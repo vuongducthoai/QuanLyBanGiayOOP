@@ -5,12 +5,18 @@
         <group>
             <file>file:/D:/ky1_nam3/OOP/PROJECTCK/QuanLyBanGiayOOP/src/SQLConnection/SQLServerConnection.java</file>
             <file>file:/D:/ky1_nam3/OOP/PROJECTCK/QuanLyBanGiayOOP/src/GUI/ChitietHD.java</file>
-            <file>file:/D:/ky1_nam3/OOP/PROJECTCK/QuanLyBanGiayOOP/src/GUI/NhanVien.java</file>
+            <file>file:/D:/ky1_nam3/OOP/PROJECTCK/QuanLyBanGiayOOP/src/DTO/Hoadon.java</file>
             <file>file:/D:/ky1_nam3/OOP/PROJECTCK/QuanLyBanGiayOOP/src/SQLConnection/DBConnection.java</file>
+            <file>file:/D:/ky1_nam3/OOP/PROJECTCK/QuanLyBanGiayOOP/src/DTO/Nhanvien.java</file>
             <file>file:/D:/ky1_nam3/OOP/PROJECTCK/QuanLyBanGiayOOP/src/GUI/Hoadon.java</file>
             <file>file:/D:/ky1_nam3/OOP/PROJECTCK/QuanLyBanGiayOOP/src/GUI/Khachhang.java</file>
-            <file>file:/D:/ky1_nam3/OOP/PROJECTCK/QuanLyBanGiayOOP/src/GUI/DangNhap.java</file>
-            <file>file:/D:/ky1_nam3/OOP/PROJECTCK/QuanLyBanGiayOOP/src/GUI/HoaDonNhap.java</file>
+            <file>file:/D:/ky1_nam3/OOP/PROJECTCK/QuanLyBanGiayOOP/src/DTO/Nhacungcap.java</file>
+            <file>file:/D:/ky1_nam3/OOP/PROJECTCK/QuanLyBanGiayOOP/src/DTO/Person.java</file>
+            <file>file:/D:/ky1_nam3/OOP/PROJECTCK/QuanLyBanGiayOOP/src/DTO/Sanpham.java</file>
+            <file>file:/D:/ky1_nam3/OOP/PROJECTCK/QuanLyBanGiayOOP/src/DTO/Danhmuc.java</file>
+            <file>file:/D:/ky1_nam3/OOP/PROJECTCK/QuanLyBanGiayOOP/src/DTO/Hoadonnhap.java</file>
+            <file>file:/D:/ky1_nam3/OOP/PROJECTCK/QuanLyBanGiayOOP/src/GUI/main.java</file>
+            <file>file:/D:/ky1_nam3/OOP/PROJECTCK/QuanLyBanGiayOOP/src/DTO/Khachhang.java</file>
         </group>
     </open-files>
 </project-private>
