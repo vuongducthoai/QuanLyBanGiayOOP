@@ -9,9 +9,10 @@ package SQLConnection;
  * @author DELL
  */
 import java.sql.*;
+
 public class DBConnection {
-    public static Connection getConnection() throws SQLException, ClassNotFoundException
-    {
+
+    public static Connection getConnection() throws SQLException, ClassNotFoundException {
         return SQLServerConnection.initializeDatabase();
     }
 }
