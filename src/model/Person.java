@@ -16,6 +16,9 @@ public abstract class Person {
     private String soDT;
     private boolean gioiTinh;
 
+    public Person() {
+    }
+    
     public Person(String ten, String diaChi, String email, String soDT, boolean gioiTinh) {
         this.ten = ten;
         this.diaChi = diaChi;

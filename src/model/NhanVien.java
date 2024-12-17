@@ -11,6 +11,10 @@ package model;
 public class NhanVien extends Person {
 
     private int maNV;
+    
+    public NhanVien() {
+        super();
+    }
 
     public NhanVien(int maNV, TaiKhoan taiKhoan, String ten, String diaChi, String email, String soDT, boolean gioiTinh) {
         super(ten, diaChi, email, soDT, gioiTinh);

@@ -111,54 +111,56 @@ FOREIGN KEY (MaDM) REFERENCES DanhMuc(MaDM);
 
 -- Thêm dữ liệu vào bảng DanhMuc
 INSERT INTO DanhMuc (TenDM) VALUES 
-('Giày Nam'),
-('Giày Nữ'),
-('Giày Thể Thao'),
-('Giày Công Sở'),
-('Giày Dã Ngoại');
+(N'Giày Nam'),
+(N'Giày Nữ'),
+(N'Giày Thể Thao'),
+(N'Giày Công Sở'),
+(N'Giày Dã Ngoại');
 
 -- Thêm dữ liệu vào bảng SanPham
 INSERT INTO SanPham (TenSP, DonGiaNhap, DonGiaBan, MaDM) VALUES 
-('Giày Adidas Nam', 500000, 800000, 1),
-('Giày Nike Nữ', 600000, 900000, 2),
-('Giày Puma Thể Thao', 700000, 1100000, 3),
-('Giày Vina Giày Công Sở', 450000, 650000, 4),
-('Giày Converse Dã Ngoại', 550000, 750000, 5);
+(N'Giày Adidas Nam', 500000, 800000, 1),
+(N'Giày Nike Nữ', 600000, 900000, 2),
+(N'Giày Puma Thể Thao', 700000, 1100000, 3),
+(N'Giày Vina Giày Công Sở', 450000, 650000, 4),
+(N'Giày Converse Dã Ngoại', 550000, 750000, 5);
 
 -- Thêm dữ liệu vào bảng NhanVien
 INSERT INTO NhanVien (TenNV, GioiTinh, DiaChi, Email, SoDT) VALUES 
-('Nguyễn Văn A', 1, 'Hà Nội', 'nguyenvana@example.com', '0987654321'),
-('Trần Thị B', 0, 'Hồ Chí Minh', 'tranb@example.com', '0932123456'),
-('Phan Văn C', 1, 'Đà Nẵng', 'phanvc@example.com', '0909876543'),
-('Lê Thị D', 0, 'Cần Thơ', 'lethid@example.com', '0912345678');
+(N'Nguyễn Văn A', 1, N'Hà Nội', 'nguyenvana@example.com', '0987654321'),
+(N'Trần Thị B', 0, N'Hồ Chí Minh', 'tranb@example.com', '0932123456'),
+(N'Phan Văn C', 1, N'Đà Nẵng', 'phanvc@example.com', '0909876543'),
+(N'Lê Thị D', 0, N'Cần Thơ', 'lethid@example.com', '0912345678');
 
 -- Thêm dữ liệu vào bảng NhaCungCap
 INSERT INTO NhaCungCap (TenNCC, DiaChi, Email, SoDT) VALUES 
-('Công Ty Giày ABC', 'Hà Nội', 'abc@giay.com', '0241234567'),
-('Công Ty Giày XYZ', 'Hồ Chí Minh', 'xyz@giay.com', '0287654321');
+(N'Công Ty Giày ABC', N'Hà Nội', 'abc@giay.com', '0241234567'),
+(N'Công Ty Giày XYZ', N'Hồ Chí Minh', 'xyz@giay.com', '0287654321');
 
 -- Thêm dữ liệu vào bảng KhachHang
 INSERT INTO KhachHang (TenKH, GioiTinh, DiaChi, Email, SoDT) VALUES 
-('Nguyễn Văn E', 1, 'Hà Nội', 'nguyenvane@example.com', '0987654321'),
-('Trần Thị F', 0, 'Hồ Chí Minh', 'tranf@example.com', '0932123456'),
-('Phan Nguyễn G', 1, 'Đà Nẵng', 'phang@example.com', '0909876543'),
-('Lê Thị H', 0, 'Cần Thơ', 'lethih@example.com', '0912345678');
+(N'Nguyễn Văn E', 1, N'Hà Nội', 'nguyenvane@example.com', '0987654321'),
+(N'Trần Thị F', 0, N'Hồ Chí Minh', 'tranf@example.com', '0932123456'),
+(N'Phan Nguyễn G', 1, N'Đà Nẵng', 'phang@example.com', '0909876543'),
+(N'Lê Thị H', 0, N'Cần Thơ', 'lethih@example.com', '0912345678');
 
 -- Thêm dữ liệu vào bảng HoaDon
 INSERT INTO HoaDon (MaKH, MaSP, NgayMua, SoLuong, DonGiaBan, TrangThai, PTTT) VALUES 
-(1, 1, '2024-12-15', 2, 800000, 'Đã thanh toán', 'Chuyển khoản'),
-(2, 2, '2024-12-16', 1, 900000, 'Chưa thanh toán', 'Tiền mặt'),
-(3, 3, '2024-12-17', 1, 1100000, 'Đã thanh toán', 'Chuyển khoản'),
-(4, 4, '2024-12-18', 3, 650000, 'Đã thanh toán', 'Tiền mặt');
+(1, 1, '2024-12-15', 2, 800000, N'Đã thanh toán', N'Chuyển khoản'),
+(2, 2, '2024-12-16', 1, 900000, N'Chưa thanh toán', N'Tiền mặt'),
+(3, 3, '2024-12-17', 1, 1100000, N'Đã thanh toán', N'Chuyển khoản'),
+(4, 4, '2024-12-18', 3, 650000, N'Đã thanh toán', N'Tiền mặt');
 
 -- Thêm dữ liệu vào bảng HoaDonNhap
 INSERT INTO HoaDonNhap (MaNCC, MaNV, MaSP, NgayNhap, SoLuong, DonGiaNhap, TrangThai) VALUES 
-(1, 1, 1, '2024-12-14', 100, 500000, 'Nhập kho thành công'),
-(2, 2, 2, '2024-12-15', 200, 600000, 'Nhập kho thành công'),
-(1, 3, 3, '2024-12-16', 150, 700000, 'Nhập kho thành công');
+(1, 1, 1, '2024-12-14', 100, 500000, N'Nhập kho thành công'),
+(2, 2, 2, '2024-12-15', 200, 600000, N'Nhập kho thành công'),
+(1, 3, 3, '2024-12-16', 150, 700000, N'Nhập kho thành công');
 
 -- Thêm dữ liệu vào bảng TaiKhoan
 INSERT INTO TaiKhoan (TenTK, MatKhau, ChucVu, MaNV) VALUES 
-('admin', 'admin123', 'Quản lý', 1),
-('user1', 'password1', 'Nhân viên', 2),
-('user2', 'password2', 'Nhân viên', 3);
+('admin', '123', N'Quản lý', 1),
+('user1', '123', N'Nhân viên', 2),
+('user2', '123', N'Nhân viên', 3);
+
+SELECT * FROM TaiKhoan JOIN NhanVien ON TaiKhoan.MaNV = NhanVien.MaNV WHERE TaiKhoan.TenTK = 'admin';

@@ -12,13 +12,20 @@ public class TaiKhoan {
     private String tenTK;
     private String matKhau;
     private String chucVu;
-    private NhanVien nhanVien;
-
-    public TaiKhoan(String tenTK, String matKhau, String chucVu, NhanVien nhanVien) {
+    private NhanVien nv;
+    
+    public TaiKhoan() {
+    }
+    
+    public TaiKhoan(String tenTK, String chucVu) {
         this.tenTK = tenTK;
-        this.matKhau = matKhau;
         this.chucVu = chucVu;
-        this.nhanVien = nhanVien;
+    }
+
+    public TaiKhoan(String tenTK, String chucVu, NhanVien nv) {
+        this.tenTK = tenTK;
+        this.chucVu = chucVu;
+        this.nv = nv;
     }
 
     public String getTenTK() {
@@ -45,12 +52,13 @@ public class TaiKhoan {
         this.chucVu = chucVu;
     }
 
-    public NhanVien getNhanVien() {
-        return nhanVien;
+    public NhanVien getNv() {
+        return nv;
     }
 
-    public void setNhanVien(NhanVien nhanVien) {
-        this.nhanVien = nhanVien;
+    public void setNv(NhanVien nv) {
+        this.nv = nv;
     }
+    
 }
 

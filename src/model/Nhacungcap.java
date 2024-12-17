@@ -19,7 +19,6 @@ public class NhaCungCap {
     public NhaCungCap() {
     }
     
-
     public NhaCungCap(int maNCC, String tenNCC, String diaChi, String email, String soDT) {
         this.maNCC = maNCC;
         this.tenNCC = tenNCC;
