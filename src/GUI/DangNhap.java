@@ -51,6 +51,7 @@ public class DangNhap extends javax.swing.JFrame {
 
         jLabel2.setText("Tên tài khoản:");
 
+        txtTenTK.setText("admin");
         txtTenTK.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtTenTKActionPerformed(evt);
@@ -70,6 +71,7 @@ public class DangNhap extends javax.swing.JFrame {
             }
         });
 
+        txtMatKhau.setText("123");
         txtMatKhau.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtMatKhauActionPerformed(evt);
@@ -174,7 +176,7 @@ public class DangNhap extends javax.swing.JFrame {
                 } else if (dao.checkTaiKhoan(tk, mk) == false) {
                     JOptionPane.showMessageDialog(this, "Mật khẩu không chính xác !", "Sai mật khẩu", JOptionPane.ERROR_MESSAGE);
                 } else {
-                    JOptionPane.showMessageDialog(this, "Đăng nhập thành công", "Thành công", JOptionPane.INFORMATION_MESSAGE);
+                    
 
                     
                     TaiKhoan taiKhoan = dao.layThongTinCaNhan(tk);
