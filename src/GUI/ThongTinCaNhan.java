@@ -30,7 +30,7 @@ public class ThongTinCaNhan extends javax.swing.JPanel {
 
         txtMaNV.setText(String.valueOf(nv.getMaNV()));
         txtHovaTen.setText(nv.getTen());
-        txtGioiTinh.setText(nv.isGioiTinh() ? "Nam" : "Nữ");
+        txtGioiTinh.setText(nv.getGioiTinh());
         txtDiaChi.setText(nv.getDiaChi());
         txtEmail.setText(nv.getEmail());
         txtDienThoai.setText(nv.getSoDT());

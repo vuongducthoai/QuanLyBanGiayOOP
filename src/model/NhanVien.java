@@ -16,7 +16,7 @@ public class NhanVien extends Person {
         super();
     }
 
-    public NhanVien(int maNV, TaiKhoan taiKhoan, String ten, String diaChi, String email, String soDT, boolean gioiTinh) {
+    public NhanVien(int maNV, TaiKhoan taiKhoan, String ten, String diaChi, String email, String soDT, String gioiTinh) {
         super(ten, diaChi, email, soDT, gioiTinh);
         this.maNV = maNV;
     }
