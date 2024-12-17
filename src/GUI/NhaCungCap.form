@@ -334,14 +334,16 @@
             <Component class="javax.swing.JTable" name="TableDskh">
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                  <Table columnCount="6" rowCount="4">
-                    <Column editable="true" title="M&#xe3; NCC" type="java.lang.Integer"/>
-                    <Column editable="true" title="H&#x1ecd; t&#xea;n" type="java.lang.String"/>
-                    <Column editable="true" title="Gi&#x1edb;i t&#xed;nh" type="java.lang.String"/>
-                    <Column editable="true" title="&#x110;&#x1ecb;a ch&#x1ec9;" type="java.lang.String"/>
-                    <Column editable="true" title="Email" type="java.lang.String"/>
-                    <Column editable="true" title="S&#x1ed1; &#x111;i&#x1ec7;n tho&#x1ea1;i" type="java.lang.String"/>
+                  <Table columnCount="5" rowCount="4">
+                    <Column editable="false" title="M&#xe3; NCC" type="java.lang.Integer"/>
+                    <Column editable="false" title="H&#x1ecd; t&#xea;n" type="java.lang.String"/>
+                    <Column editable="false" title="&#x110;&#x1ecb;a ch&#x1ec9;" type="java.lang.String"/>
+                    <Column editable="false" title="Email" type="java.lang.String"/>
+                    <Column editable="false" title="S&#x1ed1; &#x111;i&#x1ec7;n tho&#x1ea1;i" type="java.lang.String"/>
                   </Table>
+                </Property>
+                <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+                  <Color id="Hand Cursor"/>
                 </Property>
               </Properties>
               <AuxValues>

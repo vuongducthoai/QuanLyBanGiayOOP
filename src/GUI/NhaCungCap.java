@@ -4,6 +4,12 @@
  */
 package GUI;
 
+import DAO.NhaCungCapDAO;
+import SQLConnection.DBConnection;
+import java.util.List;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author DELL
@@ -13,10 +19,35 @@ public class NhaCungCap extends javax.swing.JFrame {
     /**
      * Creates new form Khachhang
      */
+    private DBConnection conn;
     public NhaCungCap() {
         initComponents();
+        customizeTable();
         txtMaNCC.setEditable(false);
+        conn = new DBConnection();
+        loadDataToTable();
+        
     }
+    
+    private void customizeTable() {
+       DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+       centerRenderer.setHorizontalAlignment(javax.swing.JLabel.CENTER);
+
+       for (int i = 0; i < TableDskh.getColumnCount(); i++) {
+         TableDskh.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
+       }
+        TableDskh.getColumnModel().getColumn(0).setPreferredWidth(50);
+        TableDskh.getColumnModel().getColumn(1).setPreferredWidth(200);
+        TableDskh.getColumnModel().getColumn(2).setPreferredWidth(75);
+        TableDskh.getColumnModel().getColumn(3).setPreferredWidth(100);
+        TableDskh.getColumnModel().getColumn(4).setPreferredWidth(100);
+    
+        // Set chiều cao hàng
+        TableDskh.setRowHeight(25);
+    
+        // Tự động điều chỉnh kích thước
+        TableDskh.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -118,23 +149,31 @@ public class NhaCungCap extends javax.swing.JFrame {
 
         TableDskh.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Mã NCC", "Họ tên", "Giới tính", "Địa chỉ", "Email", "Số điện thoại"
+                "Mã NCC", "Họ tên", "Địa chỉ", "Email", "Số điện thoại"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
         });
+        TableDskh.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jScrollPane2.setViewportView(TableDskh);
 
         btnThem.setBackground(new java.awt.Color(255, 255, 0));
@@ -278,7 +317,18 @@ public class NhaCungCap extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    private void loadDataToTable() {
+           try {
+               List<String[]> listNCC = NhaCungCapDAO.getNhaCungCapList(conn.getConnection());
+               DefaultTableModel model = (DefaultTableModel) TableDskh.getModel();
+               model.setRowCount(0); // Xóa tất cả dữ liệu cũ
+               for (String[] row : listNCC) {
+                   model.addRow(row); // Thêm từng dòng dữ liệu
+               }
+           } catch (Exception e) {
+               e.printStackTrace();
+           }
+       }
     private void txtTimkiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTimkiemActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTimkiemActionPerformed
