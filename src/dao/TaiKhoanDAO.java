@@ -4,10 +4,37 @@
  */
 package dao;
 
+import SQLConnection.DBConnection;
+import java.sql.*;
+
 /**
  *
  * @author ADMIN
  */
 public class TaiKhoanDAO {
+    
+    Connection connection = null;
+    PreparedStatement ps = null;
+    ResultSet rs = null;
+    
+    public TaiKhoanDAO() {
+    }
+    
+    public boolean checkTenTaiKhoan(String tenTK) {
+        
+        try {
+            
+            connection = DBConnection.getConnection();
+            
+            
+            String sql = "SELECT * FROM TaiKhoan WHERE TenTK = ?";
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        
+        
+        return false;
+    }
     
 }
