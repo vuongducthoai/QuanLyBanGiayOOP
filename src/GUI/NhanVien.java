@@ -4,6 +4,8 @@
  */
 package GUI;
 
+import model.TaiKhoan;
+
 /**
  *
  * @author ADMIN
@@ -12,14 +14,31 @@ public class NhanVien extends javax.swing.JFrame {
 
     DSKhachHang kh = new DSKhachHang();
     DSHoaDon hd = new DSHoaDon();
+    ThongTinCaNhan ttcn = null;
 
     /**
      * Creates new form NhanVien
      */
     public NhanVien() {
         initComponents();
+        setTab();
+    }
+
+    public NhanVien(TaiKhoan tk) {
+        initComponents();
+        ttcn = new ThongTinCaNhan(tk);
+
+        lblChucVu.setText(lblChucVu.getText() + tk.getChucVu());
+        lblHoVaTen.setText(lblHoVaTen.getText() + tk.getNv().getTen());
+        setTab();
+    }
+
+    private void setTab() {
+        
         panelMain.add(kh);
         panelMain.add(hd);
+        panelMain.add(ttcn);
+        ttcn.setVisible(true);
         kh.setVisible(false);
         hd.setVisible(false);
     }
@@ -38,13 +57,15 @@ public class NhanVien extends javax.swing.JFrame {
         btnDangXuat = new javax.swing.JButton();
         btnTTCN = new javax.swing.JButton();
         btnKhachHang = new javax.swing.JButton();
+        lblChucVu = new javax.swing.JLabel();
+        lblHoVaTen = new javax.swing.JLabel();
         panelMain = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Quản lý bán giày");
         setPreferredSize(new java.awt.Dimension(1200, 600));
 
-        panelTab.setBackground(new java.awt.Color(102, 255, 255));
+        panelTab.setBackground(new java.awt.Color(0, 102, 102));
 
         btnHoaDon.setText("Hóa đơn");
         btnHoaDon.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -78,6 +99,14 @@ public class NhanVien extends javax.swing.JFrame {
             }
         });
 
+        lblChucVu.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblChucVu.setForeground(new java.awt.Color(255, 255, 255));
+        lblChucVu.setText("Chức vụ: ");
+
+        lblHoVaTen.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblHoVaTen.setForeground(new java.awt.Color(255, 255, 255));
+        lblHoVaTen.setText("Họ và tên: ");
+
         javax.swing.GroupLayout panelTabLayout = new javax.swing.GroupLayout(panelTab);
         panelTab.setLayout(panelTabLayout);
         panelTabLayout.setHorizontalGroup(
@@ -89,7 +118,13 @@ public class NhanVien extends javax.swing.JFrame {
                     .addComponent(btnKhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnTTCN, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnDangXuat, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelTabLayout.createSequentialGroup()
+                .addContainerGap(26, Short.MAX_VALUE)
+                .addGroup(panelTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblChucVu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblHoVaTen, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
 
         panelTabLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnDangXuat, btnHoaDon, btnKhachHang, btnTTCN});
@@ -97,7 +132,11 @@ public class NhanVien extends javax.swing.JFrame {
         panelTabLayout.setVerticalGroup(
             panelTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelTabLayout.createSequentialGroup()
-                .addGap(91, 91, 91)
+                .addGap(23, 23, 23)
+                .addComponent(lblHoVaTen)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblChucVu)
+                .addGap(22, 22, 22)
                 .addComponent(btnTTCN, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnKhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -120,6 +159,7 @@ public class NhanVien extends javax.swing.JFrame {
 
     private void btnHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHoaDonActionPerformed
         // TODO add your handling code here:kh.setVisible(true);
+        ttcn.setVisible(false);
         hd.setVisible(true);
         kh.setVisible(false);
     }//GEN-LAST:event_btnHoaDonActionPerformed
@@ -130,10 +170,14 @@ public class NhanVien extends javax.swing.JFrame {
 
     private void btnTTCNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTTCNActionPerformed
         // TODO add your handling code here:
+        ttcn.setVisible(true);
+        hd.setVisible(false);
+        kh.setVisible(false);
     }//GEN-LAST:event_btnTTCNActionPerformed
 
     private void btnKhachHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKhachHangActionPerformed
         // TODO add your handling code here:
+        ttcn.setVisible(false);
         kh.setVisible(true);
         hd.setVisible(false);
     }//GEN-LAST:event_btnKhachHangActionPerformed
@@ -180,6 +224,8 @@ public class NhanVien extends javax.swing.JFrame {
     private javax.swing.JButton btnHoaDon;
     private javax.swing.JButton btnKhachHang;
     private javax.swing.JButton btnTTCN;
+    private javax.swing.JLabel lblChucVu;
+    private javax.swing.JLabel lblHoVaTen;
     private javax.swing.JPanel panelMain;
     private javax.swing.JPanel panelTab;
     // End of variables declaration//GEN-END:variables

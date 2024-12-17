@@ -16,6 +16,9 @@ public class NhaCungCap {
     private String email;
     private String soDT;
 
+    public NhaCungCap() {
+    }
+    
     public NhaCungCap(int maNCC, String tenNCC, String diaChi, String email, String soDT) {
         this.maNCC = maNCC;
         this.tenNCC = tenNCC;

@@ -4,7 +4,13 @@
  */
 package GUI;
 
+import constants.ChucVu;
+import dao.TaiKhoanDAO;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import model.TaiKhoan;
 
 /**
  *
@@ -35,7 +41,7 @@ public class DangNhap extends javax.swing.JFrame {
         txtTenTK = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         btnDangNhap = new javax.swing.JButton();
-        txtMatKhau = new javax.swing.JTextField();
+        txtMatKhau = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Đăng nhập");
@@ -45,14 +51,28 @@ public class DangNhap extends javax.swing.JFrame {
 
         jLabel2.setText("Tên tài khoản:");
 
+        txtTenTK.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTenTKActionPerformed(evt);
+            }
+        });
+
         jLabel3.setText("Mật khẩu:");
 
+        btnDangNhap.setBackground(new java.awt.Color(153, 153, 153));
         btnDangNhap.setText("Đăng nhập");
+        btnDangNhap.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnDangNhap.setContentAreaFilled(false);
         btnDangNhap.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnDangNhap.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDangNhapActionPerformed(evt);
+            }
+        });
+
+        txtMatKhau.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtMatKhauActionPerformed(evt);
             }
         });
 
@@ -62,20 +82,25 @@ public class DangNhap extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(95, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(btnDangNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtTenTK, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txtMatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(18, 18, 18))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addGap(39, 39, 39)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtTenTK, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
+                            .addComponent(jLabel1)
+                            .addComponent(txtMatKhau))))
                 .addGap(106, 106, 106))
         );
+
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {txtMatKhau, txtTenTK});
+
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -87,12 +112,14 @@ public class DangNhap extends javax.swing.JFrame {
                     .addComponent(jLabel2))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtMatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
-                .addGap(30, 30, 30)
+                    .addComponent(jLabel3)
+                    .addComponent(txtMatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addComponent(btnDangNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addGap(30, 30, 30))
         );
+
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {txtMatKhau, txtTenTK});
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -116,6 +143,20 @@ public class DangNhap extends javax.swing.JFrame {
 
     private void btnDangNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangNhapActionPerformed
         // TODO add your handling code here:
+        checkTaiKhoan();
+    }//GEN-LAST:event_btnDangNhapActionPerformed
+
+    private void txtTenTKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTenTKActionPerformed
+        // TODO add your handling code here:
+        checkTaiKhoan();
+    }//GEN-LAST:event_txtTenTKActionPerformed
+
+    private void txtMatKhauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMatKhauActionPerformed
+        // TODO add your handling code here:
+        checkTaiKhoan();
+    }//GEN-LAST:event_txtMatKhauActionPerformed
+
+    private void checkTaiKhoan() {
         String tk = txtTenTK.getText().trim();
         String mk = txtMatKhau.getText().trim();
 
@@ -123,11 +164,40 @@ public class DangNhap extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Vui lòng nhập đầy đủ thông tin !");
         } else if (tk.length() == 0) {
             JOptionPane.showMessageDialog(this, "Vui lòng nhập tên tài khoản !");
-        } else {
+        } else if (mk.length() == 0) {
             JOptionPane.showMessageDialog(this, "Vui lòng nhập mật khẩu !");
-        }
+        } else {
+            TaiKhoanDAO dao = new TaiKhoanDAO();
+            try {
+                if (dao.checkTenTaiKhoan(tk) == false) {
+                    JOptionPane.showMessageDialog(this, "Tên tài khoản không tồn tại !", "Sai tài khoản", JOptionPane.ERROR_MESSAGE);
+                } else if (dao.checkTaiKhoan(tk, mk) == false) {
+                    JOptionPane.showMessageDialog(this, "Mật khẩu không chính xác !", "Sai mật khẩu", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(this, "Đăng nhập thành công", "Thành công", JOptionPane.INFORMATION_MESSAGE);
 
-    }//GEN-LAST:event_btnDangNhapActionPerformed
+                    
+                    TaiKhoan taiKhoan = dao.layThongTinCaNhan(tk);
+
+                    this.dispose();
+
+                    JFrame frame = null;
+
+                    if (taiKhoan.getChucVu().equals(ChucVu.quanLy)) {
+                        frame = new QuanLy(taiKhoan);
+                    } else {
+                        frame = new NhanVien(taiKhoan);
+                    }
+
+                    frame.setLocationRelativeTo(null);
+                    frame.setVisible(true);
+
+                }
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(DangNhap.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
 
     /**
      * @param args the command line arguments
@@ -173,7 +243,7 @@ public class DangNhap extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField txtMatKhau;
+    private javax.swing.JPasswordField txtMatKhau;
     private javax.swing.JTextField txtTenTK;
     // End of variables declaration//GEN-END:variables
 }

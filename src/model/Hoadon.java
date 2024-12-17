@@ -21,6 +21,9 @@ public class HoaDon {
     private String trangThai;
     private String pttt;
 
+    public HoaDon() {
+    }
+    
     public HoaDon(int maHD, KhachHang khachHang, List<SanPham> dsSanPham, String ngayMua, int soLuong, double donGiaBan, String trangThai, String pttt) {
         this.maHD = maHD;
         this.khachHang = khachHang;
