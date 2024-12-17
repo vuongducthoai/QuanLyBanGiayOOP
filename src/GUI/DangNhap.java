@@ -4,6 +4,8 @@
  */
 package GUI;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author ADMIN
@@ -46,6 +48,13 @@ public class DangNhap extends javax.swing.JFrame {
         jLabel3.setText("Mật khẩu:");
 
         btnDangNhap.setText("Đăng nhập");
+        btnDangNhap.setContentAreaFilled(false);
+        btnDangNhap.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnDangNhap.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDangNhapActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -104,6 +113,21 @@ public class DangNhap extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnDangNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangNhapActionPerformed
+        // TODO add your handling code here:
+        String tk = txtTenTK.getText().trim();
+        String mk = txtMatKhau.getText().trim();
+
+        if (tk.length() == 0 && mk.length() == 0) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập đầy đủ thông tin !");
+        } else if (tk.length() == 0) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập tên tài khoản !");
+        } else {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập mật khẩu !");
+        }
+
+    }//GEN-LAST:event_btnDangNhapActionPerformed
 
     /**
      * @param args the command line arguments
