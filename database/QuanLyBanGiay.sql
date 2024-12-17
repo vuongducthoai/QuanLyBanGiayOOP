@@ -6,8 +6,8 @@ USE QuanLyCuaHangBanGiay;
 CREATE TABLE TaiKhoan (
 	TenTK NVARCHAR(100) PRIMARY KEY,
 	MatKhau NVARCHAR(100),
-	MaNV INT,
-	ChucVu NVARCHAR(50)
+	ChucVu NVARCHAR(50),
+	MaNV INT
 );
 
 CREATE TABLE KhachHang (
@@ -63,8 +63,7 @@ CREATE TABLE NhanVien (
 	GioiTinh BIT, 
 	DiaChi NVARCHAR(200),
 	Email NVARCHAR(50), 
-	SoDT NVARCHAR(10),
-	username NVARCHAR(100),
+	SoDT NVARCHAR(10)
 );
 
 CREATE TABLE NhaCungCap (
