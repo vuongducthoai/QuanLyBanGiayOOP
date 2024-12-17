@@ -3,12 +3,28 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/F:/QuanLyBanGiayOOP/src/SQLConnection/SQLServerConnection.java</file>
-            <file>file:/F:/QuanLyBanGiayOOP/src/GUI/NhanVien.java</file>
-            <file>file:/F:/QuanLyBanGiayOOP/src/DTO/Person.java</file>
+            <file>file:/F:/QuanLyBanGiayOOP/src/GUI/DSHoaDon.java</file>
+            <file>file:/F:/QuanLyBanGiayOOP/src/model/NhaCungCap.java</file>
+            <file>file:/F:/QuanLyBanGiayOOP/src/model/TaiKhoan.java</file>
+            <file>file:/F:/QuanLyBanGiayOOP/src/DAO/TaiKhoanDAO.java</file>
             <file>file:/F:/QuanLyBanGiayOOP/src/SQLConnection/DBConnection.java</file>
-            <file>file:/F:/QuanLyBanGiayOOP/src/GUI/main.java</file>
+            <file>file:/F:/QuanLyBanGiayOOP/src/GUI/QuanLy.java</file>
             <file>file:/F:/QuanLyBanGiayOOP/src/GUI/SanPham.java</file>
+            <file>file:/F:/QuanLyBanGiayOOP/src/model/SanPham.java</file>
+            <file>file:/F:/QuanLyBanGiayOOP/src/DAO/NhaCungCapDAO.java</file>
+            <file>file:/F:/QuanLyBanGiayOOP/src/model/Person.java</file>
+            <file>file:/F:/QuanLyBanGiayOOP/src/SQLConnection/SQLServerConnection.java</file>
+            <file>file:/F:/QuanLyBanGiayOOP/src/model/HoaDonNhap.java</file>
+            <file>file:/F:/QuanLyBanGiayOOP/src/GUI/NhaCungCap.java</file>
+            <file>file:/F:/QuanLyBanGiayOOP/src/model/NhanVien.java</file>
+            <file>file:/F:/QuanLyBanGiayOOP/src/GUI/DangNhap.java</file>
+            <file>file:/F:/QuanLyBanGiayOOP/src/GUI/NhanVien.java</file>
+            <file>file:/F:/QuanLyBanGiayOOP/src/GUI/DSNhanVien.java</file>
+            <file>file:/F:/QuanLyBanGiayOOP/src/model/HoaDon.java</file>
+            <file>file:/F:/QuanLyBanGiayOOP/src/model/DanhMuc.java</file>
+            <file>file:/F:/QuanLyBanGiayOOP/src/GUI/DSKhachHang.java</file>
+            <file>file:/F:/QuanLyBanGiayOOP/src/model/KhachHang.java</file>
+            <file>file:/F:/QuanLyBanGiayOOP/src/GUI/DanhMuc.java</file>
         </group>
     </open-files>
 </project-private>
