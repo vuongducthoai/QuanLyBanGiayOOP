@@ -158,7 +158,7 @@ public class TaiKhoanDAO {
                 
                 nv.setMaNV(rs.getInt(5));
                 nv.setTen(rs.getString(6));
-                nv.setGioiTinh(rs.getBoolean(7));
+                nv.setGioiTinh(rs.getString(7));
                 nv.setDiaChi(rs.getString(8));
                 nv.setEmail(rs.getString(9));
                 nv.setSoDT(rs.getString(10));

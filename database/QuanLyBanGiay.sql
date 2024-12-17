@@ -13,7 +13,7 @@ CREATE TABLE TaiKhoan (
 CREATE TABLE KhachHang (
     MaKH INT IDENTITY PRIMARY KEY,
     TenKH NVARCHAR(100), 
-    GioiTinh BIT, 
+    GioiTinh NVARCHAR(10), 
     DiaChi NVARCHAR(200),
     Email NVARCHAR(50), 
     SoDT NVARCHAR(10)
@@ -46,7 +46,7 @@ CREATE TABLE SanPham (
 CREATE TABLE NhanVien (
     MaNV INT IDENTITY PRIMARY KEY,
     TenNV NVARCHAR(100),
-    GioiTinh BIT, 
+    GioiTinh NVARCHAR(10), 
     DiaChi NVARCHAR(200),
     Email NVARCHAR(50), 
     SoDT NVARCHAR(10)
@@ -127,10 +127,10 @@ INSERT INTO SanPham (TenSP, DonGiaNhap, DonGiaBan, MaDM) VALUES
 
 -- Thêm dữ liệu vào bảng NhanVien
 INSERT INTO NhanVien (TenNV, GioiTinh, DiaChi, Email, SoDT) VALUES 
-(N'Nguyễn Văn A', 1, N'Hà Nội', 'nguyenvana@example.com', '0987654321'),
-(N'Trần Thị B', 0, N'Hồ Chí Minh', 'tranb@example.com', '0932123456'),
-(N'Phan Văn C', 1, N'Đà Nẵng', 'phanvc@example.com', '0909876543'),
-(N'Lê Thị D', 0, N'Cần Thơ', 'lethid@example.com', '0912345678');
+(N'Nguyễn Văn A', N'Nam', N'Hà Nội', 'nguyenvana@example.com', '0987654321'),
+(N'Trần Thị B', N'Nữ', N'Hồ Chí Minh', 'tranb@example.com', '0932123456'),
+(N'Phan Văn C', N'Nam', N'Đà Nẵng', 'phanvc@example.com', '0909876543'),
+(N'Lê Thị D', N'Nữ', N'Cần Thơ', 'lethid@example.com', '0912345678');
 
 -- Thêm dữ liệu vào bảng NhaCungCap
 INSERT INTO NhaCungCap (TenNCC, DiaChi, Email, SoDT) VALUES 
@@ -139,10 +139,10 @@ INSERT INTO NhaCungCap (TenNCC, DiaChi, Email, SoDT) VALUES
 
 -- Thêm dữ liệu vào bảng KhachHang
 INSERT INTO KhachHang (TenKH, GioiTinh, DiaChi, Email, SoDT) VALUES 
-(N'Nguyễn Văn E', 1, N'Hà Nội', 'nguyenvane@example.com', '0987654321'),
-(N'Trần Thị F', 0, N'Hồ Chí Minh', 'tranf@example.com', '0932123456'),
-(N'Phan Nguyễn G', 1, N'Đà Nẵng', 'phang@example.com', '0909876543'),
-(N'Lê Thị H', 0, N'Cần Thơ', 'lethih@example.com', '0912345678');
+(N'Nguyễn Văn E', N'Nam', N'Hà Nội', 'nguyenvane@example.com', '0987654321'),
+(N'Trần Thị F', N'Nữ', N'Hồ Chí Minh', 'tranf@example.com', '0932123456'),
+(N'Phan Nguyễn G', N'Nam', N'Đà Nẵng', 'phang@example.com', '0909876543'),
+(N'Lê Thị H', N'Nữ', N'Cần Thơ', 'lethih@example.com', '0912345678');
 
 -- Thêm dữ liệu vào bảng HoaDon
 INSERT INTO HoaDon (MaKH, MaSP, NgayMua, SoLuong, DonGiaBan, TrangThai, PTTT) VALUES 
