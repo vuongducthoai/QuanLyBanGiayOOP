@@ -4,43 +4,50 @@
  */
 package DAO;
 
-import SQLConnection.DBConnection;
-import java.sql.Connection; 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import model.NhaCungCap;
+import model.SanPham;
 
 /**
  *
  * @author Asus
  */
-public class NhaCungCapDAO {
-    public static List<NhaCungCap> getNhaCungCapList(Connection conn) throws SQLException {
-        String sql = "SELECT * FROM NhaCungCap";
+public class SanPhamDAO {
+      public static List<String[]> getSanPhamList(Connection conn) {
+        List<String[]> list = new ArrayList<>();
+        String sql = "SELECT * FROM SanPham";
+        try {
             PreparedStatement ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
-             List<NhaCungCap> nhaCungCapList = new ArrayList<>();
             while (rs.next()) {
-                NhaCungCap nhaCungCap = new NhaCungCap();
-                nhaCungCap.setMaNCC(rs.getInt("MaNCC"));
-                nhaCungCap.setTenNCC(rs.getString("TenNCC"));
-                nhaCungCap.setDiaChi(rs.getString("DiaChi"));
-                nhaCungCap.setEmail(rs.getString("Email"));
-                nhaCungCap.setSoDT(rs.getString("SoDT"));      
+                list.add(new String[]{
+                    String.valueOf(rs.getInt("MaSP")),
+                    rs.getString("TenSP"),
+                    rs.getString("DonGiaNhap"),
+                    rs.getString("DonGiaBan"),
+                    rs.getString("MaDM"),
+                     rs.getString("SoLuong")
+                });
             }
-        return nhaCungCapList;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
     }
     
-    public static void insertSupplier(Connection connection, NhaCungCap nhaCungCap) throws SQLException{
-        String sql = "INSERT INTO NhaCungCap(?, ?, ?, ?)";
+    public static void insertSanPham(Connection connection, SanPham sanPham) throws SQLException{
+        String sql = "INSERT INTO SanPham(?, ?, ?, ?, ?)";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
-        preparedStatement.setString(1, nhaCungCap.getTenNCC());
-        preparedStatement.setString(2, nhaCungCap.getDiaChi());
-        preparedStatement.setString(3, nhaCungCap.getEmail());
-        preparedStatement.setString(4, nhaCungCap.getSoDT());
+        preparedStatement.setString(1, sanPham.getTenSP());
+        preparedStatement.setDouble(2, sanPham.getDonGiaNhap());
+        preparedStatement.setDouble(3, sanPham.getDonGiaBan());
+        preparedStatement.setInt(4, sanPham.getDanhMuc().getMaDM());
+         preparedStatement.setInt(4, sanPham.getDanhMuc().getMaDM());
         preparedStatement.execute();
     }
     
@@ -107,5 +114,4 @@ public class NhaCungCapDAO {
     }
     return list;
   }
-
 }
