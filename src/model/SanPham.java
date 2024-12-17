@@ -16,6 +16,9 @@ public class SanPham {
     private double donGiaBan;
     private DanhMuc danhMuc;
 
+    public SanPham() {
+    }
+    
     public SanPham(int maSP, String tenSP, double donGiaNhap, double donGiaBan, DanhMuc danhMuc) {
         this.maSP = maSP;
         this.tenSP = tenSP;

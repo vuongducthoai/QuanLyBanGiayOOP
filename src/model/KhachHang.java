@@ -11,8 +11,11 @@ package model;
 public class KhachHang extends Person {
 
     private int maKH;
+    
+    public KhachHang() {
+    }
 
-    public KhachHang(int maKH, String ten, String diaChi, String email, String soDT, boolean gioiTinh) {
+    public KhachHang(int maKH, String ten, String diaChi, String email, String soDT, String gioiTinh) {
         super(ten, diaChi, email, soDT, gioiTinh);
         this.maKH = maKH;
     }

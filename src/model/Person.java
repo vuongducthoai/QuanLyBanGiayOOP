@@ -14,9 +14,12 @@ public abstract class Person {
     private String diaChi;
     private String email;
     private String soDT;
-    private boolean gioiTinh;
+    private String gioiTinh;
 
-    public Person(String ten, String diaChi, String email, String soDT, boolean gioiTinh) {
+    public Person() {
+    }
+    
+    public Person(String ten, String diaChi, String email, String soDT, String gioiTinh) {
         this.ten = ten;
         this.diaChi = diaChi;
         this.email = email;
@@ -56,11 +59,11 @@ public abstract class Person {
         this.soDT = soDT;
     }
 
-    public boolean isGioiTinh() {
+    public String getGioiTinh() {
         return gioiTinh;
     }
 
-    public void setGioiTinh(boolean gioiTinh) {
+    public void setGioiTinh(String gioiTinh) {
         this.gioiTinh = gioiTinh;
     }
 

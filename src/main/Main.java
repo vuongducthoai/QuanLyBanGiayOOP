@@ -4,7 +4,7 @@
  */
 package main;
 
-import GUI.QuanLy;
+import GUI.DangNhap;
 
 /**
  *
@@ -14,7 +14,9 @@ public class Main {
     public static void main(String[] args) {
     java.awt.EventQueue.invokeLater(new Runnable() {
         public void run() {
-            new QuanLy().setVisible(true); 
+            DangNhap dn = new DangNhap();
+            dn.setLocationRelativeTo(null);
+            dn.setVisible(true);
         }
     });
 }
