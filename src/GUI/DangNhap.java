@@ -50,6 +50,7 @@ public class DangNhap extends javax.swing.JFrame {
 
         jLabel2.setText("Tên tài khoản:");
 
+        txtTenTK.setText("admin");
         txtTenTK.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtTenTKActionPerformed(evt);
@@ -69,6 +70,7 @@ public class DangNhap extends javax.swing.JFrame {
             }
         });
 
+        txtMatKhau.setText("123");
         txtMatKhau.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtMatKhauActionPerformed(evt);
@@ -190,8 +192,17 @@ public class DangNhap extends javax.swing.JFrame {
                 
                 if (taiKhoan.getChucVu().equals(ChucVu.quanLy)) {
                     frame = new QuanLy(taiKhoan);
-                } else {
-                    frame = new NhanVien(taiKhoan);
+                } else {                  
+
+                    if (taiKhoan.getChucVu().equals(ChucVu.quanLy)) {
+                        frame = new QuanLy(taiKhoan);
+                    } else {
+                        frame = new NhanVien(taiKhoan);
+                    }
+
+                    frame.setLocationRelativeTo(null);
+                    frame.setVisible(true);
+
                 }
                 
                 frame.setLocationRelativeTo(null);
