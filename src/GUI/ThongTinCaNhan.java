@@ -20,13 +20,12 @@ public class ThongTinCaNhan extends javax.swing.JPanel {
         initComponents();
     }
 
-    public ThongTinCaNhan(TaiKhoan tk) {
+    public ThongTinCaNhan(NhanVien nv, TaiKhoan tk) {
         initComponents();
-        loadData(tk);
+        loadData(nv, tk);
     }
 
-    private void loadData(TaiKhoan tk) {
-        NhanVien nv = tk.getNv();
+    private void loadData(NhanVien nv, TaiKhoan tk) {
 
         txtMaNV.setText(String.valueOf(nv.getMaNV()));
         txtHovaTen.setText(nv.getTen());

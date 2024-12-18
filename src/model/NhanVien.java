@@ -16,7 +16,11 @@ public class NhanVien extends Person {
         super();
     }
 
-    public NhanVien(int maNV, TaiKhoan taiKhoan, String ten, String diaChi, String email, String soDT, String gioiTinh) {
+    public NhanVien(String ten, String diaChi, String email, String soDT, String gioiTinh) {
+        super(ten, diaChi, email, soDT, gioiTinh);
+    }
+    
+    public NhanVien(int maNV, String ten, String diaChi, String email, String soDT, String gioiTinh) {
         super(ten, diaChi, email, soDT, gioiTinh);
         this.maNV = maNV;
     }
@@ -27,6 +31,10 @@ public class NhanVien extends Person {
 
     public void setMaNV(int maNV) {
         this.maNV = maNV;
+    }
+
+    public Object getG() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
 }

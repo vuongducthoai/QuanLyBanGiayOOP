@@ -31,7 +31,7 @@ public class HoaDon {
         this.ngayMua = ngayMua;
         this.soLuong = soLuong;
         this.donGiaBan = donGiaBan;
-        this.trangThai = trangThai;
+        this.trangThai = trangThai; 
         this.pttt = pttt;
     }
 

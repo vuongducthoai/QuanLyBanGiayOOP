@@ -4,12 +4,8 @@
  */
 package GUI;
 
-import DAO.NhaCungCapDAO;
 import SQLConnection.DBConnection;
-import java.util.List;
 import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.DefaultTableModel;
-import model.NhaCungCap;
 
 /**
  *
@@ -21,33 +17,34 @@ public class NhaCungCap extends javax.swing.JPanel {
      * Creates new form NhaCungCap
      */
     private DBConnection conn;
+
     public NhaCungCap() {
         initComponents();
         customizeTable();
         txtMaNCC.setEditable(false);
         conn = new DBConnection();
-        loadDataToTable();
+//        loadDataToTable();
     }
-    
-     private void customizeTable() {
-       DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
-       centerRenderer.setHorizontalAlignment(javax.swing.JLabel.CENTER);
 
-       for (int i = 0; i < TableDskh.getColumnCount(); i++) {
-         TableDskh.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
-       }
+    private void customizeTable() {
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(javax.swing.JLabel.CENTER);
+
+        for (int i = 0; i < TableDskh.getColumnCount(); i++) {
+            TableDskh.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
+        }
         TableDskh.getColumnModel().getColumn(0).setPreferredWidth(50);
         TableDskh.getColumnModel().getColumn(1).setPreferredWidth(200);
         TableDskh.getColumnModel().getColumn(2).setPreferredWidth(75);
         TableDskh.getColumnModel().getColumn(3).setPreferredWidth(100);
         TableDskh.getColumnModel().getColumn(4).setPreferredWidth(100);
-    
+
         // Set chiều cao hàng
         TableDskh.setRowHeight(25);
-    
+
         // Tự động điều chỉnh kích thước
         TableDskh.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
-}
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -307,18 +304,19 @@ public class NhaCungCap extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-     private void loadDataToTable() {
-           try {
-               List<NhaCungCap> listNCC = NhaCungCapDAO.getNhaCungCapList(conn.getConnection());
-               DefaultTableModel model = (DefaultTableModel) TableDskh.getModel();
-               model.setRowCount(0); // Xóa tất cả dữ liệu cũ
-               for (String[] row : listNCC) {
-                   model.addRow(row); // Thêm từng dòng dữ liệu
-               }
-           } catch (Exception e) {
-               e.printStackTrace();
-           }
-       }
+//    private void loadDataToTable() {
+//        try {
+//            List<NhaCungCap> listNCC = NhaCungCapDAO.getNhaCungCapList(conn.getConnection());
+//            DefaultTableModel model = (DefaultTableModel) TableDskh.getModel();
+//            model.setRowCount(0); // Xóa tất cả dữ liệu cũ
+//            for (String[] row : listNCC) {
+//                model.addRow(row); // Thêm từng dòng dữ liệu
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
+    
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
         // TODO add your handling code here:
 
@@ -342,7 +340,7 @@ public class NhaCungCap extends javax.swing.JPanel {
         String tenNCC = txtTenNCC.getText();
         String diaChi = txtTenNCC.getText();
         String gioiTinh = "";
-        if(rdbNam.isSelected()){
+        if (rdbNam.isSelected()) {
             gioiTinh = "Nam";
         } else {
             gioiTinh = "Nữ";
