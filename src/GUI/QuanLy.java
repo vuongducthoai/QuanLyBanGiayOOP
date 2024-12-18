@@ -272,7 +272,7 @@ public class QuanLy extends javax.swing.JFrame {
     private void btnNCCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNCCActionPerformed
         // TODO add your handling code here:
         ttcn.setVisible(false);
-        nv.setVisible(false);
+        dsNhanVien.setVisible(false);
         hdn.setVisible(false);
         ncc.setVisible(true);
         dm.setVisible(false);
@@ -281,7 +281,7 @@ public class QuanLy extends javax.swing.JFrame {
     private void btnDanhMucActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDanhMucActionPerformed
         // TODO add your handling code here:
         ttcn.setVisible(false);
-        nv.setVisible(false);
+        dsNhanVien.setVisible(false);
         hdn.setVisible(false);
         ncc.setVisible(false);
         dm.setVisible(true);
