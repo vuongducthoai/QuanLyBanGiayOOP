@@ -16,7 +16,9 @@ import model.TaiKhoan;
 public class QuanLy extends javax.swing.JFrame {
 
     DSNhanVien dsNhanVien = null;
+    DSNhaCungCap ncc = new DSNhaCungCap();
     DSHoaDonNhap hdn = new DSHoaDonNhap();
+    DSDanhMuc dm = new DSDanhMuc();
     DSSanPham dssp = new DSSanPham();
     ThongTinCaNhan ttcn = null;
 
@@ -48,11 +50,15 @@ public class QuanLy extends javax.swing.JFrame {
         ttcn.setVisible(true);
         dsNhanVien.setVisible(false);
         hdn.setVisible(false);
+        ncc.setVisible(false);
+        dm.setVisible(false);
         dssp.setVisible(false);
 
         panelMain.add(ttcn);
         panelMain.add(dsNhanVien);
+        panelMain.add(ncc);
         panelMain.add(hdn);
+        panelMain.add(dm);
         panelMain.add(dssp);
         
     }
@@ -258,15 +264,27 @@ public class QuanLy extends javax.swing.JFrame {
         dsNhanVien.setVisible(false);
         hdn.setVisible(false);
         dssp.setVisible(false);
+        dm.setVisible(false);
+        ncc.setVisible(false);
 
     }//GEN-LAST:event_btnTTCNActionPerformed
 
     private void btnNCCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNCCActionPerformed
         // TODO add your handling code here:
+        ttcn.setVisible(false);
+        nv.setVisible(false);
+        hdn.setVisible(false);
+        ncc.setVisible(true);
+        dm.setVisible(false);
     }//GEN-LAST:event_btnNCCActionPerformed
 
     private void btnDanhMucActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDanhMucActionPerformed
         // TODO add your handling code here:
+        ttcn.setVisible(false);
+        nv.setVisible(false);
+        hdn.setVisible(false);
+        ncc.setVisible(false);
+        dm.setVisible(true);
     }//GEN-LAST:event_btnDanhMucActionPerformed
 
     private void btnSanPhamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSanPhamActionPerformed
@@ -284,6 +302,8 @@ public class QuanLy extends javax.swing.JFrame {
         dsNhanVien.setVisible(false);
         hdn.setVisible(true);
         dssp.setVisible(false);
+        ncc.setVisible(false);
+        dm.setVisible(false);
     }//GEN-LAST:event_btnNhapHangActionPerformed
 
     private void btnHDNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHDNActionPerformed
