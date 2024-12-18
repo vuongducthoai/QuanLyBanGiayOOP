@@ -9,23 +9,31 @@ package model;
  * @author ADMIN
  */
 public class TaiKhoan {
+
     private String tenTK;
     private String matKhau;
     private String chucVu;
-    private NhanVien nv;
-    
+    private int maNV;
+
     public TaiKhoan() {
     }
-    
+
     public TaiKhoan(String tenTK, String chucVu) {
         this.tenTK = tenTK;
         this.chucVu = chucVu;
     }
 
-    public TaiKhoan(String tenTK, String chucVu, NhanVien nv) {
+    public TaiKhoan(String tenTK, String chucVu, int maNV) {
         this.tenTK = tenTK;
         this.chucVu = chucVu;
-        this.nv = nv;
+        this.maNV = maNV;
+    }
+
+    public TaiKhoan(String tenTK, String matKhau, String chucVu, int maNV) {
+        this.tenTK = tenTK;
+        this.matKhau = matKhau;
+        this.chucVu = chucVu;
+        this.maNV = maNV;
     }
 
     public String getTenTK() {
@@ -52,13 +60,12 @@ public class TaiKhoan {
         this.chucVu = chucVu;
     }
 
-    public NhanVien getNv() {
-        return nv;
+    public int getMaNV() {
+        return maNV;
     }
 
-    public void setNv(NhanVien nv) {
-        this.nv = nv;
+    public void setMaNV(int maNV) {
+        this.maNV = maNV;
     }
-    
+
 }
-

@@ -4,7 +4,9 @@
  */
 package GUI;
 
+import dao.NhanVienDAO;
 import javax.swing.JOptionPane;
+import model.NhanVien;
 import model.TaiKhoan;
 
 /**
@@ -13,7 +15,7 @@ import model.TaiKhoan;
  */
 public class QuanLy extends javax.swing.JFrame {
 
-    DSNhanVien nv = new DSNhanVien();
+    DSNhanVien dsNhanVien = null;
     DSNhaCungCap ncc = new DSNhaCungCap();
     DSHoaDonNhap hdn = new DSHoaDonNhap();
     DSDanhMuc dm = new DSDanhMuc();
@@ -30,25 +32,31 @@ public class QuanLy extends javax.swing.JFrame {
 
     public QuanLy(TaiKhoan tk) {
         initComponents();
-        ttcn = new ThongTinCaNhan(tk);
+        
+        NhanVienDAO dao = new NhanVienDAO();
+        
+        NhanVien nv = dao.getNhanVienByMaNV(tk.getMaNV());
+        
+        ttcn = new ThongTinCaNhan(nv, tk);
+        dsNhanVien = new DSNhanVien(nv.getMaNV());
 
         lblChucVu.setText(lblChucVu.getText() + tk.getChucVu());
-        lblHoVaTen.setText(lblHoVaTen.getText() + tk.getNv().getTen());
+        lblHoVaTen.setText(lblHoVaTen.getText() + nv.getTen());
         setTab();
 
     }
 
     private void setTab() {
         ttcn.setVisible(true);
-        nv.setVisible(false);
+        dsNhanVien.setVisible(false);
         hdn.setVisible(false);
         ncc.setVisible(false);
         dm.setVisible(false);
         dssp.setVisible(false);
 
         panelMain.add(ttcn);
+        panelMain.add(dsNhanVien);
         panelMain.add(ncc);
-        panelMain.add(nv);
         panelMain.add(hdn);
         panelMain.add(dm);
         panelMain.add(dssp);
@@ -229,8 +237,9 @@ public class QuanLy extends javax.swing.JFrame {
     private void btnNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNhanVienActionPerformed
         // TODO add your handling code here:
         ttcn.setVisible(false);
-        nv.setVisible(true);
+        dsNhanVien.setVisible(true);
         hdn.setVisible(false);
+        dssp.setVisible(false);
     }//GEN-LAST:event_btnNhanVienActionPerformed
 
     private void btnDangXuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangXuatActionPerformed
@@ -252,8 +261,9 @@ public class QuanLy extends javax.swing.JFrame {
     private void btnTTCNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTTCNActionPerformed
         // TODO add your handling code here:
         ttcn.setVisible(true);
-        nv.setVisible(false);
+        dsNhanVien.setVisible(false);
         hdn.setVisible(false);
+        dssp.setVisible(false);
         dm.setVisible(false);
         ncc.setVisible(false);
 
@@ -280,7 +290,7 @@ public class QuanLy extends javax.swing.JFrame {
     private void btnSanPhamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSanPhamActionPerformed
 
         ttcn.setVisible(false);
-        nv.setVisible(false);
+        dsNhanVien.setVisible(false);
         hdn.setVisible(false);
         // Hiển thị giao diện DSSanPham
         dssp.setVisible(true);
@@ -289,8 +299,9 @@ public class QuanLy extends javax.swing.JFrame {
     private void btnNhapHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNhapHangActionPerformed
         // TODO add your handling code here:
         ttcn.setVisible(false);
-        nv.setVisible(false);
+        dsNhanVien.setVisible(false);
         hdn.setVisible(true);
+        dssp.setVisible(false);
         ncc.setVisible(false);
         dm.setVisible(false);
     }//GEN-LAST:event_btnNhapHangActionPerformed

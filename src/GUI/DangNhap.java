@@ -183,8 +183,7 @@ public class DangNhap extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Đăng nhập thành công", "Thành công", JOptionPane.INFORMATION_MESSAGE);
                 
                 
-                TaiKhoan taiKhoan = dao.getThongTinCaNhan(tk);
-                taiKhoan.setTenTK(tk);
+                TaiKhoan taiKhoan = dao.getThongTinTaiKhoan(tk);
                 
                 this.dispose();
                 

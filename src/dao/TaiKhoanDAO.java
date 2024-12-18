@@ -8,7 +8,6 @@ import SQLConnection.DBConnection;
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import model.NhanVien;
 import model.TaiKhoan;
 
 /**
@@ -45,6 +44,20 @@ public class TaiKhoanDAO {
             Logger.getLogger(TaiKhoanDAO.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(TaiKhoanDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
         return exists;
     }
@@ -71,52 +84,230 @@ public class TaiKhoanDAO {
             Logger.getLogger(TaiKhoanDAO.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(TaiKhoanDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
         return exists;
     }
 
     // Lấy thông tin cá nhân khi đăng nhập
-    public TaiKhoan getThongTinCaNhan(String tenTK) {
+    public TaiKhoan getThongTinTaiKhoan(String tenTK) {
+        TaiKhoan tk = null;
 
-        TaiKhoan taiKhoan = null;
-        NhanVien nv = null;
         try {
-
             connection = DBConnection.getConnection();
-            String sql = "SELECT * FROM TaiKhoan JOIN NhanVien ON TaiKhoan.MaNV = NhanVien.MaNV WHERE TaiKhoan.TenTK = ?";
 
+            String sql = "SELECT * FROM TaiKhoan WHERE TenTK = ?";;
             ps = connection.prepareStatement(sql);
             ps.setString(1, tenTK);
 
             rs = ps.executeQuery();
 
             while (rs.next()) {
-                nv = new NhanVien();
-                taiKhoan = new TaiKhoan();
-
-                nv.setMaNV(rs.getInt(5));
-                nv.setTen(rs.getString(6));
-                nv.setGioiTinh(rs.getString(7));
-                nv.setDiaChi(rs.getString(8));
-                nv.setEmail(rs.getString(9));
-                nv.setSoDT(rs.getString(10));
-                taiKhoan.setTenTK(tenTK);
-                taiKhoan.setMatKhau(rs.getString(2));
-                taiKhoan.setChucVu(rs.getString(3));
-                taiKhoan.setNv(nv);
+                tk = new TaiKhoan();
+                tk.setTenTK(rs.getString("TenTK"));
+                tk.setMatKhau(rs.getString("MatKhau"));
+                tk.setChucVu(rs.getString("ChucVu"));
+                tk.setMaNV(rs.getInt("MaNV"));
             }
 
         } catch (SQLException ex) {
             Logger.getLogger(TaiKhoanDAO.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(TaiKhoanDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
-        return taiKhoan;
 
+        return tk;
+    }
+
+    public TaiKhoan getTaiKhoanByMaNV(int maNV) {
+        TaiKhoan tk = null;
+
+        try {
+            connection = DBConnection.getConnection();
+
+            String sql = "SELECT TenTK, MatKhau, ChucVu FROM TaiKhoan WHERE MaNV = ?";
+            ps = connection.prepareStatement(sql);
+            ps.setInt(1, maNV);
+
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                tk = new TaiKhoan();
+                tk.setTenTK(rs.getString("TenTK"));
+                tk.setMatKhau(rs.getString("MatKhau"));
+                tk.setChucVu(rs.getString("ChucVu"));
+                tk.setMaNV(maNV);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(TaiKhoanDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(TaiKhoanDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return tk;
+    }
+
+    public int addTaiKhoan(TaiKhoan tk) {
+        try {
+            String sql = "INSERT INTO TaiKhoan (TenTK, MatKhau, ChucVu, MaNV) VALUES (?, ?, ?, ?)";
+
+            connection = DBConnection.getConnection();
+
+            ps = connection.prepareStatement(sql);
+            ps.setString(1, tk.getTenTK());
+            ps.setString(2, tk.getMatKhau());
+            ps.setString(3, tk.getChucVu());
+            ps.setInt(4, tk.getMaNV());
+
+            return ps.executeUpdate();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(NhanVienDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(NhanVienDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return 0;
+    }
+
+    public int capNhapTaiKhoan(TaiKhoan tk) {
+        try {
+            String sql = "UPDATE TaiKhoan SET ";
+
+            int index = 1;
+            if (tk.getMatKhau().trim().length() > 0) {
+                sql += " MatKhau = ?,";
+            }
+
+            sql += " ChucVu = ? WHERE TenTK = ? AND MaNV = ?";
+
+            connection = DBConnection.getConnection();
+
+            ps = connection.prepareStatement(sql);
+
+            if (tk.getMatKhau().trim().length() > 0) {
+                ps.setString(index++, tk.getMatKhau());
+            }
+
+            ps.setString(index++, tk.getChucVu());
+            ps.setString(index++, tk.getTenTK());
+            ps.setInt(index, tk.getMaNV());
+
+            return ps.executeUpdate();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(NhanVienDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(NhanVienDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return 0;
+    }
+
+    public int xoaTaiKhoan(int maNV) {
+        try {
+            connection = DBConnection.getConnection();
+
+            String sql = "DELETE TaiKhoan WHERE MaNV = ?";
+            ps = connection.prepareStatement(sql);
+
+            ps.setInt(1, maNV);
+
+            return ps.executeUpdate();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(TaiKhoanDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(TaiKhoanDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return 0;
     }
 
     public static void main(String[] args) throws ClassNotFoundException {
         TaiKhoanDAO dao = new TaiKhoanDAO();
-//        System.out.println(dao.layChucVu("user1").getChucVu().equals(ChucVu.nhanVien));
+        System.out.println(dao.getTaiKhoanByMaNV(1));
     }
 }
