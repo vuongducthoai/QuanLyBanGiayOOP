@@ -13,6 +13,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import model.NhaCungCap;
 
 /**
  *
@@ -25,45 +26,19 @@ public class DSNhaCungCap extends javax.swing.JPanel {
      */
     private DBConnection conn;
 
-<<<<<<< HEAD:src/GUI/NhaCungCap.java
-    public NhaCungCap() {
-=======
     public DSNhaCungCap() {
->>>>>>> remotes/origin/main:src/GUI/DSNhaCungCap.java
         initComponents();
         customizeTable();
         txtMaNCC.setEditable(false);
         conn = new DBConnection();
-<<<<<<< HEAD:src/GUI/NhaCungCap.java
-
-    }
-
-=======
         loadDataToTableNCC();
         getLastSupplerId();
     }
 
->>>>>>> remotes/origin/main:src/GUI/DSNhaCungCap.java
     private void customizeTable() {
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
         centerRenderer.setHorizontalAlignment(javax.swing.JLabel.CENTER);
 
-<<<<<<< HEAD:src/GUI/NhaCungCap.java
-        for (int i = 0; i < TableDskh.getColumnCount(); i++) {
-            TableDskh.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
-        }
-        TableDskh.getColumnModel().getColumn(0).setPreferredWidth(50);
-        TableDskh.getColumnModel().getColumn(1).setPreferredWidth(200);
-        TableDskh.getColumnModel().getColumn(2).setPreferredWidth(75);
-        TableDskh.getColumnModel().getColumn(3).setPreferredWidth(100);
-        TableDskh.getColumnModel().getColumn(4).setPreferredWidth(100);
-
-        // Set chiều cao hàng
-        TableDskh.setRowHeight(25);
-
-        // Tự động điều chỉnh kích thước
-        TableDskh.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
-=======
         for (int i = 0; i < TableDsncc.getColumnCount(); i++) {
             TableDsncc.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
         }
@@ -80,7 +55,7 @@ public class DSNhaCungCap extends javax.swing.JPanel {
         TableDsncc.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
     }
 
-    public void getLastSupplerId(){
+    public void getLastSupplerId() {
         try {
             int lastId = NhaCungCapDAO.getLastSupplierId(conn.getConnection());
             int newId = lastId + 1;
@@ -90,7 +65,6 @@ public class DSNhaCungCap extends javax.swing.JPanel {
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(DSNhaCungCap.class.getName()).log(Level.SEVERE, null, ex);
         }
->>>>>>> remotes/origin/main:src/GUI/DSNhaCungCap.java
     }
 
     /**
@@ -332,9 +306,6 @@ public class DSNhaCungCap extends javax.swing.JPanel {
             .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 515, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
-
-<<<<<<< HEAD:src/GUI/NhaCungCap.java
-=======
     private void loadDataToTableNCC() {
         try {
             List<NhaCungCap> listNCC = NhaCungCapDAO.getNhaCungCapList(conn.getConnection());
@@ -356,7 +327,7 @@ public class DSNhaCungCap extends javax.swing.JPanel {
             e.printStackTrace();
         }
     }
->>>>>>> remotes/origin/main:src/GUI/DSNhaCungCap.java
+
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
         try {
             int maNCC = Integer.parseInt(txtMaNCC.getText());
@@ -393,14 +364,9 @@ public class DSNhaCungCap extends javax.swing.JPanel {
             e.printStackTrace();
             JOptionPane.showMessageDialog(this, "Đã xảy ra lỗi khi sửa thông tin nhà cung cấp.");
         }
-
     }//GEN-LAST:event_btnSuaActionPerformed
 
-<<<<<<< HEAD:src/GUI/NhaCungCap.java
 
-=======
-    
->>>>>>> remotes/origin/main:src/GUI/DSNhaCungCap.java
     private void txtTimkiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTimkiemActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTimkiemActionPerformed
@@ -437,15 +403,6 @@ public class DSNhaCungCap extends javax.swing.JPanel {
 //        int maNCC = Integer.parseInt(txtMaNCC.getText());
         String tenNCC = txtTenNCC.getText();
         String diaChi = txtTenNCC.getText();
-<<<<<<< HEAD:src/GUI/NhaCungCap.java
-        String gioiTinh = "";
-        if (rdbNam.isSelected()) {
-            gioiTinh = "Nam";
-        } else {
-            gioiTinh = "Nữ";
-        }
-=======
->>>>>>> remotes/origin/main:src/GUI/DSNhaCungCap.java
         String email = txtEmail.getText();
         String soDT = txtSdt.getText();
 
@@ -518,6 +475,7 @@ public class DSNhaCungCap extends javax.swing.JPanel {
             }
         }
     }//GEN-LAST:event_btnXoaActionPerformed
+
     private void clearInputFields() {
         txtMaNCC.setText("");
         txtTenNCC.setText("");
