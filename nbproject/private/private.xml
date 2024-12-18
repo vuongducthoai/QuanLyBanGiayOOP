@@ -8,8 +8,10 @@
             <file>file:/D:/ky1_nam3/OOP/PROJECTCK/prj_di/QuanLyBanGiayOOP/src/GUI/DSHoaDon.java</file>
             <file>file:/D:/ky1_nam3/OOP/PROJECTCK/prj_di/QuanLyBanGiayOOP/src/main/Main.java</file>
             <file>file:/D:/ky1_nam3/OOP/PROJECTCK/prj_di/QuanLyBanGiayOOP/src/GUI/QuanLy.java</file>
+            <file>file:/D:/ky1_nam3/OOP/PROJECTCK/prj_di/QuanLyBanGiayOOP/src/model/KhachHang.java</file>
             <file>file:/D:/ky1_nam3/OOP/PROJECTCK/prj_di/QuanLyBanGiayOOP/src/GUI/DSHoaDonNhap.java</file>
             <file>file:/D:/ky1_nam3/OOP/PROJECTCK/prj_di/QuanLyBanGiayOOP/src/GUI/DSKhachHang.java</file>
+            <file>file:/D:/ky1_nam3/OOP/PROJECTCK/prj_di/QuanLyBanGiayOOP/src/dao/KhachHangDAO.java</file>
             <file>file:/D:/ky1_nam3/OOP/PROJECTCK/prj_di/QuanLyBanGiayOOP/src/dao/NhaCungCapDAO.java</file>
             <file>file:/D:/ky1_nam3/OOP/PROJECTCK/prj_di/QuanLyBanGiayOOP/src/model/SanPham.java</file>
             <file>file:/D:/ky1_nam3/OOP/PROJECTCK/prj_di/QuanLyBanGiayOOP/src/GUI/NhaCungCap.java</file>
@@ -18,6 +20,7 @@
             <file>file:/D:/ky1_nam3/OOP/PROJECTCK/prj_di/QuanLyBanGiayOOP/src/SQLConnection/SQLServerConnection.java</file>
             <file>file:/D:/ky1_nam3/OOP/PROJECTCK/prj_di/QuanLyBanGiayOOP/src/dao/QuanLySanPhamDAO.java</file>
             <file>file:/D:/ky1_nam3/OOP/PROJECTCK/prj_di/QuanLyBanGiayOOP/src/model/DanhMuc.java</file>
+            <file>file:/D:/ky1_nam3/OOP/PROJECTCK/prj_di/QuanLyBanGiayOOP/src/model/Person.java</file>
             <file>file:/D:/ky1_nam3/OOP/PROJECTCK/prj_di/QuanLyBanGiayOOP/src/GUI/NhanVien.java</file>
             <file>file:/D:/ky1_nam3/OOP/PROJECTCK/prj_di/QuanLyBanGiayOOP/src/model/NhanVien.java</file>
             <file>file:/D:/ky1_nam3/OOP/PROJECTCK/prj_di/QuanLyBanGiayOOP/src/GUI/DanhMuc.java</file>

@@ -22,10 +22,7 @@ public class NhaCungCap extends javax.swing.JFrame {
     private DBConnection conn;
     public NhaCungCap() {
         initComponents();
-        customizeTable();
-        txtMaNCC.setEditable(false);
-        conn = new DBConnection();
-        loadDataToTable();
+        
         
     }
     
@@ -317,18 +314,7 @@ public class NhaCungCap extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    private void loadDataToTable() {
-           try {
-               List<String[]> listNCC = NhaCungCapDAO.getNhaCungCapList(conn.getConnection());
-               DefaultTableModel model = (DefaultTableModel) TableDskh.getModel();
-               model.setRowCount(0); // Xóa tất cả dữ liệu cũ
-               for (String[] row : listNCC) {
-                   model.addRow(row); // Thêm từng dòng dữ liệu
-               }
-           } catch (Exception e) {
-               e.printStackTrace();
-           }
-       }
+    
     private void txtTimkiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTimkiemActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTimkiemActionPerformed

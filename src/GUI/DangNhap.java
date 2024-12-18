@@ -51,7 +51,7 @@ public class DangNhap extends javax.swing.JFrame {
 
         jLabel2.setText("Tên tài khoản:");
 
-        txtTenTK.setText("admin");
+        txtTenTK.setText("user1");
         txtTenTK.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtTenTKActionPerformed(evt);

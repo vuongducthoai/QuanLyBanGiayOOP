@@ -115,4 +115,14 @@ public class QuanLySanPhamDAO {
         return list;
     }
 
+    public static int getNextMaSP(Connection conn) throws SQLException {
+        String sqlMax = "SELECT MAX(MaSP) FROM SanPham";
+        PreparedStatement pstMax = conn.prepareStatement(sqlMax);
+        ResultSet rsMax = pstMax.executeQuery();
+        int maxMaKH = 0;
+        if (rsMax.next()) {
+            maxMaKH = rsMax.getInt(1);  // Lấy giá trị MaKH lớn nhất
+        }
+        return maxMaKH + 1; // Trả về mã khách hàng tiếp theo
+    }
 }

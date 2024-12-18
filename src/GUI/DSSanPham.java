@@ -31,6 +31,7 @@ public class DSSanPham extends javax.swing.JPanel {
             initComponents();
             tblSanPham.setModel(tableModel);
             LoadDSSanpham();
+            initMaSP();
             // Thêm sự kiện MouseListener cho bảng
             tblSanPham.addMouseListener(new java.awt.event.MouseAdapter() {
                 @Override
@@ -62,6 +63,18 @@ public class DSSanPham extends javax.swing.JPanel {
         }
     }
 
+    private void initMaSP() {
+        try {
+            
+            Connection conn = DBConnection.getConnection();
+           
+            int nextMaSP = QuanLySanPhamDAO.getNextMaSP(conn);
+          
+            txtMaSP.setText(String.valueOf(nextMaSP));
+        } catch (SQLException | ClassNotFoundException ex) {
+            JOptionPane.showMessageDialog(null, "Có lỗi xảy ra khi lấy mã khách hàng: " + ex.getMessage());
+        }
+    }
     private ArrayList<SanPham> list = new ArrayList<>();
 
     public void LoadDSSanpham() throws SQLException, ClassNotFoundException {
