@@ -12,12 +12,14 @@
             <file>file:/F:/QuanLyBanGiayOOP/src/GUI/SanPham.java</file>
             <file>file:/F:/QuanLyBanGiayOOP/src/model/SanPham.java</file>
             <file>file:/F:/QuanLyBanGiayOOP/src/DAO/NhaCungCapDAO.java</file>
+            <file>file:/F:/QuanLyBanGiayOOP/src/DAO/DanhMucDAO.java</file>
             <file>file:/F:/QuanLyBanGiayOOP/src/model/Person.java</file>
             <file>file:/F:/QuanLyBanGiayOOP/src/SQLConnection/SQLServerConnection.java</file>
             <file>file:/F:/QuanLyBanGiayOOP/src/model/HoaDonNhap.java</file>
             <file>file:/F:/QuanLyBanGiayOOP/src/GUI/NhaCungCap.java</file>
             <file>file:/F:/QuanLyBanGiayOOP/src/model/NhanVien.java</file>
             <file>file:/F:/QuanLyBanGiayOOP/src/GUI/DangNhap.java</file>
+            <file>file:/F:/QuanLyBanGiayOOP/src/DAO/SanPhamDAO.java</file>
             <file>file:/F:/QuanLyBanGiayOOP/src/GUI/NhanVien.java</file>
             <file>file:/F:/QuanLyBanGiayOOP/src/GUI/DSNhanVien.java</file>
             <file>file:/F:/QuanLyBanGiayOOP/src/model/HoaDon.java</file>
