@@ -23,10 +23,15 @@ public class NhaCungCap extends javax.swing.JPanel {
     private DBConnection conn;
     public NhaCungCap() {
         initComponents();
+<<<<<<< HEAD
         customizeTable();
         txtMaNCC.setEditable(false);
         conn = new DBConnection();
         loadDataToTable();
+=======
+        
+        
+>>>>>>> remotes/origin/di
     }
     
      private void customizeTable() {
@@ -306,6 +311,7 @@ public class NhaCungCap extends javax.swing.JPanel {
             .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 515, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
+<<<<<<< HEAD
 
      private void loadDataToTable() {
            try {
@@ -324,6 +330,9 @@ public class NhaCungCap extends javax.swing.JPanel {
 
     }//GEN-LAST:event_btnSuaActionPerformed
 
+=======
+    
+>>>>>>> remotes/origin/di
     private void txtTimkiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTimkiemActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTimkiemActionPerformed
