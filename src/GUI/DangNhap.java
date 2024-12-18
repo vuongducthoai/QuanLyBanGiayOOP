@@ -6,8 +6,6 @@ package GUI;
 
 import constants.ChucVu;
 import dao.TaiKhoanDAO;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import model.TaiKhoan;
@@ -19,7 +17,7 @@ import model.TaiKhoan;
 public class DangNhap extends javax.swing.JFrame {
 
     /**
-     * Creates new form DangNhap2
+     * Creates new form DangNhap
      */
     public DangNhap() {
         initComponents();
@@ -42,6 +40,7 @@ public class DangNhap extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         btnDangNhap = new javax.swing.JButton();
         txtMatKhau = new javax.swing.JPasswordField();
+        jCheckBox1 = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Đăng nhập");
@@ -78,6 +77,9 @@ public class DangNhap extends javax.swing.JFrame {
             }
         });
 
+        jCheckBox1.setText("Ghi nhớ");
+        jCheckBox1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -85,6 +87,7 @@ public class DangNhap extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(95, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jCheckBox1)
                     .addComponent(btnDangNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -116,9 +119,11 @@ public class DangNhap extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(txtMatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jCheckBox1)
+                .addGap(18, 18, 18)
                 .addComponent(btnDangNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {txtMatKhau, txtTenTK});
@@ -170,20 +175,24 @@ public class DangNhap extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Vui lòng nhập mật khẩu !");
         } else {
             TaiKhoanDAO dao = new TaiKhoanDAO();
-            try {
-                if (dao.checkTenTaiKhoan(tk) == false) {
-                    JOptionPane.showMessageDialog(this, "Tên tài khoản không tồn tại !", "Sai tài khoản", JOptionPane.ERROR_MESSAGE);
-                } else if (dao.checkTaiKhoan(tk, mk) == false) {
-                    JOptionPane.showMessageDialog(this, "Mật khẩu không chính xác !", "Sai mật khẩu", JOptionPane.ERROR_MESSAGE);
-                } else {
-                    
-
-                    
-                    TaiKhoan taiKhoan = dao.layThongTinCaNhan(tk);
-
-                    this.dispose();
-
-                    JFrame frame = null;
+            if (dao.checkTenTaiKhoan(tk) == false) {
+                JOptionPane.showMessageDialog(this, "Tên tài khoản không tồn tại !", "Sai tài khoản", JOptionPane.ERROR_MESSAGE);
+            } else if (dao.checkTaiKhoan(tk, mk) == false) {
+                JOptionPane.showMessageDialog(this, "Mật khẩu không chính xác !", "Sai mật khẩu", JOptionPane.ERROR_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(this, "Đăng nhập thành công", "Thành công", JOptionPane.INFORMATION_MESSAGE);
+                
+                
+                TaiKhoan taiKhoan = dao.getThongTinCaNhan(tk);
+                taiKhoan.setTenTK(tk);
+                
+                this.dispose();
+                
+                JFrame frame = null;
+                
+                if (taiKhoan.getChucVu().equals(ChucVu.quanLy)) {
+                    frame = new QuanLy(taiKhoan);
+                } else {                  
 
                     if (taiKhoan.getChucVu().equals(ChucVu.quanLy)) {
                         frame = new QuanLy(taiKhoan);
@@ -195,8 +204,10 @@ public class DangNhap extends javax.swing.JFrame {
                     frame.setVisible(true);
 
                 }
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(DangNhap.class.getName()).log(Level.SEVERE, null, ex);
+                
+                frame.setLocationRelativeTo(null);
+                frame.setVisible(true);
+                
             }
         }
     }
@@ -241,6 +252,7 @@ public class DangNhap extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDangNhap;
+    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

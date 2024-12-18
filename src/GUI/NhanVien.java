@@ -34,7 +34,6 @@ public class NhanVien extends javax.swing.JFrame {
     }
 
     private void setTab() {
-        
         panelMain.add(kh);
         panelMain.add(hd);
         panelMain.add(ttcn);
