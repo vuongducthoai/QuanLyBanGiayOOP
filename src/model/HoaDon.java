@@ -4,7 +4,7 @@
  */
 package model;
 
-import java.util.List;
+import java.util.Date;
 
 /**
  *
@@ -13,91 +13,105 @@ import java.util.List;
 public class HoaDon {
 
     private int maHD;
-    private KhachHang khachHang;
-    private List<SanPham> dsSanPham;
-    private String ngayMua;
-    private int soLuong;
-    private double donGiaBan;
+    private int maKH;
+    private Date ngayMua;
     private String trangThai;
-    private String pttt;
+    private String pTTT;
+    private double tongTien;
 
-    public HoaDon() {
+    public HoaDon(){
     }
     
-    public HoaDon(int maHD, KhachHang khachHang, List<SanPham> dsSanPham, String ngayMua, int soLuong, double donGiaBan, String trangThai, String pttt) {
+    public HoaDon(int maHD, int maKH, Date ngayMua, String trangThai, String pTTT, double tongTien) {
         this.maHD = maHD;
-        this.khachHang = khachHang;
-        this.dsSanPham = dsSanPham;
+        this.maKH = maKH;
         this.ngayMua = ngayMua;
-        this.soLuong = soLuong;
-        this.donGiaBan = donGiaBan;
         this.trangThai = trangThai;
-        this.pttt = pttt;
+        this.pTTT = pTTT;
+        this.tongTien = tongTien;
     }
 
+    /**
+     * @return the maHD
+     */
     public int getMaHD() {
         return maHD;
     }
 
+    /**
+     * @param maHD the maHD to set
+     */
     public void setMaHD(int maHD) {
         this.maHD = maHD;
     }
 
-    public KhachHang getKhachHang() {
-        return khachHang;
-    }
-
-    public void setKhachHang(KhachHang khachHang) {
-        this.khachHang = khachHang;
-    }
-
-    public List<SanPham> getDsSanPham() {
-        return dsSanPham;
-    }
-
-    public void setDsSanPham(List<SanPham> dsSanPham) {
-        this.dsSanPham = dsSanPham;
-    }
-
-    public String getNgayMua() {
+    /**
+     * @return the ngayMua
+     */
+    public Date getNgayMua() {
         return ngayMua;
     }
 
-    public void setNgayMua(String ngayMua) {
+    /**
+     * @param ngayMua the ngayMua to set
+     */
+    public void setNgayMua(Date ngayMua) {
         this.ngayMua = ngayMua;
     }
 
-    public int getSoLuong() {
-        return soLuong;
-    }
-
-    public void setSoLuong(int soLuong) {
-        this.soLuong = soLuong;
-    }
-
-    public double getDonGiaBan() {
-        return donGiaBan;
-    }
-
-    public void setDonGiaBan(double donGiaBan) {
-        this.donGiaBan = donGiaBan;
-    }
-
+    /**
+     * @return the trangThai
+     */
     public String getTrangThai() {
         return trangThai;
     }
 
+    /**
+     * @param trangThai the trangThai to set
+     */
     public void setTrangThai(String trangThai) {
         this.trangThai = trangThai;
     }
 
-    public String getPttt() {
-        return pttt;
+    /**
+     * @return the pTTT
+     */
+    public String getpTTT() {
+        return pTTT;
     }
 
-    public void setPttt(String pttt) {
-        this.pttt = pttt;
+    /**
+     * @param pTTT the pTTT to set
+     */
+    public void setpTTT(String pTTT) {
+        this.pTTT = pTTT;
     }
 
-    
+    /**
+     * @return the tongTien
+     */
+    public double getTongTien() {
+        return tongTien;
+    }
+
+    /**
+     * @param tongTien the tongTien to set
+     */
+    public void setTongTien(double tongTien) {
+        this.tongTien = tongTien;
+    }
+
+    /**
+     * @return the maKH
+     */
+    public int getMaKH() {
+        return maKH;
+    }
+
+    /**
+     * @param maKH the maKH to set
+     */
+    public void setMaKH(int maKH) {
+        this.maKH = maKH;
+    }
 }
