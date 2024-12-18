@@ -101,4 +101,14 @@ public class HoaDonDAO {
         }
         return list;
     }
+    public static int getNextMaHD(Connection conn) throws SQLException {
+        String sqlMax = "SELECT MAX(MaHD) FROM HoaDon";
+        PreparedStatement pstMax = conn.prepareStatement(sqlMax);
+        ResultSet rsMax = pstMax.executeQuery();
+        int maxMaHD = 0;
+        if (rsMax.next()) {
+            maxMaHD = rsMax.getInt(1);  // Lấy giá trị MaKD lớn nhất
+        }
+        return maxMaHD + 1;
+    }
 }

@@ -4,6 +4,20 @@
  */
 package GUI;
 
+import SQLConnection.DBConnection;
+import dao.HoaDonDAO;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.JSpinner;
+import javax.swing.table.DefaultTableModel;
+import model.HoaDon;
+
 /**
  *
  * @author ADMIN
@@ -11,10 +25,93 @@ package GUI;
 public class DSHoaDon extends javax.swing.JPanel {
 
     /**
-     * Creates new form DSHoaDon2
+     * Creates new form
      */
+    private DefaultTableModel tableModel1 = new DefaultTableModel();
+
     public DSHoaDon() {
-        initComponents();
+        try {
+            initComponents();
+            tblDshd.setModel(tableModel1);
+            JSpinner.DateEditor editor = new JSpinner.DateEditor(jSpinnerNgaymua, "dd-MM-yyyy");
+            jSpinnerNgaymua.setEditor(editor);
+            initMaHD();
+
+            // Thêm sự kiện MouseListener cho bảng
+            tblDshd.addMouseListener(new java.awt.event.MouseAdapter() {
+                @Override
+                public void mouseClicked(java.awt.event.MouseEvent evt) {
+                    int selectedRow = tblDshd.getSelectedRow(); // Lấy chỉ số của hàng được chọn
+                    if (selectedRow != -1) { // Kiểm tra nếu có hàng được chọn
+                        // Lấy dữ liệu từ dòng được chọn
+                        String maHD = tblDshd.getValueAt(selectedRow, 0).toString();
+                        String maKH = tblDshd.getValueAt(selectedRow, 1).toString();
+                        String ngayMua = tblDshd.getValueAt(selectedRow, 2).toString();
+                        String pTTT = tblDshd.getValueAt(selectedRow, 3).toString();
+                        String trangThai = tblDshd.getValueAt(selectedRow, 4).toString();
+                        String tongTien = tblDshd.getValueAt(selectedRow, 5).toString();
+
+                        // Hiển thị dữ liệu vào các TextField
+                        txtMaHD.setText(maHD);
+                        txtMaKH.setText(maKH);
+
+                        // Hiển thị ngày mua vào JSpinner
+                        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+                        try {
+                            Date date = dateFormat.parse(ngayMua); // Chuyển đổi chuỗi sang Date
+                            jSpinnerNgaymua.setValue(date); // Thiết lập giá trị cho Spinner
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                            JOptionPane.showMessageDialog(null, "Định dạng ngày không hợp lệ: " + ngayMua);
+                        }
+
+                        cbbPttt.setSelectedItem(pTTT);
+                        cbbTrangthai.setSelectedItem(trangThai);
+                        txtTongtien.setText(tongTien);
+                    }
+                }
+            });
+        } catch (Exception e) {
+            // Bắt tất cả các ngoại lệ chung, xử lý lỗi
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Có lỗi xảy ra khi khởi tạo: " + e.getMessage());
+        }
+    }
+
+    private void initMaHD() {
+        try {
+            // Kết nối tới cơ sở dữ liệu
+            Connection conn = DBConnection.getConnection();
+
+            int nextMaHD = HoaDonDAO.getNextMaHD(conn);
+
+            txtMaHD.setText(String.valueOf(nextMaHD));
+        } catch (SQLException | ClassNotFoundException ex) {
+            JOptionPane.showMessageDialog(null, "Có lỗi xảy ra khi lấy mã hóa đơn: " + ex.getMessage());
+        }
+    }
+
+    private ArrayList<HoaDon> list = new ArrayList<>();
+
+    public void LoadDSHoaDon() throws SQLException, ClassNotFoundException {
+        String[] colsName = {"Mã hóa đơn", "Mã khách hàng", "Ngày mua", "Phương thức TT", "Trạng thái", "Tổng tiền"};
+        DefaultTableModel tableModel1 = (DefaultTableModel) tblDshd.getModel();
+        tableModel1.setRowCount(0); // Xóa dữ liệu cũ trước khi load mới
+        tableModel1.setColumnIdentifiers(colsName);
+
+        Connection conn = DBConnection.getConnection();
+        List<HoaDon> list = HoaDonDAO.ListHoaDon(conn);
+
+        for (HoaDon hd : list) {
+            String rows[] = new String[6];
+            rows[0] = Integer.toString(hd.getMaHD());
+            rows[1] = Integer.toString(hd.getMaKH());
+            rows[2] = new SimpleDateFormat("dd-MM-yyyy").format(hd.getNgayMua());
+            rows[3] = hd.getpTTT();
+            rows[4] = hd.getTrangThai();
+            rows[5] = Double.toString(hd.getTongTien());
+            tableModel1.addRow(rows);
+        }
     }
 
     /**
@@ -45,7 +142,6 @@ public class DSHoaDon extends javax.swing.JPanel {
         jLabel6 = new javax.swing.JLabel();
         cbbPttt = new javax.swing.JComboBox<>();
         cbbTrangthai = new javax.swing.JComboBox<>();
-        btnXoaHD1 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         txtMaCTHD = new javax.swing.JTextField();
@@ -83,6 +179,11 @@ public class DSHoaDon extends javax.swing.JPanel {
         btnSuaHD.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnSuaHD.setForeground(new java.awt.Color(255, 255, 255));
         btnSuaHD.setText("Sửa");
+        btnSuaHD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSuaHDActionPerformed(evt);
+            }
+        });
 
         jLabel7.setText("Mã hóa đơn:");
 
@@ -95,6 +196,11 @@ public class DSHoaDon extends javax.swing.JPanel {
         });
 
         btnTimkiemHD.setText("Tìm");
+        btnTimkiemHD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTimkiemHDActionPerformed(evt);
+            }
+        });
 
         tblDshd.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -136,16 +242,6 @@ public class DSHoaDon extends javax.swing.JPanel {
         cbbPttt.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Chuyển khoản", "Tiền mặt" }));
 
         cbbTrangthai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Đã thanh toán", "Chưa thanh toán" }));
-
-        btnXoaHD1.setBackground(new java.awt.Color(255, 0, 0));
-        btnXoaHD1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnXoaHD1.setForeground(new java.awt.Color(255, 255, 255));
-        btnXoaHD1.setText("Xóa");
-        btnXoaHD1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnXoaHD1ActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -192,13 +288,11 @@ public class DSHoaDon extends javax.swing.JPanel {
                                 .addComponent(cbbPttt, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(62, 62, 62)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btnThemHD)
-                        .addGap(59, 59, 59)
-                        .addComponent(btnXoaHD1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(68, 68, 68)
                         .addComponent(btnSuaHD)
-                        .addGap(47, 47, 47)))
+                        .addGap(122, 122, 122)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -227,11 +321,10 @@ public class DSHoaDon extends javax.swing.JPanel {
                     .addComponent(txtTimkiemHD, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnTimkiemHD, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 242, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSuaHD, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnXoaHD1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnThemHD, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(12, 12, 12))
         );
@@ -340,13 +433,12 @@ public class DSHoaDon extends javax.swing.JPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                 .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addGap(74, 74, 74)
+                    .addGap(44, 44, 44)
                     .addComponent(btnThemCTHD)
                     .addGap(61, 61, 61)
                     .addComponent(btnXoaCTHD)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
-                    .addComponent(btnSuaCTHD)
-                    .addContainerGap())
+                    .addGap(51, 51, 51)
+                    .addComponent(btnSuaCTHD))
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addGap(20, 20, 20)
                     .addComponent(txtTimkiemCTHD, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -447,12 +539,39 @@ public class DSHoaDon extends javax.swing.JPanel {
     }//GEN-LAST:event_txtTimkiemHDActionPerformed
 
     private void btnThemHDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemHDActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnThemHDActionPerformed
+        try {
+            // Lấy dữ liệu từ các trường trên form
+            int maKH = Integer.parseInt(txtMaKH.getText());
+            Date ngayMua = (Date) jSpinnerNgaymua.getValue();
+            String trangThai = cbbTrangthai.getSelectedItem().toString();
+            String pTTT = cbbPttt.getSelectedItem().toString();
+            double tongTien = Double.parseDouble(txtTongtien.getText());
 
-    private void btnXoaHD1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaHD1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnXoaHD1ActionPerformed
+            // Tạo đối tượng HoaDon
+            HoaDon hd = new HoaDon();
+            hd.setMaKH(maKH);
+            hd.setNgayMua(ngayMua);
+            hd.setTrangThai(trangThai);
+            hd.setpTTT(pTTT);
+            hd.setTongTien(tongTien);
+
+            // Kết nối tới cơ sở dữ liệu và thêm hóa đơn
+            Connection conn = DBConnection.getConnection();
+            int result = HoaDonDAO.addHoaDon(conn, hd);
+
+            if (result > 0) {
+                JOptionPane.showMessageDialog(this, "Thêm hóa đơn thành công!");
+                LoadDSHoaDon(); // Cập nhật lại danh sách hóa đơn sau khi thêm
+            } else {
+                JOptionPane.showMessageDialog(this, "Thêm hóa đơn thất bại!");
+            }
+
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Dữ liệu không hợp lệ! Vui lòng kiểm tra các trường nhập.");
+        } catch (SQLException | ClassNotFoundException e) {
+            JOptionPane.showMessageDialog(this, "Có lỗi xảy ra khi thêm hóa đơn: " + e.getMessage());
+        }
+    }//GEN-LAST:event_btnThemHDActionPerformed
 
     private void btnXoaCTHDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaCTHDActionPerformed
         // TODO add your handling code here:
@@ -486,6 +605,80 @@ public class DSHoaDon extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtMaCTHDActionPerformed
 
+    private void btnSuaHDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaHDActionPerformed
+        try {
+            // Lấy dữ liệu từ các trường trên form
+            int maHD = Integer.parseInt(txtMaHD.getText());
+            int maKH = Integer.parseInt(txtMaKH.getText());
+            Date ngayMua = (Date) jSpinnerNgaymua.getValue();
+            String trangThai = cbbTrangthai.getSelectedItem().toString();
+            String pTTT = cbbPttt.getSelectedItem().toString();
+            double tongTien = Double.parseDouble(txtTongtien.getText());
+
+            // Tạo đối tượng HoaDon
+            HoaDon hd = new HoaDon();
+            hd.setMaHD(maHD);
+            hd.setMaKH(maKH);
+            hd.setNgayMua(ngayMua);
+            hd.setTrangThai(trangThai);
+            hd.setpTTT(pTTT);
+            hd.setTongTien(tongTien);
+
+            // Kết nối tới cơ sở dữ liệu và cập nhật hóa đơn
+            Connection conn = DBConnection.getConnection();
+            int result = HoaDonDAO.updateHoaDon(conn, hd);
+
+            if (result > 0) {
+                JOptionPane.showMessageDialog(this, "Cập nhật hóa đơn thành công!");
+                LoadDSHoaDon(); // Cập nhật lại danh sách hóa đơn sau khi sửa
+            } else {
+                JOptionPane.showMessageDialog(this, "Cập nhật hóa đơn thất bại!");
+            }
+
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Dữ liệu không hợp lệ! Vui lòng kiểm tra các trường nhập.");
+        } catch (SQLException | ClassNotFoundException e) {
+            JOptionPane.showMessageDialog(this, "Có lỗi xảy ra khi cập nhật hóa đơn: " + e.getMessage());
+        }
+    }//GEN-LAST:event_btnSuaHDActionPerformed
+
+    private void btnTimkiemHDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimkiemHDActionPerformed
+        // Lấy dữ liệu từ ô tìm kiếm
+        String keyword = txtTimkiemHD.getText().trim();
+
+        try {
+            // Kết nối cơ sở dữ liệu
+            Connection conn = DBConnection.getConnection();
+
+            // Gọi phương thức tìm kiếm từ DAO
+            List<HoaDon> dsHoaDon = HoaDonDAO.searchHoaDon(conn, keyword);
+
+            // Hiển thị danh sách hóa đơn tìm được lên bảng
+            DefaultTableModel model = (DefaultTableModel) tblDshd.getModel();
+            model.setRowCount(0); // Xóa dữ liệu cũ trên bảng
+
+            if (dsHoaDon.isEmpty()) {
+                // Nếu không tìm thấy hóa đơn, load lại toàn bộ danh sách hóa đơn
+                JOptionPane.showMessageDialog(this, "Không tìm thấy hóa đơn nào. Đang tải lại dữ liệu...");
+                dsHoaDon = HoaDonDAO.ListHoaDon(conn); // Phương thức lấy toàn bộ hóa đơn
+            }
+
+            // Thêm dữ liệu vào bảng
+            for (HoaDon hd : dsHoaDon) {
+                model.addRow(new Object[]{
+                    hd.getMaHD(),
+                    hd.getMaKH(),
+                    new SimpleDateFormat("dd-MM-yyyy").format(hd.getNgayMua()),
+                    hd.getpTTT(),
+                    hd.getTrangThai(),
+                    hd.getTongTien()
+                });
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            JOptionPane.showMessageDialog(this, "Có lỗi xảy ra khi tìm kiếm: " + e.getMessage());
+        }
+    }//GEN-LAST:event_btnTimkiemHDActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSuaCTHD;
@@ -495,7 +688,6 @@ public class DSHoaDon extends javax.swing.JPanel {
     private javax.swing.JButton btnTimkiemCTHD;
     private javax.swing.JButton btnTimkiemHD;
     private javax.swing.JButton btnXoaCTHD;
-    private javax.swing.JButton btnXoaHD1;
     private javax.swing.JComboBox<String> cbbPttt;
     private javax.swing.JComboBox<String> cbbTrangthai;
     private javax.swing.JLabel jLabel10;
@@ -514,7 +706,7 @@ public class DSHoaDon extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSpinner jSpinnerNgaymua;
-    private javax.swing.JTable tblDscthd;
+    public javax.swing.JTable tblDscthd;
     public javax.swing.JTable tblDshd;
     private javax.swing.JTextField txtGiaban;
     private javax.swing.JTextField txtMaCTHD;
