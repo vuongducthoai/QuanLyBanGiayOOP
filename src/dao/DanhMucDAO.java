@@ -26,6 +26,7 @@ public class DanhMucDAO {
                 DanhMuc danhMuc = new DanhMuc();
                 danhMuc.setMaDM(rs.getInt("MaDM"));
                 danhMuc.setTenDM(rs.getString("TenDM"));
+                danhMucList.add(danhMuc);
             }
         return danhMucList;
     }
@@ -44,6 +45,7 @@ public class DanhMucDAO {
                 PreparedStatement preparedStatement = connection.prepareStatement(sql);
                 preparedStatement.setString(1, danhMuc.getTenDM());
                 preparedStatement.setInt(2, danhMuc.getMaDM());
+                 preparedStatement.executeUpdate();
             } else{
                 insertDanhMuc(connection, danhMuc);
             }
@@ -91,6 +93,18 @@ public class DanhMucDAO {
             e.printStackTrace();
         }
         return list;
+    }
+    
+    
+     public static int getLastCategoryId(Connection connection) throws SQLException {
+        String sql = "SELECT MAX(MaDM) AS LastID FROM DanhMuc";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        ResultSet rs = preparedStatement.executeQuery();
+
+        if (rs.next()) {
+            return rs.getInt("LastID");
+        }
+        return 0;
     }
 
 }
