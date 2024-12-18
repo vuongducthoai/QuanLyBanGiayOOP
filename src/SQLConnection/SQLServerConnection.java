@@ -19,12 +19,8 @@ public class SQLServerConnection {
         String dbURL = "jdbc:sqlserver://localhost:1433";
         String dbName = "QuanLyCuaHangBanGiay";
         String dbUsername = "sa";
-<<<<<<< HEAD
         String dbPassword = "123456";
 
-=======
-        String dbPassword = "nopainnogain@dx";
->>>>>>> remotes/origin/main
         String connectionURL = dbURL + ";databaseName=" + dbName + ";encrypt=true;trustServerCertificate=true";
         Connection conn = null;
         try {

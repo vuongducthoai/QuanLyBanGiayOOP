@@ -6,6 +6,7 @@ package GUI;
 
 import SQLConnection.DBConnection;
 import dao.HoaDonDAO;
+import dao.ChiTietHoaDonDAO;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -17,6 +18,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
 import javax.swing.table.DefaultTableModel;
 import model.HoaDon;
+import model.ChiTietHoaDon;
 
 /**
  *
@@ -28,6 +30,7 @@ public class DSHoaDon extends javax.swing.JPanel {
      * Creates new form
      */
     private DefaultTableModel tableModel1 = new DefaultTableModel();
+    private DefaultTableModel tableModel2 = new DefaultTableModel();
 
     public DSHoaDon() {
         try {
@@ -35,9 +38,13 @@ public class DSHoaDon extends javax.swing.JPanel {
             tblDshd.setModel(tableModel1);
             JSpinner.DateEditor editor = new JSpinner.DateEditor(jSpinnerNgaymua, "dd-MM-yyyy");
             jSpinnerNgaymua.setEditor(editor);
+            LoadDSHoaDon();
             initMaHD();
+            tblDscthd.setModel(tableModel2);
+            initMaCTHD();
+            LoadDSChiTietHoaDon();
 
-            // Thêm sự kiện MouseListener cho bảng
+            // Thêm sự kiện MouseListener cho bảng tblDshd
             tblDshd.addMouseListener(new java.awt.event.MouseAdapter() {
                 @Override
                 public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -71,6 +78,28 @@ public class DSHoaDon extends javax.swing.JPanel {
                     }
                 }
             });
+            // Thêm sự kiện MouseListener cho bảng tblDscthd
+            tblDscthd.addMouseListener(new java.awt.event.MouseAdapter() {
+                @Override
+                public void mouseClicked(java.awt.event.MouseEvent evt) {
+                    int selectedRow = tblDscthd.getSelectedRow(); // Lấy chỉ số của hàng được chọn
+                    if (selectedRow != -1) { // Kiểm tra nếu có hàng được chọn
+                        // Lấy dữ liệu từ dòng được chọn
+                        String maCTHD = tblDscthd.getValueAt(selectedRow, 0).toString();
+                        String maHD = tblDscthd.getValueAt(selectedRow, 1).toString();
+                        String maSP = tblDscthd.getValueAt(selectedRow, 2).toString();
+                        String soLuong = tblDscthd.getValueAt(selectedRow, 3).toString();
+                        String donGiaBan = tblDscthd.getValueAt(selectedRow, 4).toString();
+
+                        // Hiển thị dữ liệu vào các TextField
+                        txtMaCTHD.setText(maCTHD);
+                        txtMaHDinCTHD.setText(maHD);
+                        txtMaSP.setText(maSP);
+                        txtSoluong.setText(soLuong);
+                        txtGiaban.setText(donGiaBan);
+                    }
+                }
+            });
         } catch (Exception e) {
             // Bắt tất cả các ngoại lệ chung, xử lý lỗi
             e.printStackTrace();
@@ -86,6 +115,19 @@ public class DSHoaDon extends javax.swing.JPanel {
             int nextMaHD = HoaDonDAO.getNextMaHD(conn);
 
             txtMaHD.setText(String.valueOf(nextMaHD));
+        } catch (SQLException | ClassNotFoundException ex) {
+            JOptionPane.showMessageDialog(null, "Có lỗi xảy ra khi lấy mã hóa đơn: " + ex.getMessage());
+        }
+    }
+
+    private void initMaCTHD() {
+        try {
+            // Kết nối tới cơ sở dữ liệu
+            Connection conn = DBConnection.getConnection();
+
+            int nextMaCTHD = ChiTietHoaDonDAO.getNextMaCTHD(conn);
+
+            txtMaCTHD.setText(String.valueOf(nextMaCTHD));
         } catch (SQLException | ClassNotFoundException ex) {
             JOptionPane.showMessageDialog(null, "Có lỗi xảy ra khi lấy mã hóa đơn: " + ex.getMessage());
         }
@@ -111,6 +153,28 @@ public class DSHoaDon extends javax.swing.JPanel {
             rows[4] = hd.getTrangThai();
             rows[5] = Double.toString(hd.getTongTien());
             tableModel1.addRow(rows);
+        }
+    }
+
+    private ArrayList<ChiTietHoaDon> list2 = new ArrayList<>();
+
+    public void LoadDSChiTietHoaDon() throws SQLException, ClassNotFoundException {
+        String[] colsName = {"Mã CTHD", "Mã hóa đơn", "Mã sản phẩm", "Số lượng", "Giá bán"};
+        DefaultTableModel tableModel2 = (DefaultTableModel) tblDscthd.getModel();
+        tableModel2.setRowCount(0); // Xóa dữ liệu cũ trước khi load mới
+        tableModel2.setColumnIdentifiers(colsName);
+
+        Connection conn = DBConnection.getConnection();
+        List<ChiTietHoaDon> list2 = ChiTietHoaDonDAO.ListChiTietHoaDon(conn);
+
+        for (ChiTietHoaDon cthd : list2) {
+            String rows[] = new String[5];
+            rows[0] = Integer.toString(cthd.getMaCTHD());
+            rows[1] = Integer.toString(cthd.getMaHD());
+            rows[2] = Integer.toString(cthd.getMaSP());
+            rows[3] = Integer.toString(cthd.getSoLuong());
+            rows[4] = Double.toString(cthd.getDonGiaBan());
+            tableModel2.addRow(rows);
         }
     }
 
@@ -380,6 +444,11 @@ public class DSHoaDon extends javax.swing.JPanel {
         });
 
         btnTimkiemCTHD.setText("Tìm");
+        btnTimkiemCTHD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTimkiemCTHDActionPerformed(evt);
+            }
+        });
 
         tblDscthd.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -426,39 +495,39 @@ public class DSHoaDon extends javax.swing.JPanel {
         btnSuaCTHD.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnSuaCTHD.setForeground(new java.awt.Color(255, 255, 255));
         btnSuaCTHD.setText("Sửa");
+        btnSuaCTHD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSuaCTHDActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addGap(44, 44, 44)
-                    .addComponent(btnThemCTHD)
-                    .addGap(61, 61, 61)
-                    .addComponent(btnXoaCTHD)
-                    .addGap(51, 51, 51)
-                    .addComponent(btnSuaCTHD))
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addGap(20, 20, 20)
-                    .addComponent(txtTimkiemCTHD, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(32, 32, 32)
-                    .addComponent(btnTimkiemCTHD))
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(44, 44, 44)
+                .addComponent(btnThemCTHD)
+                .addGap(61, 61, 61)
+                .addComponent(btnXoaCTHD)
+                .addGap(51, 51, 51)
+                .addComponent(btnSuaCTHD))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(txtTimkiemCTHD, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnTimkiemCTHD))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 422, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(17, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 11, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel12)
-                        .addGap(39, 39, 39)))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel12))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtGiaban, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -555,6 +624,8 @@ public class DSHoaDon extends javax.swing.JPanel {
             hd.setpTTT(pTTT);
             hd.setTongTien(tongTien);
 
+            // Lấy mã hóa đơn tiếp theo từ txtMaHD
+            int maHD = Integer.parseInt(txtMaHD.getText());
             // Kết nối tới cơ sở dữ liệu và thêm hóa đơn
             Connection conn = DBConnection.getConnection();
             int result = HoaDonDAO.addHoaDon(conn, hd);
@@ -562,6 +633,10 @@ public class DSHoaDon extends javax.swing.JPanel {
             if (result > 0) {
                 JOptionPane.showMessageDialog(this, "Thêm hóa đơn thành công!");
                 LoadDSHoaDon(); // Cập nhật lại danh sách hóa đơn sau khi thêm
+                clearForm1();
+                txtMaHDinCTHD.setText(String.valueOf(maHD));
+                // Tăng mã hóa đơn cho lần thêm sau
+                txtMaHD.setText(String.valueOf(maHD + 1));
             } else {
                 JOptionPane.showMessageDialog(this, "Thêm hóa đơn thất bại!");
             }
@@ -574,11 +649,67 @@ public class DSHoaDon extends javax.swing.JPanel {
     }//GEN-LAST:event_btnThemHDActionPerformed
 
     private void btnXoaCTHDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaCTHDActionPerformed
-        // TODO add your handling code here:
+        try {
+            // Lấy dữ liệu từ bảng chi tiết hóa đơn
+            int selectedRow = tblDscthd.getSelectedRow(); // Lấy chỉ số của hàng được chọn trong bảng chi tiết hóa đơn
+            if (selectedRow != -1) { // Kiểm tra nếu có hàng được chọn
+                int maCTHD = Integer.parseInt(tblDscthd.getValueAt(selectedRow, 0).toString()); // Lấy mã chi tiết hóa đơn
+
+                // Kết nối tới cơ sở dữ liệu và xóa chi tiết hóa đơn
+                Connection conn = DBConnection.getConnection();
+                int result = ChiTietHoaDonDAO.deleteChiTietHoaDon(conn, maCTHD);
+
+                if (result > 0) {
+                    JOptionPane.showMessageDialog(this, "Xóa chi tiết hóa đơn thành công!");
+                    LoadDSChiTietHoaDon(); // Cập nhật lại danh sách chi tiết hóa đơn sau khi xóa
+                    clearForm2(); // Xóa các trường nhập liệu trong form chi tiết hóa đơn
+                } else {
+                    JOptionPane.showMessageDialog(this, "Xóa chi tiết hóa đơn thất bại!");
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Vui lòng chọn chi tiết hóa đơn để xóa.");
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            JOptionPane.showMessageDialog(this, "Có lỗi xảy ra khi xóa chi tiết hóa đơn: " + e.getMessage());
+        }
     }//GEN-LAST:event_btnXoaCTHDActionPerformed
 
     private void btnThemCTHDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemCTHDActionPerformed
-        // TODO add your handling code here:
+        try {
+            // Lấy dữ liệu từ các trường trên form
+            int maHD = Integer.parseInt(txtMaHDinCTHD.getText()); // Mã hóa đơn từ ô nhập liệu
+            int maSP = Integer.parseInt(txtMaSP.getText()); // Mã sản phẩm từ ô nhập liệu
+            int soLuong = Integer.parseInt(txtSoluong.getText()); // Số lượng từ ô nhập liệu
+            double donGiaBan = Double.parseDouble(txtGiaban.getText()); // Giá bán từ ô nhập liệu
+
+            // Tạo đối tượng ChiTietHoaDon
+            ChiTietHoaDon cthd = new ChiTietHoaDon();
+            cthd.setMaHD(maHD);
+            cthd.setMaSP(maSP);
+            cthd.setSoLuong(soLuong);
+            cthd.setDonGiaBan(donGiaBan);
+
+            // Lấy mã cthd tiếp theo từ txtMaCTHD
+            int maCTHD = Integer.parseInt(txtMaCTHD.getText());
+            // Kết nối tới cơ sở dữ liệu và thêm chi tiết hóa đơn
+            Connection conn = DBConnection.getConnection();
+            int result = ChiTietHoaDonDAO.addChiTietHoaDon(conn, cthd);
+
+            if (result > 0) {
+                JOptionPane.showMessageDialog(this, "Thêm chi tiết hóa đơn thành công!");
+                LoadDSChiTietHoaDon(); // Cập nhật lại danh sách chi tiết hóa đơn sau khi thêm
+                clearForm2(); // Xóa các trường nhập liệu trong form chi tiết hóa đơn
+                // Tăng mã cthd cho lần thêm sau
+                txtMaCTHD.setText(String.valueOf(maCTHD + 1));
+            } else {
+                JOptionPane.showMessageDialog(this, "Thêm chi tiết hóa đơn thất bại!");
+            }
+
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Dữ liệu không hợp lệ! Vui lòng kiểm tra các trường nhập.");
+        } catch (SQLException | ClassNotFoundException e) {
+            JOptionPane.showMessageDialog(this, "Có lỗi xảy ra khi thêm chi tiết hóa đơn: " + e.getMessage());
+        }
     }//GEN-LAST:event_btnThemCTHDActionPerformed
 
     private void txtTimkiemCTHDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTimkiemCTHDActionPerformed
@@ -631,6 +762,7 @@ public class DSHoaDon extends javax.swing.JPanel {
             if (result > 0) {
                 JOptionPane.showMessageDialog(this, "Cập nhật hóa đơn thành công!");
                 LoadDSHoaDon(); // Cập nhật lại danh sách hóa đơn sau khi sửa
+                clearForm1();
             } else {
                 JOptionPane.showMessageDialog(this, "Cập nhật hóa đơn thất bại!");
             }
@@ -679,6 +811,88 @@ public class DSHoaDon extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnTimkiemHDActionPerformed
 
+    private void btnSuaCTHDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaCTHDActionPerformed
+        try {
+            // Lấy dữ liệu từ các trường trên form
+            int maCTHD = Integer.parseInt(txtMaCTHD.getText());
+            int maHD = Integer.parseInt(txtMaHDinCTHD.getText());
+            int maSP = Integer.parseInt(txtMaSP.getText());
+            int soLuong = Integer.parseInt(txtSoluong.getText());
+            double donGiaBan = Double.parseDouble(txtGiaban.getText());
+
+            
+            ChiTietHoaDon cthd = new ChiTietHoaDon();
+            cthd.setMaCTHD(maCTHD);
+            cthd.setMaHD(maHD);
+            cthd.setMaSP(maSP);
+            cthd.setSoLuong(soLuong);
+            cthd.setDonGiaBan(donGiaBan);
+
+            // Kết nối tới cơ sở dữ liệu và cập nhật hóa đơn
+            Connection conn = DBConnection.getConnection();
+            int result = ChiTietHoaDonDAO.updateChiTietHoaDon(conn, cthd);
+
+            if (result > 0) {
+                JOptionPane.showMessageDialog(this, "Cập nhật chi tiết hóa đơn thành công!");
+                LoadDSChiTietHoaDon(); // Cập nhật lại danh sách ct hóa đơn sau khi sửa
+                clearForm2();
+            } else {
+                JOptionPane.showMessageDialog(this, "Cập nhật hóa đơn thất bại!");
+            }
+
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Dữ liệu không hợp lệ! Vui lòng kiểm tra các trường nhập.");
+        } catch (SQLException | ClassNotFoundException e) {
+            JOptionPane.showMessageDialog(this, "Có lỗi xảy ra khi cập nhật chi tiết hóa đơn: " + e.getMessage());
+        }
+    }//GEN-LAST:event_btnSuaCTHDActionPerformed
+
+    private void btnTimkiemCTHDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimkiemCTHDActionPerformed
+        String keyword = txtTimkiemCTHD.getText().trim();
+
+        try {
+            // Kết nối cơ sở dữ liệu
+            Connection conn = DBConnection.getConnection();
+
+            // Gọi phương thức tìm kiếm từ DAO
+            List<ChiTietHoaDon> dsChiTietHoaDon = ChiTietHoaDonDAO.searchChiTietHoaDon(conn, keyword);
+
+            // Hiển thị danh sách hóa đơn tìm được lên bảng
+            DefaultTableModel model1 = (DefaultTableModel) tblDscthd.getModel();
+            model1.setRowCount(0); // Xóa dữ liệu cũ trên bảng
+
+            if (dsChiTietHoaDon.isEmpty()) {
+                // Nếu không tìm thấy ct hóa đơn, load lại toàn bộ danh sách ct hóa đơn
+                JOptionPane.showMessageDialog(this, "Không tìm thấy chi tiết hóa đơn nào. Đang tải lại dữ liệu...");
+                dsChiTietHoaDon = ChiTietHoaDonDAO.ListChiTietHoaDon(conn); // Phương thức lấy toàn bộ ct hóa đơn
+            }
+
+            // Thêm dữ liệu vào bảng
+            for (ChiTietHoaDon cthd : dsChiTietHoaDon) {
+                model1.addRow(new Object[]{
+                    cthd.getMaCTHD(),
+                    cthd.getMaHD(),
+                    cthd.getMaSP(),
+                    cthd.getSoLuong(),
+                    cthd.getDonGiaBan()
+                });
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            JOptionPane.showMessageDialog(this, "Có lỗi xảy ra khi tìm kiếm: " + e.getMessage());
+        }
+    }//GEN-LAST:event_btnTimkiemCTHDActionPerformed
+
+    private void clearForm1() {
+        txtMaKH.setText("");
+        txtTongtien.setText("");
+    }
+
+    private void clearForm2() {
+        txtMaHDinCTHD.setText("");
+        txtMaSP.setText("");
+        txtSoluong.setText("");
+        txtGiaban.setText("");
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSuaCTHD;

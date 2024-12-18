@@ -7,6 +7,7 @@
             <file>file:/D:/ky1_nam3/OOP/PROJECTCK/prj_di/QuanLyBanGiayOOP/src/model/NhaCungCap.java</file>
             <file>file:/D:/ky1_nam3/OOP/PROJECTCK/prj_di/QuanLyBanGiayOOP/src/main/Main.java</file>
             <file>file:/D:/ky1_nam3/OOP/PROJECTCK/prj_di/QuanLyBanGiayOOP/src/model/KhachHang.java</file>
+            <file>file:/D:/ky1_nam3/OOP/PROJECTCK/prj_di/QuanLyBanGiayOOP/src/dao/DanhMucDAO.java</file>
             <file>file:/D:/ky1_nam3/OOP/PROJECTCK/prj_di/QuanLyBanGiayOOP/src/dao/KhachHangDAO.java</file>
             <file>file:/D:/ky1_nam3/OOP/PROJECTCK/prj_di/QuanLyBanGiayOOP/src/GUI/DSDanhMuc.java</file>
             <file>file:/D:/ky1_nam3/OOP/PROJECTCK/prj_di/QuanLyBanGiayOOP/src/model/ChiTietHoaDon.java</file>
@@ -17,6 +18,7 @@
             <file>file:/D:/ky1_nam3/OOP/PROJECTCK/prj_di/QuanLyBanGiayOOP/src/model/DanhMuc.java</file>
             <file>file:/D:/ky1_nam3/OOP/PROJECTCK/prj_di/QuanLyBanGiayOOP/src/model/Person.java</file>
             <file>file:/D:/ky1_nam3/OOP/PROJECTCK/prj_di/QuanLyBanGiayOOP/src/util/VietnameseNormalizer.java</file>
+            <file>file:/D:/ky1_nam3/OOP/PROJECTCK/prj_di/QuanLyBanGiayOOP/src/dao/ChiTietHoaDonDAO.java</file>
             <file>file:/D:/ky1_nam3/OOP/PROJECTCK/prj_di/QuanLyBanGiayOOP/src/model/HoaDon.java</file>
             <file>file:/D:/ky1_nam3/OOP/PROJECTCK/prj_di/QuanLyBanGiayOOP/src/GUI/DSSanPham.java</file>
             <file>file:/D:/ky1_nam3/OOP/PROJECTCK/prj_di/QuanLyBanGiayOOP/src/GUI/DSHoaDon.java</file>
