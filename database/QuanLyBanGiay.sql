@@ -264,4 +264,13 @@ INSERT INTO ChiTietHoaDonNhap (MaHDN, MaSP, SoLuong, DonGiaNhap) VALUES
 (7, 7, 40, 250000),
 (8, 8, 45, 220000),
 (9, 9, 50, 200000),
+<<<<<<< HEAD
 (10, 10, 60, 190000);
+=======
+(10, 10, 60, 190000);
+
+select * from TaiKhoan;
+select * from NhanVien;
+
+DELETE TaiKhoan WHERE MaNV = 1;
+>>>>>>> remotes/origin/main

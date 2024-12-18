@@ -14,7 +14,6 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.NhanVien;
-import model.TaiKhoan;
 
 /**
  *
@@ -29,33 +28,72 @@ public class NhanVienDAO {
     public NhanVienDAO() {
     }
 
-    public List<TaiKhoan> getAllNhanVienWithTaiKhoan() throws ClassNotFoundException {
-        List<TaiKhoan> taiKhoanList = new ArrayList<>();
+    public NhanVien getNhanVienByMaNV(int maNV) {
+        NhanVien nv = null;
 
         try {
             connection = DBConnection.getConnection();
-            String sql = "SELECT nv.MaNV, nv.TenNV, nv.GioiTinh, nv.DiaChi, nv.Email, nv.SoDT, tk.TenTK, tk.MatKhau, tk.ChucVu "
-                    + "FROM NhanVien nv "
-                    + "JOIN TaiKhoan tk ON nv.MaNV = tk.MaNV";
+
+            String sql = "SELECT * FROM NhanVien WHERE MaNV = ?";
             ps = connection.prepareStatement(sql);
+            ps.setInt(1, maNV);
+
             rs = ps.executeQuery();
 
             while (rs.next()) {
-                NhanVien nhanVien = new NhanVien();
-                nhanVien.setMaNV(rs.getInt("MaNV"));
-                nhanVien.setTen(rs.getString("TenNV"));
-                nhanVien.setGioiTinh(rs.getString("GioiTinh"));
-                nhanVien.setDiaChi(rs.getString("DiaChi"));
-                nhanVien.setEmail(rs.getString("Email"));
-                nhanVien.setSoDT(rs.getString("SoDT"));
+                nv = new NhanVien();
+                nv.setMaNV(rs.getInt("MaNV"));
+                nv.setTen(rs.getString("TenNV"));
+                nv.setGioiTinh(rs.getString("GioiTinh"));
+                nv.setDiaChi(rs.getString("DiaChi"));
+                nv.setEmail(rs.getString("Email"));
+                nv.setSoDT(rs.getString("SoDT"));
+            }
 
-                TaiKhoan taiKhoan = new TaiKhoan();
-                taiKhoan.setTenTK(rs.getString("TenTK"));
-                taiKhoan.setMatKhau(rs.getString("MatKhau"));
-                taiKhoan.setChucVu(rs.getString("ChucVu"));
-                taiKhoan.setNv(nhanVien);
+        } catch (SQLException ex) {
+            Logger.getLogger(TaiKhoanDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(TaiKhoanDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
 
-                taiKhoanList.add(taiKhoan);
+        return nv;
+    }
+
+    public List<NhanVien> getAllNhanVien() throws ClassNotFoundException {
+        List<NhanVien> dsNhanVien = new ArrayList<>();
+
+        try {
+            connection = DBConnection.getConnection();
+            String sql = "SELECT * FROM NhanVien nv ";
+
+            ps = connection.prepareStatement(sql);
+            rs = ps.executeQuery();
+            NhanVien nv = null;
+            while (rs.next()) {
+
+                nv = new NhanVien();
+                nv.setMaNV(rs.getInt("MaNV"));
+                nv.setTen(rs.getString("TenNV"));
+                nv.setGioiTinh(rs.getString("GioiTinh"));
+                nv.setDiaChi(rs.getString("DiaChi"));
+                nv.setEmail(rs.getString("Email"));
+                nv.setSoDT(rs.getString("SoDT"));
+
+                dsNhanVien.add(nv);
             }
 
         } catch (SQLException e) {
@@ -77,18 +115,16 @@ public class NhanVienDAO {
                 e.printStackTrace();
             }
         }
-
-        return taiKhoanList;
+        return dsNhanVien;
     }
 
-    public boolean addNhanVien(NhanVien nhanVien, TaiKhoan taiKhoan) {
+    public int addNhanVien(NhanVien nhanVien) {
         try {
-            String insertNhanVienSQL = "INSERT INTO NhanVien (TenNV, GioiTinh, DiaChi, Email, SoDT) VALUES (?, ?, ?, ?, ?)";
-            String insertTaiKhoanSQL = "INSERT INTO TaiKhoan (TenTK, MatKhau, ChucVu, MaNV) VALUES (?, ?, ?, ?)";
+            String sql = "INSERT INTO NhanVien (TenNV, GioiTinh, DiaChi, Email, SoDT) VALUES (?, ?, ?, ?, ?)";
 
             connection = DBConnection.getConnection();
 
-            ps = connection.prepareStatement(insertNhanVienSQL, PreparedStatement.RETURN_GENERATED_KEYS);
+            ps = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
             ps.setString(1, nhanVien.getTen());
             ps.setString(2, nhanVien.getGioiTinh());
             ps.setString(3, nhanVien.getDiaChi());
@@ -97,7 +133,7 @@ public class NhanVienDAO {
 
             int affectedRows = ps.executeUpdate();
             if (affectedRows == 0) {
-                return false;
+                return 0;
             }
 
             rs = ps.getGeneratedKeys();
@@ -106,36 +142,229 @@ public class NhanVienDAO {
                 maNV = rs.getInt(1);
             }
 
-            ps = connection.prepareStatement(insertTaiKhoanSQL);
-            ps.setString(1, taiKhoan.getTenTK());
-            ps.setString(2, taiKhoan.getMatKhau());
-            ps.setString(3, taiKhoan.getChucVu());
-            ps.setInt(4, maNV);
+            return maNV;
 
-            affectedRows = ps.executeUpdate();
-            if (affectedRows == 0) {
-                return false;
-            }
-
-            return true;
         } catch (SQLException ex) {
             Logger.getLogger(NhanVienDAO.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(NhanVienDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
+        return 0;
+    }
+
+    public int capNhatNhanVien(NhanVien nhanVien) {
+        try {
+            String sql = "UPDATE NhanVien SET TenNV = ?, GioiTinh = ?, DiaChi = ?, Email = ?, SoDT = ? WHERE MaNV = ?";
+
+            connection = DBConnection.getConnection();
+
+            ps = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
+            ps.setString(1, nhanVien.getTen());
+            ps.setString(2, nhanVien.getGioiTinh());
+            ps.setString(3, nhanVien.getDiaChi());
+            ps.setString(4, nhanVien.getEmail());
+            ps.setString(5, nhanVien.getSoDT());
+            ps.setInt(6, nhanVien.getMaNV());
+
+            return ps.executeUpdate();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(NhanVienDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(NhanVienDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return 0;
+    }
+
+    public int deleteNhanVien(int maNV) {
+
+        try {
+            connection = DBConnection.getConnection();
+
+            String sql = "DELETE NhanVien WHERE MaNV = ?";
+            ps = connection.prepareStatement(sql);
+
+            ps.setInt(1, maNV);
+
+            return ps.executeUpdate();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(TaiKhoanDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(TaiKhoanDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return 0;
+    }
+
+    public boolean checkEmail(String email) {
+
+        try {
+            connection = DBConnection.getConnection();
+            String sql = "SELECT * FROM NhanVien WHERE email = ?";
+            ps = connection.prepareStatement(sql);
+            ps.setString(1, email);
+
+            rs = ps.executeQuery();
+
+            return rs.next();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(NhanVienDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(NhanVienDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
         return false;
     }
 
-    public static void main(String[] args) {
-        NhanVienDAO dao = new NhanVienDAO();
+    public boolean checkSDT(String sdt) {
 
         try {
-            for (TaiKhoan tk : dao.getAllNhanVienWithTaiKhoan()) {
-                System.out.println(tk.getNv().getTen());
-            }
+            connection = DBConnection.getConnection();
+            String sql = "SELECT * FROM NhanVien WHERE SoDT = ?";
+            ps = connection.prepareStatement(sql);
+            ps.setString(1, sdt);
+
+            rs = ps.executeQuery();
+
+            return rs.next();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(NhanVienDAO.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(NhanVienDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
+
+        return false;
     }
 
+    public List<NhanVien> searchNhanVien(String keyword) {
+        List<NhanVien> dsNhanVien = new ArrayList<>();
+        try {
+            connection = DBConnection.getConnection();
+
+            String sql = "SELECT * FROM NhanVien "
+                    + "WHERE MaNV LIKE ? "
+                    + "   OR TenNV LIKE ? "
+                    + "   OR GioiTinh LIKE ? "
+                    + "   OR DiaChi LIKE ? "
+                    + "   OR Email LIKE ? "
+                    + "   OR SoDT LIKE ?";
+
+            ps = connection.prepareStatement(sql);
+            String searchKeyword = "%" + keyword + "%";
+            ps.setString(1, searchKeyword);
+            ps.setString(2, searchKeyword);
+            ps.setString(3, searchKeyword);
+            ps.setString(4, searchKeyword);
+            ps.setString(5, searchKeyword);
+            ps.setString(6, searchKeyword);
+
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                NhanVien nv = new NhanVien();
+                nv.setMaNV(rs.getInt("MaNV"));
+                nv.setTen(rs.getString("TenNV"));
+                nv.setGioiTinh(rs.getString("GioiTinh"));
+                nv.setDiaChi(rs.getString("DiaChi"));
+                nv.setEmail(rs.getString("Email"));
+                nv.setSoDT(rs.getString("SoDT"));
+
+                dsNhanVien.add(nv);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(NhanVienDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(NhanVienDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return dsNhanVien;
+    }
 }

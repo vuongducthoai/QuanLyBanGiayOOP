@@ -26,7 +26,7 @@ public class HoaDon {
         this.maHD = maHD;
         this.maKH = maKH;
         this.ngayMua = ngayMua;
-        this.trangThai = trangThai;
+        this.trangThai = trangThai; 
         this.pTTT = pTTT;
         this.tongTien = tongTien;
     }
