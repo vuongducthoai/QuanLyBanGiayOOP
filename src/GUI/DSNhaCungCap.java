@@ -367,6 +367,7 @@ public class DSNhaCungCap extends javax.swing.JPanel {
 
     }//GEN-LAST:event_btnSuaActionPerformed
 
+    
     private void txtTimkiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTimkiemActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTimkiemActionPerformed

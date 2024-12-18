@@ -17,6 +17,7 @@ public class QuanLy extends javax.swing.JFrame {
     DSNhaCungCap ncc = new DSNhaCungCap();
     DSHoaDonNhap hdn = new DSHoaDonNhap();
     DSDanhMuc dm = new DSDanhMuc();
+    DSSanPham dssp = new DSSanPham();
     ThongTinCaNhan ttcn = null;
 
     /**
@@ -24,6 +25,7 @@ public class QuanLy extends javax.swing.JFrame {
      */
     public QuanLy() {
         initComponents();
+        dssp = new DSSanPham();
     }
 
     public QuanLy(TaiKhoan tk) {
@@ -42,12 +44,15 @@ public class QuanLy extends javax.swing.JFrame {
         hdn.setVisible(false);
         ncc.setVisible(false);
         dm.setVisible(false);
+        dssp.setVisible(false);
 
         panelMain.add(ttcn);
         panelMain.add(ncc);
         panelMain.add(nv);
         panelMain.add(hdn);
         panelMain.add(dm);
+        panelMain.add(dssp);
+        
     }
 
     /**
@@ -205,7 +210,7 @@ public class QuanLy extends javax.swing.JFrame {
                 .addComponent(btnNhapHang, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnHDN, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 178, Short.MAX_VALUE)
                 .addComponent(btnDangXuat, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(50, 50, 50))
         );
@@ -273,7 +278,12 @@ public class QuanLy extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDanhMucActionPerformed
 
     private void btnSanPhamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSanPhamActionPerformed
-        // TODO add your handling code here:
+
+        ttcn.setVisible(false);
+        nv.setVisible(false);
+        hdn.setVisible(false);
+        // Hiển thị giao diện DSSanPham
+        dssp.setVisible(true);
     }//GEN-LAST:event_btnSanPhamActionPerformed
 
     private void btnNhapHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNhapHangActionPerformed
