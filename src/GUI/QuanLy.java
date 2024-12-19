@@ -284,14 +284,16 @@ public class QuanLy extends javax.swing.JFrame {
         dsNhanVien.setVisible(false);
         hdn.setVisible(false);
         ncc.setVisible(false);
+        dssp.setVisible(false);
         dm.setVisible(true);
     }//GEN-LAST:event_btnDanhMucActionPerformed
 
     private void btnSanPhamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSanPhamActionPerformed
-
+        ncc.setVisible(false);
         ttcn.setVisible(false);
         dsNhanVien.setVisible(false);
         hdn.setVisible(false);
+        dm.setVisible(false);
         // Hiển thị giao diện DSSanPham
         dssp.setVisible(true);
     }//GEN-LAST:event_btnSanPhamActionPerformed

@@ -106,6 +106,7 @@ public class HoaDonDAO {
         }
         return list;
     }
+
     public static int getNextMaHD(Connection conn) throws SQLException {
         String sqlMax = "SELECT MAX(MaHD) FROM HoaDon";
         PreparedStatement pstMax = conn.prepareStatement(sqlMax);
@@ -116,4 +117,53 @@ public class HoaDonDAO {
         }
         return maxMaHD + 1;
     }
+
+    public static List<Integer> getMaKhachHangList(Connection conn) throws SQLException {
+        List<Integer> maKhachHangList = new ArrayList<>();
+        String sql = "SELECT MaKH FROM KhachHang";
+        PreparedStatement pst = conn.prepareStatement(sql);
+        ResultSet rs = pst.executeQuery();
+
+        while (rs.next()) {
+            maKhachHangList.add(rs.getInt("MaKH"));
+        }
+        return maKhachHangList;
+    }
+
+    public static List<Integer> getMaNhanVienList(Connection conn) throws SQLException {
+        List<Integer> maNhanVienList = new ArrayList<>();
+        String sql = "SELECT MaNV FROM NhanVien";
+        PreparedStatement pst = conn.prepareStatement(sql);
+        ResultSet rs = pst.executeQuery();
+
+        while (rs.next()) {
+            maNhanVienList.add(rs.getInt("MaNV"));
+        }
+        return maNhanVienList;
+    }
+
+    public static List<Integer> getMaSanPhamList(Connection conn) throws SQLException {
+        List<Integer> maSanPhamList = new ArrayList<>();
+        String sql = "SELECT MaSP FROM SanPham";
+        PreparedStatement pst = conn.prepareStatement(sql);
+        ResultSet rs = pst.executeQuery();
+
+        while (rs.next()) {
+            maSanPhamList.add(rs.getInt("MaSP"));
+        }
+        return maSanPhamList;
+    }
+
+    public static double getGiaBanByMaSP(Connection conn, int maSP) throws SQLException {
+        String sql = "SELECT DonGiaBan FROM SanPham WHERE MaSP = ?";
+        PreparedStatement pst = conn.prepareStatement(sql);
+        pst.setInt(1, maSP);
+        ResultSet rs = pst.executeQuery();
+
+        if (rs.next()) {
+            return rs.getDouble("DonGiaBan");
+        }
+        throw new SQLException("Không tìm thấy giá bán cho sản phẩm với mã: " + maSP);
+    }
+
 }
