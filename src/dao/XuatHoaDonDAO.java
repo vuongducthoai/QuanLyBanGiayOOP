@@ -19,7 +19,7 @@ import SQLConnection.DBConnection;
 public class XuatHoaDonDAO {
 
     public void exportHoaDonToTxt(int maHD, Connection conn, String filePath) {
-        String query = "SELECT HD.MaHD, SP.TenSP, CTHD.SoLuong, NV.TenNV, HD.TongTien "
+        String query = "SELECT HD.MaHD, SP.TenSP, CTHD.SoLuong, SP.DonGiaBan, NV.TenNV "
                 + "FROM HoaDon HD "
                 + "JOIN ChiTietHoaDon CTHD ON HD.MaHD = CTHD.MaHD "
                 + "JOIN SanPham SP ON CTHD.MaSP = SP.MaSP "
@@ -38,22 +38,29 @@ public class XuatHoaDonDAO {
 
             writer.write("Hóa Đơn: " + maHD);
             writer.newLine();
-            writer.write(String.format("%-30s %-10s %-20s %-10s", "Tên Sản Phẩm", "Số Lượng", "Nhân Viên", "Tổng Tiền"));
+            writer.write(String.format("%-30s %-10s %-20s %-10s", "Tên Sản Phẩm", "Số Lượng", "Nhân Viên", "Đơn Giá Bán"));
             writer.newLine();
             writer.write("------------------------------------------------------------------");
             writer.newLine();
+
+            double tongTien = 0; // Biến tính tổng tiền
 
             while (rs.next()) {
                 String tenSP = rs.getString("TenSP");
                 int soLuong = rs.getInt("SoLuong");
                 String tenNV = rs.getString("TenNV");
-                double tongTien = rs.getDouble("TongTien");
+                double donGiaBan = rs.getDouble("DonGiaBan");
+                double thanhTien = donGiaBan * soLuong; // Tính thành tiền cho từng sản phẩm
 
-                writer.write(String.format("%-30s %-10d %-20s %-10.2f", tenSP, soLuong, tenNV, tongTien));
+                tongTien += thanhTien; // Cộng dồn vào tổng tiền
+
+                writer.write(String.format("%-30s %-10d %-20s %-10.2f", tenSP, soLuong, tenNV, donGiaBan));
                 writer.newLine();
             }
 
             writer.write("------------------------------------------------------------------");
+            writer.newLine();
+            writer.write(String.format("Tổng Tiền: %.2f", tongTien)); // Xuất tổng tiền ở cuối hóa đơn
             writer.newLine();
             writer.write("Cảm ơn quý khách!");
 
