@@ -4,6 +4,8 @@
  */
 package GUI;
 
+import dao.NhanVienDAO;
+import javax.swing.JOptionPane;
 import model.TaiKhoan;
 
 /**
@@ -26,10 +28,14 @@ public class NhanVien extends javax.swing.JFrame {
 
     public NhanVien(TaiKhoan tk) {
         initComponents();
-        ttcn = new ThongTinCaNhan(tk);
+        NhanVienDAO dao = new NhanVienDAO();
+
+        model.NhanVien nv = dao.getNhanVienByMaNV(tk.getMaNV());
+
+        ttcn = new ThongTinCaNhan(nv, tk);
 
         lblChucVu.setText(lblChucVu.getText() + tk.getChucVu());
-        lblHoVaTen.setText(lblHoVaTen.getText() + tk.getNv().getTen());
+        lblHoVaTen.setText(lblHoVaTen.getText() + nv.getTen());
         setTab();
     }
 
@@ -165,6 +171,16 @@ public class NhanVien extends javax.swing.JFrame {
 
     private void btnDangXuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangXuatActionPerformed
         // TODO add your handling code here:
+        int choice = JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn muốn đăng xuất", "Đăng xuất", JOptionPane.YES_NO_OPTION);
+
+        if (choice == JOptionPane.YES_OPTION) {
+
+            this.dispose();
+
+            DangNhap dangNhap = new DangNhap();
+            dangNhap.setLocationRelativeTo(null);
+            dangNhap.setVisible(true);
+        }
     }//GEN-LAST:event_btnDangXuatActionPerformed
 
     private void btnTTCNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTTCNActionPerformed

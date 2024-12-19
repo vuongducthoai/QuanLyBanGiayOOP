@@ -55,7 +55,7 @@ public class DSNhaCungCap extends javax.swing.JPanel {
         TableDsncc.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
     }
 
-    public void getLastSupplerId(){
+    public void getLastSupplerId() {
         try {
             int lastId = NhaCungCapDAO.getLastSupplierId(conn.getConnection());
             int newId = lastId + 1;
@@ -306,7 +306,6 @@ public class DSNhaCungCap extends javax.swing.JPanel {
             .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 515, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
-
     private void loadDataToTableNCC() {
         try {
             List<NhaCungCap> listNCC = NhaCungCapDAO.getNhaCungCapList(conn.getConnection());
@@ -328,6 +327,7 @@ public class DSNhaCungCap extends javax.swing.JPanel {
             e.printStackTrace();
         }
     }
+
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
         try {
             int maNCC = Integer.parseInt(txtMaNCC.getText());
@@ -364,10 +364,9 @@ public class DSNhaCungCap extends javax.swing.JPanel {
             e.printStackTrace();
             JOptionPane.showMessageDialog(this, "Đã xảy ra lỗi khi sửa thông tin nhà cung cấp.");
         }
-
     }//GEN-LAST:event_btnSuaActionPerformed
 
-    
+
     private void txtTimkiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTimkiemActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTimkiemActionPerformed
@@ -476,6 +475,7 @@ public class DSNhaCungCap extends javax.swing.JPanel {
             }
         }
     }//GEN-LAST:event_btnXoaActionPerformed
+
     private void clearInputFields() {
         txtMaNCC.setText("");
         txtTenNCC.setText("");
