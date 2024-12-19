@@ -190,16 +190,16 @@ INSERT INTO DanhMuc (TenDM) VALUES
 
 -- Thêm dữ liệu vào bảng SanPham
 INSERT INTO SanPham (TenSP, DonGiaNhap, DonGiaBan, MaDM) VALUES
-(N'Giày nam da bò', 800000, 1000000, 1),
-(N'Giày nữ cao gót', 700000, 900000, 6),
-(N'Giày thể thao nam', 600000, 750000, 4),
-(N'Giày búp bê nữ', 500000, 650000, 5),
-(N'Giày trẻ em', 300000, 450000, 3),
-(N'Dép xỏ ngón', 100000, 200000, 9),
-(N'Dép lê', 50000, 100000, 10),
-(N'Giày lười nam', 400000, 550000, 7),
-(N'Giày tây nam', 1200000, 1500000, 8),
-(N'Giày nữ thời trang', 900000, 1200000, 2);
+(N'Giày nam da bò', 800, 1000, 1),
+(N'Giày nữ cao gót', 700, 900, 6),
+(N'Giày thể thao nam', 600, 750, 4),
+(N'Giày búp bê nữ', 500, 650, 5),
+(N'Giày trẻ em', 300, 450, 3),
+(N'Dép xỏ ngón', 100, 200, 9),
+(N'Dép lê', 50, 100, 10),
+(N'Giày lười nam', 400, 550, 7),
+(N'Giày tây nam', 1200, 1500, 8),
+(N'Giày nữ thời trang', 900, 1200, 2);
 
 -- Thêm dữ liệu vào bảng NhaCungCap
 INSERT INTO NhaCungCap (TenNCC, DiaChi, SoDT, Email) VALUES
@@ -216,61 +216,58 @@ INSERT INTO NhaCungCap (TenNCC, DiaChi, SoDT, Email) VALUES
 
 -- Thêm dữ liệu vào bảng HoaDon
 INSERT INTO HoaDon (MaKH, MaNV, NgayMua, TrangThai, PTTT, TongTien) VALUES
-(1, 1, '2024-12-01', N'Đã thanh toán', N'Tiền mặt', 1000000),
-(2, 2, '2024-12-02', N'Đã thanh toán', N'Tiền mặt', 2000000),
-(3, 3, '2024-12-03', N'Đã thanh toán', N'Tiền mặt', 1500000),
-(4, 4, '2024-12-04', N'Đã thanh toán', N'Tiền mặt', 2500000),
-(5, 5, '2024-12-05', N'Đã thanh toán', N'Chuyển khoản', 3000000),
-(6, 6, '2024-12-06', N'Đã thanh toán', N'Tiền mặt', 3500000),
-(7, 7, '2024-12-07', N'Đã thanh toán', N'Chuyển khoản', 4000000),
-(8, 8, '2024-12-08', N'Đã thanh toán', N'Tiền mặt', 4500000),
-(9, 9, '2024-12-09', N'Đã thanh toán', N'Tiền mặt', 5000000),
-(10, 10, '2024-12-10', N'Đã thanh toán', N'Tiền mặt', 5500000);
+(1, 1, '2024-12-01', N'Đã thanh toán', N'Tiền mặt', 1000),
+(2, 2, '2024-12-02', N'Đã thanh toán', N'Tiền mặt', 2000),
+(3, 3, '2024-12-03', N'Đã thanh toán', N'Tiền mặt', 1500),
+(4, 4, '2024-12-04', N'Đã thanh toán', N'Tiền mặt', 2500),
+(5, 5, '2024-12-05', N'Đã thanh toán', N'Chuyển khoản', 3000),
+(6, 6, '2024-12-06', N'Đã thanh toán', N'Tiền mặt', 3500),
+(7, 7, '2024-12-07', N'Đã thanh toán', N'Chuyển khoản', 4000),
+(8, 8, '2024-12-08', N'Đã thanh toán', N'Tiền mặt', 4500),
+(9, 9, '2024-12-09', N'Đã thanh toán', N'Tiền mặt', 5000),
+(10, 10, '2024-12-10', N'Đã thanh toán', N'Tiền mặt', 5500);
 
 -- Thêm dữ liệu vào bảng ChiTietHoaDon
 INSERT INTO ChiTietHoaDon (MaHD, MaSP, SoLuong, DonGiaBan) VALUES
-(1, 1, 2, 500000),
-(2, 2, 1, 2000000),
-(3, 3, 3, 500000),
-(4, 4, 2, 1250000),
-(5, 5, 1, 3000000),
-(6, 6, 2, 1750000),
-(7, 7, 1, 4000000),
-(8, 8, 3, 1500000),
-(9, 9, 2, 2500000),
-(10, 10, 1, 5500000);
+(1, 1, 2, 500),
+(2, 2, 1, 2000),
+(3, 3, 3, 500),
+(4, 4, 2, 1250),
+(5, 5, 1, 3000),
+(6, 6, 2, 1750),
+(7, 7, 1, 4000),
+(8, 8, 3, 1500),
+(9, 9, 2, 2500),
+(10, 10, 1, 5500);
 
 -- Thêm dữ liệu vào bảng HoaDonNhap
 INSERT INTO HoaDonNhap (MaNCC, NgayNhap, TongTien) VALUES
-(1,'2024-12-01', 5000000),
-(2,'2024-12-02', 6000000),
-(3,'2024-12-03', 7000000),
-(4,'2024-12-04', 8000000),
-(5,'2024-12-05', 9000000),
-(6,'2024-12-06', 10000000),
-(7,'2024-12-07', 11000000),
-(8,'2024-12-08', 12000000),
-(9,'2024-12-09', 13000000),
-(10,'2024-12-10', 14000000);
+(1,'2024-12-01', 5000),
+(2,'2024-12-02', 6000),
+(3,'2024-12-03', 7000),
+(4,'2024-12-04', 8000),
+(5,'2024-12-05', 9000),
+(6,'2024-12-06', 10000),
+(7,'2024-12-07', 11000),
+(8,'2024-12-08', 12000),
+(9,'2024-12-09', 13000),
+(10,'2024-12-10', 14000);
 
 -- Thêm dữ liệu vào bảng ChiTietHoaDonNhap
 INSERT INTO ChiTietHoaDonNhap (MaHDN, MaSP, SoLuong, DonGiaNhap) VALUES
-(1, 1, 10, 500000),
-(2, 2, 15, 400000),
-(3, 3, 20, 350000),
-(4, 4, 25, 300000),
-(5, 5, 30, 300000),
-(6, 6, 35, 285000),
-(7, 7, 40, 250000),
-(8, 8, 45, 220000),
-(9, 9, 50, 200000),
-<<<<<<< HEAD
-(10, 10, 60, 190000);
-=======
-(10, 10, 60, 190000);
+(1, 1, 10, 500),
+(2, 2, 15, 400),
+(3, 3, 20, 350),
+(4, 4, 25, 300),
+(5, 5, 30, 300),
+(6, 6, 35, 285),
+(7, 7, 40, 250),
+(8, 8, 45, 220),
+(9, 9, 50, 200),
+(10, 10, 60, 190);
 
-select * from TaiKhoan;
-select * from NhanVien;
+ALTER TABLE HoaDonNhap
+ADD MaNV INT
 
-DELETE TaiKhoan WHERE MaNV = 1;
->>>>>>> remotes/origin/main
+ALTER TABLE HoaDonNhap
+ADD TrangThai NVARCHAR(50)

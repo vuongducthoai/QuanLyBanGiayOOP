@@ -119,10 +119,10 @@ public class QuanLySanPhamDAO {
         String sqlMax = "SELECT MAX(MaSP) FROM SanPham";
         PreparedStatement pstMax = conn.prepareStatement(sqlMax);
         ResultSet rsMax = pstMax.executeQuery();
-        int maxMaKH = 0;
+        int maxMaSP = 0;
         if (rsMax.next()) {
-            maxMaKH = rsMax.getInt(1);  // Lấy giá trị MaKH lớn nhất
+            maxMaSP = rsMax.getInt(1);
         }
-        return maxMaKH + 1; // Trả về mã khách hàng tiếp theo
+        return maxMaSP + 1;
     }
 }
