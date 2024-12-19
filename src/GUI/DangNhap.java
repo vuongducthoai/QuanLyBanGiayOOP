@@ -9,6 +9,7 @@ import dao.TaiKhoanDAO;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import model.TaiKhoan;
+import util.Session;
 
 /**
  *
@@ -184,7 +185,7 @@ public class DangNhap extends javax.swing.JFrame {
                 
                 
                 TaiKhoan taiKhoan = dao.getThongTinTaiKhoan(tk);
-                
+               Session.setMaNV(taiKhoan.getMaNV());
                 this.dispose();
                 
                 JFrame frame = null;
