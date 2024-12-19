@@ -75,7 +75,7 @@ public class DSNhanVien extends javax.swing.JPanel {
             v.add(nv.getSoDT());
 
             tk = taiKhoanDAO.getTaiKhoanByMaNV(nv.getMaNV());
-
+            
             v.add(tk.getTenTK());
             v.add(tk.getChucVu());
 

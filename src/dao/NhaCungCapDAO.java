@@ -11,7 +11,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import model.NhaCungCap;
-import static util.VietnameseNormalizer.removeVietnameseAccents;
 
 /**
  *
@@ -86,35 +85,46 @@ public class NhaCungCapDAO {
         prepareStatement.execute();
     }
 
-    public static List<NhaCungCap> searchNhaCungCap(Connection connection, String keyword) throws SQLException {
-        List<NhaCungCap> list = new ArrayList<>();
-        String searchKeyword = "%" + removeVietnameseAccents(keyword) + "%";
-        String sql = "SELECT * FROM NhaCungCap WHERE MaNCC LIKE ? OR TenNCC LIKE ? OR SoDT LIKE ? OR Email LIKE ?";
-        try {
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+   public static List<NhaCungCap> searchNhaCungCap(Connection connection, String keyword) throws SQLException {
+    List<NhaCungCap> list = new ArrayList<>();
+    
+     String searchKeyword = "%" + keyword + "%";
+    
+    String sql = "SELECT * FROM NhaCungCap " +
+                     "WHERE MaNCC LIKE ? " +
+                     "OR TenNCC COLLATE Latin1_General_CI_AI LIKE ? " +
+                     "OR SoDT COLLATE Latin1_General_CI_AI LIKE ? " +
+                     "OR Email COLLATE Latin1_General_CI_AI LIKE ? " +
+                     "OR DiaChi COLLATE Latin1_General_CI_AI LIKE ?";
 
-            // Dùng '%' để tìm kiếm gần đúng (LIKE)
-            preparedStatement.setString(1, "%" + searchKeyword + "%"); 
-            preparedStatement.setString(2, "%" + searchKeyword + "%"); 
-            preparedStatement.setString(3, "%" + searchKeyword + "%"); 
-            preparedStatement.setString(4, "%" + searchKeyword + "%"); 
+    try {
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
 
-            ResultSet rs = preparedStatement.executeQuery();
-            while (rs.next()) {
-                NhaCungCap nhaCungCap = new NhaCungCap();
-                nhaCungCap.setMaNCC(rs.getInt("MaNCC"));
-                nhaCungCap.setTenNCC(rs.getString("TenNCC"));
-                nhaCungCap.setDiaChi(rs.getString("DiaChi"));
-                nhaCungCap.setEmail(rs.getString("Email"));
-                nhaCungCap.setSoDT(rs.getString("SoDT"));
+        preparedStatement.setString(1, searchKeyword);  
+        preparedStatement.setString(2, searchKeyword);  
+        preparedStatement.setString(3, searchKeyword);  
+        preparedStatement.setString(4, searchKeyword); 
+        preparedStatement.setString(5, searchKeyword);  
 
-                list.add(nhaCungCap);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        // Execute the query
+        ResultSet rs = preparedStatement.executeQuery();
+        while (rs.next()) {
+            NhaCungCap nhaCungCap = new NhaCungCap();
+            nhaCungCap.setMaNCC(rs.getInt("MaNCC"));
+            nhaCungCap.setTenNCC(rs.getString("TenNCC"));
+            nhaCungCap.setDiaChi(rs.getString("DiaChi"));
+            nhaCungCap.setEmail(rs.getString("Email"));
+            nhaCungCap.setSoDT(rs.getString("SoDT"));
+
+            list.add(nhaCungCap);
         }
-        return list;
+    } catch (SQLException e) {
+        e.printStackTrace();
     }
+    
+    return list;
+}
+
 
     public static int getLastSupplierId(Connection connection) throws SQLException {
         String sql = "SELECT MAX(MaNCC) AS LastID FROM NhaCungCap";

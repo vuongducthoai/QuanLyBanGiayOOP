@@ -4,36 +4,42 @@
  */
 package model;
 
-import java.util.List;
+import java.util.Date;
 
 /**
  *
  * @author DELL
  */
 public class HoaDonNhap {
-
     private int maHDN;
     private NhaCungCap nhaCungCap;
     private NhanVien nhanVien;
-    private List<SanPham> dsSanPham;
-    private String ngayNhap;
-    private int soLuong;
-    private double donGiaNhap;
+    private Date ngayNhap;
+    private double tongTien;
+    private String formatTongTien;
     private String trangThai;
 
     public HoaDonNhap() {
     }
-    
-    public HoaDonNhap(int maHDN, NhaCungCap nhaCungCap, NhanVien nhanVien, List<SanPham> dsSanPham, String ngayNhap, int soLuong, double donGiaNhap, String trangThai) {
+
+    public HoaDonNhap(int maHDN, NhaCungCap nhaCungCap, NhanVien nhanVien, Date ngayNhap, double tongTien, String trangThai) {
         this.maHDN = maHDN;
         this.nhaCungCap = nhaCungCap;
         this.nhanVien = nhanVien;
-        this.dsSanPham = dsSanPham;
         this.ngayNhap = ngayNhap;
-        this.soLuong = soLuong;
-        this.donGiaNhap = donGiaNhap;
+        this.tongTien = tongTien;
         this.trangThai = trangThai;
     }
+
+    public HoaDonNhap(int maHDN, NhaCungCap nhaCungCap, NhanVien nhanVien, Date ngayNhap, String formatTongTien, String trangThai) {
+        this.maHDN = maHDN;
+        this.nhaCungCap = nhaCungCap;
+        this.nhanVien = nhanVien;
+        this.ngayNhap = ngayNhap;
+        this.formatTongTien = formatTongTien;
+        this.trangThai = trangThai;
+    }
+    
 
     public int getMaHDN() {
         return maHDN;
@@ -59,36 +65,20 @@ public class HoaDonNhap {
         this.nhanVien = nhanVien;
     }
 
-    public List<SanPham> getDsSanPham() {
-        return dsSanPham;
-    }
-
-    public void setDsSanPham(List<SanPham> dsSanPham) {
-        this.dsSanPham = dsSanPham;
-    }
-
-    public String getNgayNhap() {
+    public Date getNgayNhap() {
         return ngayNhap;
     }
 
-    public void setNgayNhap(String ngayNhap) {
+    public void setNgayNhap(Date ngayNhap) {
         this.ngayNhap = ngayNhap;
     }
 
-    public int getSoLuong() {
-        return soLuong;
+    public double getTongTien() {
+        return tongTien;
     }
 
-    public void setSoLuong(int soLuong) {
-        this.soLuong = soLuong;
-    }
-
-    public double getDonGiaNhap() {
-        return donGiaNhap;
-    }
-
-    public void setDonGiaNhap(double donGiaNhap) {
-        this.donGiaNhap = donGiaNhap;
+    public void setTongTien(double tongTien) {
+        this.tongTien = tongTien;
     }
 
     public String getTrangThai() {
@@ -98,5 +88,15 @@ public class HoaDonNhap {
     public void setTrangThai(String trangThai) {
         this.trangThai = trangThai;
     }
+
+    public String getFormatTongTien() {
+        return formatTongTien;
+    }
+
+    public void setFormatTongTien(String formatTongTien) {
+        this.formatTongTien = formatTongTien;
+    }
+    
+    
 
 }

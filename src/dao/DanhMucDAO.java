@@ -73,7 +73,7 @@ public class DanhMucDAO {
     
     public static List<DanhMuc> searchDanhMuc(Connection connection, String keyword) throws SQLException {
         List<DanhMuc> list = new ArrayList<>();
-        String sql = "SELECT * FROM DanhMuc WHERE MaDM LIKE ? OR TenDM LIKE ?";
+        String sql = "SELECT * FROM DanhMuc WHERE MaDM LIKE ? OR TenDM COLLATE Latin1_General_CI_AI LIKE ?";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
 
