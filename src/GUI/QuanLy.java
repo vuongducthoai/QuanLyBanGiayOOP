@@ -92,6 +92,7 @@ public class QuanLy extends javax.swing.JFrame {
         panelTab.setBackground(new java.awt.Color(0, 102, 102));
         panelTab.setPreferredSize(new java.awt.Dimension(200, 600));
 
+        btnNhanVien.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnNhanVien.setText("Nhân viên");
         btnNhanVien.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnNhanVien.addActionListener(new java.awt.event.ActionListener() {
@@ -100,6 +101,7 @@ public class QuanLy extends javax.swing.JFrame {
             }
         });
 
+        btnNCC.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnNCC.setText("Nhà cung cấp");
         btnNCC.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnNCC.addActionListener(new java.awt.event.ActionListener() {
@@ -108,6 +110,7 @@ public class QuanLy extends javax.swing.JFrame {
             }
         });
 
+        btnSanPham.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnSanPham.setText("Sản phẩm");
         btnSanPham.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnSanPham.addActionListener(new java.awt.event.ActionListener() {
@@ -116,6 +119,7 @@ public class QuanLy extends javax.swing.JFrame {
             }
         });
 
+        btnDanhMuc.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnDanhMuc.setText("Danh mục");
         btnDanhMuc.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnDanhMuc.addActionListener(new java.awt.event.ActionListener() {
@@ -124,6 +128,7 @@ public class QuanLy extends javax.swing.JFrame {
             }
         });
 
+        btnNhapHang.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnNhapHang.setText("Nhập hàng");
         btnNhapHang.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnNhapHang.addActionListener(new java.awt.event.ActionListener() {
@@ -132,6 +137,7 @@ public class QuanLy extends javax.swing.JFrame {
             }
         });
 
+        btnDangXuat.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnDangXuat.setText("Đăng xuất");
         btnDangXuat.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnDangXuat.addActionListener(new java.awt.event.ActionListener() {
@@ -140,6 +146,7 @@ public class QuanLy extends javax.swing.JFrame {
             }
         });
 
+        btnTTCN.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnTTCN.setText("Thông tin cá nhân");
         btnTTCN.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnTTCN.addActionListener(new java.awt.event.ActionListener() {
@@ -148,6 +155,7 @@ public class QuanLy extends javax.swing.JFrame {
             }
         });
 
+        btnHDN.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnHDN.setText("Hóa đơn nhập");
         btnHDN.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnHDN.addActionListener(new java.awt.event.ActionListener() {

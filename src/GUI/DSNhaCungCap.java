@@ -96,7 +96,7 @@ public class DSNhaCungCap extends javax.swing.JPanel {
         btnXoa = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "THÔNG TIN NHÀ CUNG CẤP", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14), new java.awt.Color(255, 51, 204))); // NOI18N
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Thông tin nhà cung cấp", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
         jPanel2.setPreferredSize(new java.awt.Dimension(912, 500));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -108,8 +108,9 @@ public class DSNhaCungCap extends javax.swing.JPanel {
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel5.setText("Địa chỉ:");
 
-        btnSua.setBackground(new java.awt.Color(0, 255, 255));
+        btnSua.setBackground(new java.awt.Color(0, 204, 51));
         btnSua.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnSua.setForeground(new java.awt.Color(255, 255, 255));
         btnSua.setText("Sửa");
         btnSua.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -120,8 +121,8 @@ public class DSNhaCungCap extends javax.swing.JPanel {
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel7.setText("Mã NCC:");
 
-        txtTimkiem.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        txtTimkiem.setToolTipText("Tìm kiếm...");
+        txtTimkiem.setText("Tìm kiếm...");
+        txtTimkiem.setToolTipText("");
         txtTimkiem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtTimkiemActionPerformed(evt);
@@ -131,9 +132,9 @@ public class DSNhaCungCap extends javax.swing.JPanel {
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel8.setText("SĐT:");
 
-        btnTimkiem.setBackground(new java.awt.Color(255, 255, 0));
+        btnTimkiem.setBackground(new java.awt.Color(153, 255, 255));
         btnTimkiem.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnTimkiem.setForeground(new java.awt.Color(51, 102, 255));
+        btnTimkiem.setForeground(new java.awt.Color(51, 51, 51));
         btnTimkiem.setText("Tìm");
         btnTimkiem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -175,8 +176,9 @@ public class DSNhaCungCap extends javax.swing.JPanel {
         });
         jScrollPane2.setViewportView(TableDsncc);
 
-        btnThem.setBackground(new java.awt.Color(255, 255, 0));
+        btnThem.setBackground(new java.awt.Color(0, 0, 255));
         btnThem.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnThem.setForeground(new java.awt.Color(255, 255, 255));
         btnThem.setText("Thêm");
         btnThem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -184,8 +186,9 @@ public class DSNhaCungCap extends javax.swing.JPanel {
             }
         });
 
-        btnXoa.setBackground(new java.awt.Color(102, 255, 0));
+        btnXoa.setBackground(new java.awt.Color(255, 0, 0));
         btnXoa.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnXoa.setForeground(new java.awt.Color(255, 255, 255));
         btnXoa.setText("Xóa");
         btnXoa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

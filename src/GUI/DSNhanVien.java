@@ -226,19 +226,26 @@ public class DSNhanVien extends javax.swing.JPanel {
 
         setPreferredSize(new java.awt.Dimension(877, 563));
 
-        jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder("Nhân viên"));
+        jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Nhân viên", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
 
+        jLabel42.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel42.setText("Họ tên:");
 
+        jLabel43.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel43.setText("Giới tính:");
 
         txtMaNV.setDisabledTextColor(new java.awt.Color(153, 153, 153));
         txtMaNV.setEnabled(false);
 
+        jLabel44.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel44.setText("Email:");
 
+        jLabel45.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel45.setText("Địa chỉ:");
 
+        btnSua.setBackground(new java.awt.Color(0, 153, 0));
+        btnSua.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnSua.setForeground(new java.awt.Color(255, 255, 255));
         btnSua.setText("Sửa");
         btnSua.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnSua.addActionListener(new java.awt.event.ActionListener() {
@@ -247,11 +254,11 @@ public class DSNhanVien extends javax.swing.JPanel {
             }
         });
 
+        jLabel46.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel46.setText("Mã nhân viên:");
 
         txtHoTen.setDisabledTextColor(new java.awt.Color(153, 153, 153));
 
-        txtTenTK.setForeground(new java.awt.Color(0, 0, 0));
         txtTenTK.setToolTipText("");
         txtTenTK.setDisabledTextColor(new java.awt.Color(153, 153, 153));
         txtTenTK.addActionListener(new java.awt.event.ActionListener() {
@@ -262,12 +269,15 @@ public class DSNhanVien extends javax.swing.JPanel {
 
         txtDiaChi.setDisabledTextColor(new java.awt.Color(153, 153, 153));
 
+        jLabel47.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel47.setText("SĐT:");
 
         txtEmail.setDisabledTextColor(new java.awt.Color(153, 153, 153));
 
         txtSDT.setDisabledTextColor(new java.awt.Color(153, 153, 153));
 
+        btnTimkiem.setBackground(new java.awt.Color(153, 255, 255));
+        btnTimkiem.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnTimkiem.setText("Tìm");
         btnTimkiem.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnTimkiem.addActionListener(new java.awt.event.ActionListener() {
@@ -310,6 +320,9 @@ public class DSNhanVien extends javax.swing.JPanel {
         });
         jScrollPane7.setViewportView(tblNhanVien);
 
+        btnThem.setBackground(new java.awt.Color(0, 51, 255));
+        btnThem.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnThem.setForeground(new java.awt.Color(255, 255, 255));
         btnThem.setText("Thêm");
         btnThem.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnThem.addActionListener(new java.awt.event.ActionListener() {
@@ -318,8 +331,12 @@ public class DSNhanVien extends javax.swing.JPanel {
             }
         });
 
+        txtTimKiem.setText("Tìm kiếm...");
+
+        jLabel48.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel48.setText("Tên tài khoản:");
 
+        jLabel49.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel49.setText("Chức vụ:");
 
         cbxChucVu.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nhân viên", "Quản lý" }));
@@ -328,6 +345,9 @@ public class DSNhanVien extends javax.swing.JPanel {
         cbxGioiTinh.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nam", "Nữ" }));
         cbxGioiTinh.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
+        btnXoa.setBackground(new java.awt.Color(255, 51, 0));
+        btnXoa.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnXoa.setForeground(new java.awt.Color(255, 255, 255));
         btnXoa.setText("Xóa");
         btnXoa.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnXoa.addActionListener(new java.awt.event.ActionListener() {
@@ -336,10 +356,15 @@ public class DSNhanVien extends javax.swing.JPanel {
             }
         });
 
+        lblMatKhau.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblMatKhau.setText("Mật khẩu:");
 
+        lblNhapLaiMK.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblNhapLaiMK.setText("Nhập lại:");
 
+        btnDatLai.setBackground(new java.awt.Color(255, 204, 153));
+        btnDatLai.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnDatLai.setForeground(new java.awt.Color(255, 255, 255));
         btnDatLai.setText("Đặt lại");
         btnDatLai.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnDatLai.addActionListener(new java.awt.event.ActionListener() {
@@ -348,6 +373,9 @@ public class DSNhanVien extends javax.swing.JPanel {
             }
         });
 
+        btnThucThi.setBackground(new java.awt.Color(0, 153, 153));
+        btnThucThi.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnThucThi.setForeground(new java.awt.Color(255, 255, 255));
         btnThucThi.setText("Thực thi");
         btnThucThi.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnThucThi.addActionListener(new java.awt.event.ActionListener() {
@@ -465,7 +493,7 @@ public class DSNhanVien extends javax.swing.JPanel {
                         .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(btnTimkiem, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(14, 14, 14)
-                .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE)
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 204, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
