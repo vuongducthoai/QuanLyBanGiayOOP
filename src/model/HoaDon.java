@@ -14,6 +14,7 @@ public class HoaDon {
 
     private int maHD;
     private int maKH;
+    private int maNV;
     private Date ngayMua;
     private String trangThai;
     private String pTTT;
@@ -22,9 +23,10 @@ public class HoaDon {
     public HoaDon(){
     }
     
-    public HoaDon(int maHD, int maKH, Date ngayMua, String trangThai, String pTTT, double tongTien) {
+    public HoaDon(int maHD, int maKH, int maNV, Date ngayMua, String trangThai, String pTTT, double tongTien) {
         this.maHD = maHD;
         this.maKH = maKH;
+        this.maNV = maNV;
         this.ngayMua = ngayMua;
         this.trangThai = trangThai; 
         this.pTTT = pTTT;
@@ -113,5 +115,19 @@ public class HoaDon {
      */
     public void setMaKH(int maKH) {
         this.maKH = maKH;
+    }
+
+    /**
+     * @return the maNV
+     */
+    public int getMaNV() {
+        return maNV;
+    }
+
+    /**
+     * @param maNV the maNV to set
+     */
+    public void setMaNV(int maNV) {
+        this.maNV = maNV;
     }
 }

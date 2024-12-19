@@ -65,11 +65,11 @@ public class DSSanPham extends javax.swing.JPanel {
 
     private void initMaSP() {
         try {
-            
+
             Connection conn = DBConnection.getConnection();
-           
+
             int nextMaSP = QuanLySanPhamDAO.getNextMaSP(conn);
-          
+
             txtMaSP.setText(String.valueOf(nextMaSP));
         } catch (SQLException | ClassNotFoundException ex) {
             JOptionPane.showMessageDialog(null, "Có lỗi xảy ra khi lấy mã khách hàng: " + ex.getMessage());
@@ -124,6 +124,7 @@ public class DSSanPham extends javax.swing.JPanel {
         txtMaSP = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         txtGiaBan = new javax.swing.JTextField();
+        btnReloadSP = new javax.swing.JButton();
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "QUẢN LÝ SẢN PHẨM", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14), new java.awt.Color(0, 51, 255))); // NOI18N
         jPanel2.setAutoscrolls(true);
@@ -229,6 +230,16 @@ public class DSSanPham extends javax.swing.JPanel {
         jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel11.setText("Đơn giá bán:");
 
+        btnReloadSP.setBackground(new java.awt.Color(0, 153, 153));
+        btnReloadSP.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnReloadSP.setForeground(new java.awt.Color(255, 255, 255));
+        btnReloadSP.setText("Reload");
+        btnReloadSP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReloadSPActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -272,11 +283,13 @@ public class DSSanPham extends javax.swing.JPanel {
                                     .addComponent(btnTimkiem, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 872, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                        .addGap(247, 247, 247)
+                        .addGap(106, 106, 106)
+                        .addComponent(btnReloadSP, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(67, 67, 67)
                         .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(81, 81, 81)
+                        .addGap(78, 78, 78)
                         .addComponent(btnXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(80, 80, 80)
+                        .addGap(62, 62, 62)
                         .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(18, Short.MAX_VALUE))
         );
@@ -305,11 +318,14 @@ public class DSSanPham extends javax.swing.JPanel {
                     .addComponent(btnTimkiem, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(btnXoa, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
-                    .addComponent(btnThem, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnSua, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 27, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnSua, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnXoa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnReloadSP, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
+                        .addComponent(btnThem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGap(16, 16, 16))
         );
 
@@ -354,6 +370,7 @@ public class DSSanPham extends javax.swing.JPanel {
             if (confirm == JOptionPane.YES_OPTION) {
                 // Kết nối tới cơ sở dữ liệu và xóa sản phẩm
                 Connection conn = DBConnection.getConnection();
+                int nextMaSP = QuanLySanPhamDAO.getNextMaSP(conn);
                 int result = QuanLySanPhamDAO.deleteSanPham(conn, maSP);
 
                 if (result > 0) {
@@ -361,6 +378,8 @@ public class DSSanPham extends javax.swing.JPanel {
                     JOptionPane.showMessageDialog(null, "Xóa sản phẩm thành công!");
                     LoadDSSanpham();  // Tải lại danh sách sản phẩm
                     clearForm();  // Xóa các trường nhập liệu
+                    // Lấy mã sp  tiếp theo từ txtMaSP
+                    txtMaSP.setText(String.valueOf(nextMaSP + 1));
                 } else {
                     JOptionPane.showMessageDialog(null, "Xóa sản phẩm thất bại!");
                 }
@@ -407,6 +426,7 @@ public class DSSanPham extends javax.swing.JPanel {
 
             // Kết nối tới cơ sở dữ liệu và cập nhật sản phẩm
             Connection conn = DBConnection.getConnection();
+            int nextMaSP = QuanLySanPhamDAO.getNextMaSP(conn);
             int result = QuanLySanPhamDAO.updateSanPham(conn, sanPham);
 
             if (result > 0) {
@@ -414,6 +434,8 @@ public class DSSanPham extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(null, "Sửa sản phẩm thành công!");
                 LoadDSSanpham();  // Tải lại danh sách sản phẩm
                 clearForm();  // Xóa các trường nhập liệu
+                // Lấy mã sp  tiếp theo từ txtMaSP
+                txtMaSP.setText(String.valueOf(nextMaSP + 1));
             } else {
                 JOptionPane.showMessageDialog(null, "Sửa sản phẩm thất bại!");
             }
@@ -451,6 +473,7 @@ public class DSSanPham extends javax.swing.JPanel {
 
             // Thêm sản phẩm vào cơ sở dữ liệu
             Connection conn = DBConnection.getConnection();
+            int nextMaSP = QuanLySanPhamDAO.getNextMaSP(conn);
             int result = QuanLySanPhamDAO.addSanPham(conn, sanPham);
 
             if (result > 0) {
@@ -458,6 +481,8 @@ public class DSSanPham extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(null, "Thêm sản phẩm thành công!");
                 LoadDSSanpham();  // Tải lại danh sách sản phẩm
                 clearForm();  // Xóa các trường nhập liệu
+                // Lấy mã sp  tiếp theo từ txtMaSP
+                txtMaSP.setText(String.valueOf(nextMaSP + 1));
             } else {
                 JOptionPane.showMessageDialog(null, "Thêm sản phẩm thất bại!");
             }
@@ -503,6 +528,21 @@ public class DSSanPham extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnTimkiemActionPerformed
 
+    private void btnReloadSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReloadSPActionPerformed
+        clearForm();
+        try {
+            LoadDSSanpham();
+            // Kết nối cơ sở dữ liệu
+            Connection conn = DBConnection.getConnection();
+            int nextMaSP = QuanLySanPhamDAO.getNextMaSP(conn);
+            // Lấy mã sp tiếp theo từ txtMaSP
+            txtMaSP.setText(String.valueOf(nextMaSP));
+
+        } catch (SQLException | ClassNotFoundException e) {
+            JOptionPane.showMessageDialog(this, "Có lỗi xảy ra khi tìm kiếm: " + e.getMessage());
+        }
+    }//GEN-LAST:event_btnReloadSPActionPerformed
+
     private void clearForm() {
         txtMaSP.setText("");
         txtTenSP.setText("");
@@ -512,6 +552,7 @@ public class DSSanPham extends javax.swing.JPanel {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnReloadSP;
     private javax.swing.JButton btnSua;
     private javax.swing.JButton btnThem;
     private javax.swing.JButton btnTimkiem;
