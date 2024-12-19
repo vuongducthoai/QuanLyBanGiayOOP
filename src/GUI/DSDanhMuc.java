@@ -31,6 +31,7 @@ public class DSDanhMuc extends javax.swing.JPanel {
         txtMaDM.setEditable(false);
         conn = new DBConnection();
         customizeTable();
+        
         loadDataToTableDanhMuc();
         getLastDanhMucId();
     }
