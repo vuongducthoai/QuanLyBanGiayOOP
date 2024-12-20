@@ -5,15 +5,24 @@
 package GUI;
 
 import DAO.NhaCungCapDAO;
+import static DAO.NhaCungCapDAO.getNhaCungCapList;
 import SQLConnection.DBConnection;
-import java.sql.SQLException;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import model.NhaCungCap;
+import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
+import javax.swing.*;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.List;
 
 /**
  *
@@ -95,6 +104,7 @@ public class DSNhaCungCap extends javax.swing.JPanel {
         btnThem = new javax.swing.JButton();
         btnXoa = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
+        jButton1 = new javax.swing.JButton();
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "THÔNG TIN NHÀ CUNG CẤP", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14), new java.awt.Color(255, 51, 204))); // NOI18N
         jPanel2.setPreferredSize(new java.awt.Dimension(912, 500));
@@ -193,6 +203,16 @@ public class DSNhaCungCap extends javax.swing.JPanel {
             }
         });
 
+        jButton1.setBackground(new java.awt.Color(204, 0, 204));
+        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setText("Export Excel");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -232,21 +252,22 @@ public class DSNhaCungCap extends javax.swing.JPanel {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(txtSdt, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(49, 49, 49))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                        .addGap(16, 16, 16)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 872, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(26, 26, 26)
+                                .addGap(38, 38, 38)
                                 .addComponent(btnXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(32, 32, 32)
+                                .addGap(47, 47, 47)
                                 .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(210, 210, 210))
-                            .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGap(50, 50, 50)
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(47, 47, 47))
+                            .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                        .addGap(16, 16, 16)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 872, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(32, 32, 32))
         );
         jPanel2Layout.setVerticalGroup(
@@ -281,15 +302,16 @@ public class DSNhaCungCap extends javax.swing.JPanel {
                             .addComponent(btnTimkiem, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(26, 26, 26)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(12, 12, 12)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(12, 12, 12))
+                            .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton1)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -360,6 +382,7 @@ public class DSNhaCungCap extends javax.swing.JPanel {
             loadDataToTableNCC();
             JOptionPane.showMessageDialog(this, "Sửa thông tin nhà cung cấp thành công.");
             clearInputFields();
+            getLastSupplerId();
         } catch (Exception e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(this, "Đã xảy ra lỗi khi sửa thông tin nhà cung cấp.");
@@ -447,6 +470,7 @@ public class DSNhaCungCap extends javax.swing.JPanel {
             NhaCungCapDAO.insertSupplier(conn.getConnection(), nhaCungCap);
             loadDataToTableNCC();
             JOptionPane.showMessageDialog(this, "Thêm nhà cung cấp thành công.");
+            getLastSupplerId();
         } catch (SQLException ex) {
             Logger.getLogger(DSNhaCungCap.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(this, "Đã xảy ra lỗi khi thêm nhà cung cấp.");
@@ -469,6 +493,7 @@ public class DSNhaCungCap extends javax.swing.JPanel {
                 loadDataToTableNCC();
                 JOptionPane.showMessageDialog(this, "Xóa nhà cung cấp thành công.");
                 clearInputFields();
+                getLastSupplerId();
             } catch (Exception e) {
                 e.printStackTrace();
                 JOptionPane.showMessageDialog(this, "Đã xảy ra lỗi khi xóa nhà cung cấp.");
@@ -495,6 +520,95 @@ public class DSNhaCungCap extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_TableDsnccMouseClicked
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        try {
+
+            // Lấy danh sách nhà cung cấp
+            List<NhaCungCap> nhaCungCapList = getNhaCungCapList(conn.getConnection());
+
+            // Hiển thị hộp thoại chọn nơi lưu file
+            String filePath = chooseFileLocation();
+            if (filePath != null) {
+                // Xuất dữ liệu ra file Excel
+                exportToExcel(nhaCungCapList, filePath);
+
+                // Thông báo xuất thành công
+                javax.swing.JOptionPane.showMessageDialog(this, "Xuất dữ liệu ra file Excel thành công!");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            javax.swing.JOptionPane.showMessageDialog(this, "Đã xảy ra lỗi: " + e.getMessage());
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(DSNhaCungCap.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(DSNhaCungCap.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_jButton1ActionPerformed
+    private void exportToExcel(List<NhaCungCap> nhaCungCapList, String fileName) throws IOException {
+        Workbook workbook = new XSSFWorkbook();
+        Sheet sheet = workbook.createSheet("Nhà Cung Cấp");
+
+        // Tạo tiêu đề cột
+        Row headerRow = sheet.createRow(0);
+        String[] columns = {"Mã NCC", "Tên NCC", "Địa Chỉ", "Email", "Số ĐT"};
+
+        for (int i = 0; i < columns.length; i++) {
+            Cell cell = headerRow.createCell(i);
+            cell.setCellValue(columns[i]);
+            CellStyle style = workbook.createCellStyle();
+            Font font = workbook.createFont();
+            font.setBold(true);
+            style.setFont(font);
+            cell.setCellStyle(style);
+        }
+
+        // Điền dữ liệu
+        int rowNum = 1;
+        for (NhaCungCap nhaCungCap : nhaCungCapList) {
+            Row row = sheet.createRow(rowNum++);
+            row.createCell(0).setCellValue(nhaCungCap.getMaNCC());
+            row.createCell(1).setCellValue(nhaCungCap.getTenNCC());
+            row.createCell(2).setCellValue(nhaCungCap.getDiaChi());
+            row.createCell(3).setCellValue(nhaCungCap.getEmail());
+            row.createCell(4).setCellValue(nhaCungCap.getSoDT());
+        }
+
+        // Tự động điều chỉnh kích thước cột
+        for (int i = 0; i < columns.length; i++) {
+            sheet.autoSizeColumn(i);
+        }
+
+        // Ghi dữ liệu ra file
+        try (FileOutputStream fileOut = new FileOutputStream(fileName)) {
+            workbook.write(fileOut);
+        }
+
+        // Đóng workbook
+        workbook.close();
+    }
+
+    private String chooseFileLocation() {
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Chọn nơi lưu file Excel");
+        fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+
+        int userSelection = fileChooser.showSaveDialog(null);
+        if (userSelection == JFileChooser.APPROVE_OPTION) {
+            File fileToSave = fileChooser.getSelectedFile();
+            String filePath = fileToSave.getAbsolutePath();
+
+            // Đảm bảo file có đuôi .xlsx
+            if (!filePath.endsWith(".xlsx")) {
+                filePath += ".xlsx";
+            }
+            return filePath;
+        }
+        return null;
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JTable TableDsncc;
@@ -502,6 +616,7 @@ public class DSNhaCungCap extends javax.swing.JPanel {
     private javax.swing.JButton btnThem;
     private javax.swing.JButton btnTimkiem;
     private javax.swing.JButton btnXoa;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
