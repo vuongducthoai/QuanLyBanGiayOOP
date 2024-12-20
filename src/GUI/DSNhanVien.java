@@ -223,6 +223,7 @@ public class DSNhanVien extends javax.swing.JPanel {
         txtNhapLaiMK = new javax.swing.JPasswordField();
         btnDatLai = new javax.swing.JButton();
         btnThucThi = new javax.swing.JButton();
+        cbxType = new javax.swing.JComboBox<>();
 
         setPreferredSize(new java.awt.Dimension(877, 563));
 
@@ -278,6 +279,7 @@ public class DSNhanVien extends javax.swing.JPanel {
 
         btnTimkiem.setBackground(new java.awt.Color(153, 255, 255));
         btnTimkiem.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnTimkiem.setForeground(new java.awt.Color(0, 0, 0));
         btnTimkiem.setText("Tìm");
         btnTimkiem.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnTimkiem.addActionListener(new java.awt.event.ActionListener() {
@@ -331,7 +333,11 @@ public class DSNhanVien extends javax.swing.JPanel {
             }
         });
 
-        txtTimKiem.setText("Tìm kiếm...");
+        txtTimKiem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTimKiemActionPerformed(evt);
+            }
+        });
 
         jLabel48.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel48.setText("Tên tài khoản:");
@@ -344,6 +350,11 @@ public class DSNhanVien extends javax.swing.JPanel {
 
         cbxGioiTinh.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nam", "Nữ" }));
         cbxGioiTinh.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        cbxGioiTinh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxGioiTinhActionPerformed(evt);
+            }
+        });
 
         btnXoa.setBackground(new java.awt.Color(255, 51, 0));
         btnXoa.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -388,6 +399,8 @@ public class DSNhanVien extends javax.swing.JPanel {
             }
         });
 
+        cbxType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mã nhân viên", "Họ tên", "Địa chỉ", "Giới tính", "Email", "Số điện thoại", "Tên tài khoản", "Chức vụ" }));
+
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
@@ -398,7 +411,9 @@ public class DSNhanVien extends javax.swing.JPanel {
                         .addGap(56, 56, 56)
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel7Layout.createSequentialGroup()
-                                .addComponent(txtTimKiem)
+                                .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(cbxType, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(btnTimkiem, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel7Layout.createSequentialGroup()
@@ -413,8 +428,7 @@ public class DSNhanVien extends javax.swing.JPanel {
                                     .addComponent(txtDiaChi, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE)
                                     .addComponent(txtHoTen, javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtMaNV, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtTenTK))
-                                .addGap(0, 0, Short.MAX_VALUE)))
+                                    .addComponent(txtTenTK))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel47, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -488,16 +502,21 @@ public class DSNhanVien extends javax.swing.JPanel {
                         .addComponent(txtTenTK, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel48)
                         .addComponent(lblMatKhau)))
-                .addGap(18, 18, 18)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(txtNhapLaiMK, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(lblNhapLaiMK))
-                    .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnTimkiem, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(14, 14, 14)
-                .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 204, Short.MAX_VALUE)
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(txtNhapLaiMK, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lblNhapLaiMK))
+                            .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cbxType, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnTimkiem, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -834,9 +853,20 @@ public class DSNhanVien extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Vui lòng nhập thông tin tìm kiếm !", "Tìm kiếm", JOptionPane.INFORMATION_MESSAGE);
             return;
         }
-        dsNhanVien = nhanVienDAO.searchNhanVien(keyword);
+        
+        int type = cbxType.getSelectedIndex();
+        
+        dsNhanVien = nhanVienDAO.searchNhanVien(keyword, type);
         loadDataToTable(dsNhanVien);
     }//GEN-LAST:event_btnTimkiemActionPerformed
+
+    private void txtTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTimKiemActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTimKiemActionPerformed
+
+    private void cbxGioiTinhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxGioiTinhActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbxGioiTinhActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -848,6 +878,7 @@ public class DSNhanVien extends javax.swing.JPanel {
     private javax.swing.JButton btnXoa;
     private javax.swing.JComboBox<String> cbxChucVu;
     private javax.swing.JComboBox<String> cbxGioiTinh;
+    private javax.swing.JComboBox<String> cbxType;
     private javax.swing.JLabel jLabel42;
     private javax.swing.JLabel jLabel43;
     private javax.swing.JLabel jLabel44;
