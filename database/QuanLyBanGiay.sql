@@ -136,6 +136,11 @@ FOREIGN KEY (MaSP) REFERENCES SanPham(MaSP)
     ON DELETE CASCADE
     ON UPDATE CASCADE;
 
+ALTER TABLE HoaDonNhap
+ADD MaNV INT;
+
+ALTER TABLE HoaDonNhap
+ADD TrangThai NVARCHAR(50);
 -- Thêm dữ liệu vào bảng NhanVien
 INSERT INTO NhanVien (TenNV, GioiTinh, DiaChi, Email, SoDT) VALUES
 (N'Trần Văn A', N'Nam', N'123 Nguyễn Văn Linh, Q7, TP HCM', N'tranvana@gmail.com', N'0909123456'),
@@ -265,9 +270,3 @@ INSERT INTO ChiTietHoaDonNhap (MaHDN, MaSP, SoLuong, DonGiaNhap) VALUES
 (8, 8, 45, 220),
 (9, 9, 50, 200),
 (10, 10, 60, 190);
-
-ALTER TABLE HoaDonNhap
-ADD MaNV INT
-
-ALTER TABLE HoaDonNhap
-ADD TrangThai NVARCHAR(50)
