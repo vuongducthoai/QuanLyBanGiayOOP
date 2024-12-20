@@ -39,6 +39,7 @@ public class DSHoaDon extends javax.swing.JPanel {
         try {
             initComponents();
             txtMaHD.setEditable(false);
+            txtTongtien.setEditable(false);
             txtMaCTHD.setEditable(false);
             tblDshd.setModel(tableModel1);
             JSpinner.DateEditor editor = new JSpinner.DateEditor(jSpinnerNgaymua, "dd-MM-yyyy");
@@ -771,7 +772,16 @@ public class DSHoaDon extends javax.swing.JPanel {
             Date ngayMua = (Date) jSpinnerNgaymua.getValue();
             String trangThai = cbbTrangthai.getSelectedItem().toString();
             String pTTT = cbbPttt.getSelectedItem().toString();
-            double tongTien = Double.parseDouble(txtTongtien.getText());
+
+            // Kiểm tra giá trị của txtTongtien, nếu rỗng thì mặc định là 0
+            double tongTien = 0.0;
+            if (!txtTongtien.getText().trim().isEmpty()) {
+                try {
+                    tongTien = Double.parseDouble(txtTongtien.getText().trim());
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(this, "Giá trị tổng tiền không hợp lệ! Mặc định là 0.");
+                }
+            }
 
             // Tạo đối tượng HoaDon
             HoaDon hd = new HoaDon();
