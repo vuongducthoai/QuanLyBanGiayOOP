@@ -28,6 +28,7 @@ public class DSKhachHang extends javax.swing.JPanel {
     public DSKhachHang() {
         try {
             initComponents();
+            txtMaKH.setEditable(false);
             tblDskh.setModel(tableModel);
             LoadDSKhachhang();
 
@@ -148,15 +149,19 @@ public class DSKhachHang extends javax.swing.JPanel {
         setPreferredSize(new java.awt.Dimension(929, 551));
         setRequestFocusEnabled(false);
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "QUẢN LÝ KHÁCH HÀNG", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14), new java.awt.Color(0, 0, 255))); // NOI18N
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Quản lý khách hàng", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
         jPanel2.setPreferredSize(new java.awt.Dimension(929, 551));
 
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel2.setText("Họ tên:");
 
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel3.setText("Giới tính:");
 
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel4.setText("Email:");
 
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel5.setText("Địa chỉ:");
 
         btnSua.setBackground(new java.awt.Color(0, 204, 102));
@@ -169,6 +174,7 @@ public class DSKhachHang extends javax.swing.JPanel {
             }
         });
 
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel7.setText("Mã KH:");
 
         txtTimkiem.setText("Tìm kiếm...");
@@ -179,8 +185,11 @@ public class DSKhachHang extends javax.swing.JPanel {
             }
         });
 
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel8.setText("SĐT:");
 
+        btnTimkiem.setBackground(new java.awt.Color(153, 255, 255));
+        btnTimkiem.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnTimkiem.setText("Tìm");
         btnTimkiem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
