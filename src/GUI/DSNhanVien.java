@@ -234,7 +234,7 @@ public class DSNhanVien extends javax.swing.JPanel {
         jLabel43.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel43.setText("Giới tính:");
 
-        txtMaNV.setDisabledTextColor(new java.awt.Color(153, 153, 153));
+        txtMaNV.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         txtMaNV.setEnabled(false);
 
         jLabel44.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -257,24 +257,24 @@ public class DSNhanVien extends javax.swing.JPanel {
         jLabel46.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel46.setText("Mã nhân viên:");
 
-        txtHoTen.setDisabledTextColor(new java.awt.Color(153, 153, 153));
+        txtHoTen.setDisabledTextColor(new java.awt.Color(0, 0, 0));
 
         txtTenTK.setToolTipText("");
-        txtTenTK.setDisabledTextColor(new java.awt.Color(153, 153, 153));
+        txtTenTK.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         txtTenTK.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtTenTKActionPerformed(evt);
             }
         });
 
-        txtDiaChi.setDisabledTextColor(new java.awt.Color(153, 153, 153));
+        txtDiaChi.setDisabledTextColor(new java.awt.Color(0, 0, 0));
 
         jLabel47.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel47.setText("SĐT:");
 
-        txtEmail.setDisabledTextColor(new java.awt.Color(153, 153, 153));
+        txtEmail.setDisabledTextColor(new java.awt.Color(0, 0, 0));
 
-        txtSDT.setDisabledTextColor(new java.awt.Color(153, 153, 153));
+        txtSDT.setDisabledTextColor(new java.awt.Color(0, 0, 0));
 
         btnTimkiem.setBackground(new java.awt.Color(153, 255, 255));
         btnTimkiem.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -359,8 +359,12 @@ public class DSNhanVien extends javax.swing.JPanel {
         lblMatKhau.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblMatKhau.setText("Mật khẩu:");
 
+        txtMatKhau.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+
         lblNhapLaiMK.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblNhapLaiMK.setText("Nhập lại:");
+
+        txtNhapLaiMK.setDisabledTextColor(new java.awt.Color(0, 0, 0));
 
         btnDatLai.setBackground(new java.awt.Color(255, 204, 153));
         btnDatLai.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N

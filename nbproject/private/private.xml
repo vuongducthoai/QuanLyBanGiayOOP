@@ -3,6 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/D:/ky1_nam3/OOP/PROJECTCK/prj_main/QuanLyBanGiayOOP/src/GUI/DSHoaDonNhap.java</file>
             <file>file:/D:/ky1_nam3/OOP/PROJECTCK/prj_main/QuanLyBanGiayOOP/src/GUI/DangNhap.java</file>
             <file>file:/D:/ky1_nam3/OOP/PROJECTCK/prj_main/QuanLyBanGiayOOP/src/dao/HoaDonNhapDAO.java</file>
@@ -20,6 +21,10 @@
             <file>file:/D:/ky1_nam3/OOP/PROJECTCK/prj_main/QuanLyBanGiayOOP/src/GUI/NhanVien.java</file>
             <file>file:/D:/ky1_nam3/OOP/PROJECTCK/prj_main/QuanLyBanGiayOOP/src/GUI/QuanLy.java</file>
             <file>file:/D:/ky1_nam3/OOP/PROJECTCK/prj_main/QuanLyBanGiayOOP/src/GUI/DSNhanVien.java</file>
+=======
+            <file>file:/D:/CODE/Java/JavaCore/OOP/QuanLyBanGiayOOP/src/SQLConnection/SQLServerConnection.java</file>
+            <file>file:/D:/CODE/Java/JavaCore/OOP/QuanLyBanGiayOOP/src/GUI/DSHoaDonNhap.java</file>
+>>>>>>> 130e2165989f5b6fd3c3bca7b78a8a915323c568
         </group>
     </open-files>
 </project-private>
