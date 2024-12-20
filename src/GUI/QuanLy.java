@@ -21,6 +21,7 @@ public class QuanLy extends javax.swing.JFrame {
     DSDanhMuc dm = new DSDanhMuc();
     DSSanPham dssp = new DSSanPham();
     ThongTinCaNhan ttcn = null;
+    ChartCTHDN chartHDN = new ChartCTHDN();
 
     /**
      * Creates new form Admin
@@ -60,7 +61,6 @@ public class QuanLy extends javax.swing.JFrame {
         panelMain.add(hdn);
         panelMain.add(dm);
         panelMain.add(dssp);
-        
     }
 
     /**
@@ -87,7 +87,6 @@ public class QuanLy extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Quản lý bán giày");
-        setPreferredSize(new java.awt.Dimension(1200, 600));
 
         panelTab.setBackground(new java.awt.Color(0, 102, 102));
         panelTab.setPreferredSize(new java.awt.Dimension(200, 600));
@@ -156,7 +155,8 @@ public class QuanLy extends javax.swing.JFrame {
         });
 
         btnHDN.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnHDN.setText("Hóa đơn nhập");
+        btnHDN.setText("Thống Kê");
+        btnHDN.setActionCommand("Thống Kê");
         btnHDN.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnHDN.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -318,6 +318,13 @@ public class QuanLy extends javax.swing.JFrame {
 
     private void btnHDNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHDNActionPerformed
         // TODO add your handling code here:
+        ttcn.setVisible(false);
+        dsNhanVien.setVisible(false);
+        hdn.setVisible(false);
+        dssp.setVisible(false);
+        ncc.setVisible(false);
+        dm.setVisible(false);
+        chartHDN.setVisible(true);
     }//GEN-LAST:event_btnHDNActionPerformed
 
     /**

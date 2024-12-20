@@ -49,6 +49,27 @@ public class HoaDonNhapDAO {
 
         return list;
     }
+    
+    
+     public static List<HoaDonNhap> thongKe(Connection conn) throws SQLException {
+        List<HoaDonNhap> list = new ArrayList<>();
+        String sql = "SELECT NgayNhap, TongTien FROM HoaDonNhap WHERE TrangThai LIKE N'ĐÃ THANH TOÁN' ORDER BY NgayNhap;";
+        PreparedStatement pst = conn.prepareStatement(sql);
+        ResultSet rs = pst.executeQuery();
+        DecimalFormat df = new DecimalFormat("#,###");
+        while (rs.next()) {
+            Date ngayNhap = rs.getDate("NgayNhap");
+            double tongTien = rs.getDouble("TongTien");
+            String formattedTongTien = df.format(tongTien);
+
+            HoaDonNhap hoaDonNhap = new HoaDonNhap();
+            hoaDonNhap.setNgayNhap(ngayNhap);
+            hoaDonNhap.setFormatTongTien(formattedTongTien);
+            list.add(hoaDonNhap);
+        }
+
+        return list;
+    }
 
     public static NhaCungCap findNhaCungCapByMaNCC(Connection conn, int maNCC) throws SQLException {
         NhaCungCap nhaCungCap = null;

@@ -32,6 +32,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 import org.apache.poi.ss.usermodel.Font;
 
 /**
@@ -60,6 +62,14 @@ public class DSHoaDonNhap extends javax.swing.JPanel {
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
+
+        Timer timer = new Timer();
+        timer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                loadDataTableHDN();  
+            }
+        }, 4000, 4000);
     }
 
     private void customizeTable() {
