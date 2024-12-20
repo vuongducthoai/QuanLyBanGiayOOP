@@ -28,6 +28,7 @@ public class HoaDonDAO {
             HoaDon hd = new HoaDon(
                     rs.getInt("MaHD"),
                     rs.getInt("MaKH"),
+                    rs.getInt("MaNV"),
                     rs.getDate("NgayMua"),
                     rs.getString("TrangThai"),
                     rs.getString("PTTT"),
@@ -40,14 +41,15 @@ public class HoaDonDAO {
     }
 
     public static int addHoaDon(Connection conn, HoaDon hd) throws SQLException {
-        String sql = "INSERT INTO HoaDon (MaKH, NgayMua, TrangThai, PTTT, TongTien) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO HoaDon (MaKH, MaNV, NgayMua, TrangThai, PTTT, TongTien) VALUES (?, ?, ?, ?, ?, ?)";
         PreparedStatement pst = conn.prepareStatement(sql);
 
         pst.setInt(1, hd.getMaKH());
-        pst.setDate(2, new java.sql.Date(hd.getNgayMua().getTime()));
-        pst.setString(3, hd.getTrangThai());
-        pst.setString(4, hd.getpTTT());
-        pst.setDouble(5, hd.getTongTien());
+        pst.setInt(2, hd.getMaNV());
+        pst.setDate(3, new java.sql.Date(hd.getNgayMua().getTime()));
+        pst.setString(4, hd.getTrangThai());
+        pst.setString(5, hd.getpTTT());
+        pst.setDouble(6, hd.getTongTien());
 
         return pst.executeUpdate();
     }
@@ -61,22 +63,23 @@ public class HoaDonDAO {
     }
 
     public static int updateHoaDon(Connection conn, HoaDon hd) throws SQLException {
-        String sql = "UPDATE HoaDon SET MaKH = ?, NgayMua = ?, TrangThai = ?, PTTT = ?, TongTien = ? WHERE MaHD = ?";
+        String sql = "UPDATE HoaDon SET MaKH = ?, MaNV = ?, NgayMua = ?, TrangThai = ?, PTTT = ?, TongTien = ? WHERE MaHD = ?";
         PreparedStatement pst = conn.prepareStatement(sql);
 
         pst.setInt(1, hd.getMaKH());
-        pst.setDate(2, new java.sql.Date(hd.getNgayMua().getTime()));
-        pst.setString(3, hd.getTrangThai());
-        pst.setString(4, hd.getpTTT());
-        pst.setDouble(5, hd.getTongTien());
-        pst.setInt(6, hd.getMaHD());
+        pst.setInt(2, hd.getMaNV());
+        pst.setDate(3, new java.sql.Date(hd.getNgayMua().getTime()));
+        pst.setString(4, hd.getTrangThai());
+        pst.setString(5, hd.getpTTT());
+        pst.setDouble(6, hd.getTongTien());
+        pst.setInt(7, hd.getMaHD());
 
         return pst.executeUpdate();
     }
 
     public static List<HoaDon> searchHoaDon(Connection conn, String searchTerm) throws SQLException {
         List<HoaDon> list = new ArrayList<>();
-        String sql = "SELECT * FROM HoaDon WHERE MaHD LIKE ? OR MaKH LIKE ? OR TrangThai LIKE ? OR PTTT LIKE ?";
+        String sql = "SELECT * FROM HoaDon WHERE MaHD LIKE ? OR MaKH LIKE ? OR MaNV LIKE ? OR TrangThai LIKE ? OR PTTT LIKE ?";
         PreparedStatement pst = conn.prepareStatement(sql);
 
         String searchPattern = "%" + searchTerm + "%";
@@ -84,6 +87,7 @@ public class HoaDonDAO {
         pst.setString(2, searchPattern);
         pst.setString(3, searchPattern);
         pst.setString(4, searchPattern);
+        pst.setString(5, searchPattern);
 
         ResultSet rs = pst.executeQuery();
 
@@ -91,6 +95,7 @@ public class HoaDonDAO {
             HoaDon hd = new HoaDon(
                     rs.getInt("MaHD"),
                     rs.getInt("MaKH"),
+                    rs.getInt("MaNV"),
                     rs.getDate("NgayMua"),
                     rs.getString("TrangThai"),
                     rs.getString("PTTT"),
@@ -101,14 +106,64 @@ public class HoaDonDAO {
         }
         return list;
     }
+
     public static int getNextMaHD(Connection conn) throws SQLException {
         String sqlMax = "SELECT MAX(MaHD) FROM HoaDon";
         PreparedStatement pstMax = conn.prepareStatement(sqlMax);
         ResultSet rsMax = pstMax.executeQuery();
         int maxMaHD = 0;
         if (rsMax.next()) {
-            maxMaHD = rsMax.getInt(1);  // Lấy giá trị MaKD lớn nhất
+            maxMaHD = rsMax.getInt(1);  // Lấy giá trị MaHD lớn nhất
         }
         return maxMaHD + 1;
     }
+
+    public static List<Integer> getMaKhachHangList(Connection conn) throws SQLException {
+        List<Integer> maKhachHangList = new ArrayList<>();
+        String sql = "SELECT MaKH FROM KhachHang";
+        PreparedStatement pst = conn.prepareStatement(sql);
+        ResultSet rs = pst.executeQuery();
+
+        while (rs.next()) {
+            maKhachHangList.add(rs.getInt("MaKH"));
+        }
+        return maKhachHangList;
+    }
+
+    public static List<Integer> getMaNhanVienList(Connection conn) throws SQLException {
+        List<Integer> maNhanVienList = new ArrayList<>();
+        String sql = "SELECT MaNV FROM NhanVien";
+        PreparedStatement pst = conn.prepareStatement(sql);
+        ResultSet rs = pst.executeQuery();
+
+        while (rs.next()) {
+            maNhanVienList.add(rs.getInt("MaNV"));
+        }
+        return maNhanVienList;
+    }
+
+    public static List<Integer> getMaSanPhamList(Connection conn) throws SQLException {
+        List<Integer> maSanPhamList = new ArrayList<>();
+        String sql = "SELECT MaSP FROM SanPham";
+        PreparedStatement pst = conn.prepareStatement(sql);
+        ResultSet rs = pst.executeQuery();
+
+        while (rs.next()) {
+            maSanPhamList.add(rs.getInt("MaSP"));
+        }
+        return maSanPhamList;
+    }
+
+    public static double getGiaBanByMaSP(Connection conn, int maSP) throws SQLException {
+        String sql = "SELECT DonGiaBan FROM SanPham WHERE MaSP = ?";
+        PreparedStatement pst = conn.prepareStatement(sql);
+        pst.setInt(1, maSP);
+        ResultSet rs = pst.executeQuery();
+
+        if (rs.next()) {
+            return rs.getDouble("DonGiaBan");
+        }
+        throw new SQLException("Không tìm thấy giá bán cho sản phẩm với mã: " + maSP);
+    }
+
 }

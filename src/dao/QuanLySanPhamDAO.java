@@ -106,9 +106,9 @@ public class QuanLySanPhamDAO {
             String tenSP = rs.getString("TenSP");
             double donGiaNhap = rs.getDouble("DonGiaNhap");
             double donGiaBan = rs.getDouble("DonGiaBan");
-            int maDM = rs.getInt("MaDM");            
+            int maDM = rs.getInt("MaDM");
 
-            DanhMuc danhMuc = new DanhMuc(maDM,"");
+            DanhMuc danhMuc = new DanhMuc(maDM, "");
             SanPham sp = new SanPham(maSP, tenSP, donGiaNhap, donGiaBan, danhMuc);
             list.add(sp);
         }
@@ -119,10 +119,47 @@ public class QuanLySanPhamDAO {
         String sqlMax = "SELECT MAX(MaSP) FROM SanPham";
         PreparedStatement pstMax = conn.prepareStatement(sqlMax);
         ResultSet rsMax = pstMax.executeQuery();
-        int maxMaKH = 0;
+        int maxMaSP = 0;
         if (rsMax.next()) {
-            maxMaKH = rsMax.getInt(1);  // Lấy giá trị MaKH lớn nhất
+            maxMaSP = rsMax.getInt(1);
         }
-        return maxMaKH + 1; // Trả về mã khách hàng tiếp theo
+        return maxMaSP + 1;
     }
+
+    public static List<String> getTenDanhMucList(Connection conn) throws SQLException {
+        List<String> tenDanhMucList = new ArrayList<>();
+        String sql = "SELECT TenDM FROM DanhMuc";
+        PreparedStatement pst = conn.prepareStatement(sql);
+        ResultSet rs = pst.executeQuery();
+
+        while (rs.next()) {
+            tenDanhMucList.add(rs.getString("TenDM"));
+        }
+        return tenDanhMucList;
+    }
+
+    public static int getMaDanhMucByTenDM(Connection conn, String tenDM) throws SQLException {
+        String sql = "SELECT MaDM FROM DanhMuc WHERE TenDM = ?";
+        PreparedStatement pst = conn.prepareStatement(sql);
+        pst.setString(1, tenDM);
+        ResultSet rs = pst.executeQuery();
+
+        if (rs.next()) {
+            return rs.getInt("MaDM");
+        }
+        throw new SQLException("Không tìm thấy mã danh mục cho tên danh mục: " + tenDM);
+    }
+
+    public static String getTenDanhMucByMaDM(Connection conn, int maDM) throws SQLException {
+        String sql = "SELECT TenDM FROM DanhMuc WHERE MaDM = ?";
+        PreparedStatement pst = conn.prepareStatement(sql);
+        pst.setInt(1, maDM);
+        ResultSet rs = pst.executeQuery();
+
+        if (rs.next()) {
+            return rs.getString("TenDM");
+        }
+        throw new SQLException("Không tìm thấy tên danh mục cho mã danh mục: " + maDM);
+    }
+
 }

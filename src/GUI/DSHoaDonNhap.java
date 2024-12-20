@@ -158,7 +158,7 @@ public class DSHoaDonNhap extends javax.swing.JPanel {
         cmbTenNCC = new javax.swing.JComboBox<>();
         jButton2 = new javax.swing.JButton();
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Hóa đơn nhập", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14), new java.awt.Color(51, 51, 255))); // NOI18N
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Hóa đơn nhập", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
 
         txtMaHDN.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -177,6 +177,7 @@ public class DSHoaDonNhap extends javax.swing.JPanel {
 
         txtTimKiem.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         txtTimKiem.setForeground(new java.awt.Color(51, 51, 51));
+
         txtTimKiem.setText("Tìm kiếm...");
         txtTimKiem.setToolTipText("");
         txtTimKiem.addActionListener(new java.awt.event.ActionListener() {
@@ -185,7 +186,7 @@ public class DSHoaDonNhap extends javax.swing.JPanel {
             }
         });
 
-        btnTimkiem.setBackground(new java.awt.Color(51, 255, 0));
+        btnTimkiem.setBackground(new java.awt.Color(153, 255, 255));
         btnTimkiem.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnTimkiem.setText("Tìm");
         btnTimkiem.addActionListener(new java.awt.event.ActionListener() {
@@ -227,7 +228,7 @@ public class DSHoaDonNhap extends javax.swing.JPanel {
         });
         jScrollPane2.setViewportView(tblHoaDonNhap);
 
-        btnXoa.setBackground(new java.awt.Color(0, 0, 255));
+        btnXoa.setBackground(new java.awt.Color(255, 0, 0));
         btnXoa.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnXoa.setForeground(new java.awt.Color(255, 255, 255));
         btnXoa.setText("Xóa");
@@ -240,13 +241,14 @@ public class DSHoaDonNhap extends javax.swing.JPanel {
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel9.setText("Tên nhà cung cấp:");
 
+
         txtNgayNhap.setModel(new javax.swing.SpinnerDateModel());
 
-        cmbStatus.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         cmbStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "CHƯA THANH TOÁN", "ĐÃ THANH TOÁN", " " }));
 
-        btnSua.setBackground(new java.awt.Color(255, 255, 51));
+        btnSua.setBackground(new java.awt.Color(0, 153, 0));
         btnSua.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnSua.setForeground(new java.awt.Color(255, 255, 255));
         btnSua.setText("Sửa");
         btnSua.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -254,7 +256,7 @@ public class DSHoaDonNhap extends javax.swing.JPanel {
             }
         });
 
-        btnThem1.setBackground(new java.awt.Color(255, 102, 51));
+        btnThem1.setBackground(new java.awt.Color(0, 102, 255));
         btnThem1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnThem1.setForeground(new java.awt.Color(255, 255, 255));
         btnThem1.setText("Thêm");
@@ -264,7 +266,7 @@ public class DSHoaDonNhap extends javax.swing.JPanel {
             }
         });
 
-        jButton1.setBackground(new java.awt.Color(204, 0, 204));
+        jButton1.setBackground(new java.awt.Color(0, 153, 153));
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Chi Tiết Hóa Đơn Nhập");
@@ -298,6 +300,7 @@ public class DSHoaDonNhap extends javax.swing.JPanel {
                             .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
                             .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(txtTongTien)
@@ -359,6 +362,7 @@ public class DSHoaDonNhap extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtTongTien, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+
                     .addComponent(jLabel5)
                     .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnTimkiem, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -371,6 +375,7 @@ public class DSHoaDonNhap extends javax.swing.JPanel {
                     .addComponent(btnThem1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+
                 .addGap(2, 2, 2))
         );
 

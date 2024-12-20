@@ -68,7 +68,7 @@ public class TaiKhoanDAO {
 
             connection = DBConnection.getConnection();
 
-            String sql = "SELECT * FROM TaiKhoan WHERE TenTK = ? AND matKhau = ?";
+            String sql = "SELECT * FROM TaiKhoan WHERE TenTK = ? AND MatKhau = ?";
 
             ps = connection.prepareStatement(sql);
             ps.setString(1, tenTK);
@@ -109,7 +109,7 @@ public class TaiKhoanDAO {
         try {
             connection = DBConnection.getConnection();
 
-            String sql = "SELECT * FROM TaiKhoan WHERE TenTK = ?";;
+            String sql = "SELECT * FROM TaiKhoan WHERE TenTK = ?";
             ps = connection.prepareStatement(sql);
             ps.setString(1, tenTK);
 

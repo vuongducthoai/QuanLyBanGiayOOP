@@ -72,6 +72,7 @@ public class NhanVien extends javax.swing.JFrame {
 
         panelTab.setBackground(new java.awt.Color(0, 102, 102));
 
+        btnHoaDon.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnHoaDon.setText("Hóa đơn");
         btnHoaDon.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnHoaDon.addActionListener(new java.awt.event.ActionListener() {
@@ -80,6 +81,7 @@ public class NhanVien extends javax.swing.JFrame {
             }
         });
 
+        btnDangXuat.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnDangXuat.setText("Đăng xuất");
         btnDangXuat.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnDangXuat.addActionListener(new java.awt.event.ActionListener() {
@@ -88,6 +90,7 @@ public class NhanVien extends javax.swing.JFrame {
             }
         });
 
+        btnTTCN.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnTTCN.setText("Thông tin cá nhân");
         btnTTCN.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnTTCN.addActionListener(new java.awt.event.ActionListener() {
@@ -96,6 +99,7 @@ public class NhanVien extends javax.swing.JFrame {
             }
         });
 
+        btnKhachHang.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnKhachHang.setText("Khách hàng");
         btnKhachHang.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnKhachHang.addActionListener(new java.awt.event.ActionListener() {
