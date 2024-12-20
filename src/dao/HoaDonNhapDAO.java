@@ -66,8 +66,7 @@ public class HoaDonNhapDAO {
         }
         return nhaCungCap;
     }
-    
-    
+
     public static HoaDonNhap findHoaDonNhapByMaHDN(Connection conn, int maHDN) throws SQLException {
         HoaDonNhap hoaDonNhap = null;
         String sql = "SELECT * FROM HoaDonNhap WHERE maHDN = ?";
@@ -108,14 +107,13 @@ public class HoaDonNhapDAO {
     }
 
     public static int addHoaDonNhap(Connection conn, HoaDonNhap hoaDonNhap) throws SQLException {
-        String sql = "INSERT INTO HoaDonNhap (MaNCC, NgayNhap, TongTien,  MaNV, TrangThai) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO HoaDonNhap (MaNCC, NgayNhap, MaNV, TrangThai) VALUES (?, ?, ?, ?)";
         PreparedStatement pst = conn.prepareStatement(sql);
 
         pst.setInt(1, hoaDonNhap.getNhaCungCap().getMaNCC());
-        pst.setDate(2, (java.sql.Date) hoaDonNhap.getNgayNhap());
-        pst.setDouble(3, hoaDonNhap.getTongTien());
-        pst.setDouble(4, hoaDonNhap.getNhanVien().getMaNV());
-        pst.setString(5, hoaDonNhap.getTrangThai());
+        pst.setDate(2, new java.sql.Date(hoaDonNhap.getNgayNhap().getTime()));
+        pst.setDouble(3, hoaDonNhap.getNhanVien().getMaNV());
+        pst.setString(4, hoaDonNhap.getTrangThai());
 
         return pst.executeUpdate();
     }
@@ -145,20 +143,22 @@ public class HoaDonNhapDAO {
         List<HoaDonNhap> list = new ArrayList<>();
 
         // Câu lệnh SQL với JOIN để kết hợp ba bảng: HoaDonNhap, NhaCungCap, NhanVien
-        String sql = "SELECT * FROM HoaDonNhap h "
+        String sql = "SELECT h.MaHDN, n.MaNCC, n.TenNCC, nv.MaNV, nv.TenNV, h.NgayNhap, h.TongTien, h.TrangThai "
+                + "FROM HoaDonNhap h "
                 + "JOIN NhaCungCap n ON h.MaNCC = n.MaNCC "
                 + "JOIN NhanVien nv ON h.MaNV = nv.MaNV "
-                + "WHERE MaHDN LIKE ? "
+                + "WHERE CAST(h.MaHDN AS CHAR) LIKE ? "
                 + "OR n.TenNCC COLLATE Latin1_General_CI_AI LIKE ? "
                 + "OR nv.TenNV COLLATE Latin1_General_CI_AI LIKE ? "
-                + "OR h.TrangThai COLLATE Latin1_General_CI_AILIKE ? "
-                + "OR h.TongTien  LIKE ? "
-                + "OR h.NgayNhap LIKE ?";
+                + "OR h.TrangThai COLLATE Latin1_General_CI_AI LIKE ? "
+                + "OR CAST(h.TongTien AS CHAR) LIKE ? "
+                + "OR CAST(h.NgayNhap AS CHAR) LIKE ?";
 
         PreparedStatement pst = conn.prepareStatement(sql);
 
         String searchPattern = "%" + searchTerm + "%";
 
+        // Gán giá trị tham số cho PreparedStatement
         pst.setString(1, searchPattern);
         pst.setString(2, searchPattern);
         pst.setString(3, searchPattern);
@@ -167,14 +167,19 @@ public class HoaDonNhapDAO {
         pst.setString(6, searchPattern);
 
         ResultSet rs = pst.executeQuery();
+
         while (rs.next()) {
-            // Tạo đối tượng HoaDonNhap từ kết quả truy vấn
+            // Tạo đối tượng NhaCungCap
             NhaCungCap nhaCungCap = new NhaCungCap();
             nhaCungCap.setMaNCC(rs.getInt("MaNCC"));
             nhaCungCap.setTenNCC(rs.getString("TenNCC"));
+
+            // Tạo đối tượng NhanVien
             NhanVien nhanVien = new NhanVien();
             nhanVien.setMaNV(rs.getInt("MaNV"));
-            nhanVien.setTen(rs.getString("tenNV"));
+            nhanVien.setTen(rs.getString("TenNV"));
+
+            // Tạo đối tượng HoaDonNhap
             HoaDonNhap hoaDonNhap = new HoaDonNhap(
                     rs.getInt("MaHDN"),
                     nhaCungCap,
@@ -183,6 +188,8 @@ public class HoaDonNhapDAO {
                     rs.getDouble("TongTien"),
                     rs.getString("TrangThai")
             );
+
+            // Thêm vào danh sách kết quả
             list.add(hoaDonNhap);
         }
 
