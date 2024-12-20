@@ -58,6 +58,8 @@ public class HoaDonNhap {
     }
 
     public NhanVien getNhanVien() {
+        if (this.nhanVien == null)
+            return new NhanVien();
         return nhanVien;
     }
 
