@@ -309,27 +309,31 @@ public class NhanVienDAO {
         return false;
     }
 
-    public List<NhanVien> searchNhanVien(String keyword) {
+    public List<NhanVien> searchNhanVien(String keyword, int type) {
         List<NhanVien> dsNhanVien = new ArrayList<>();
         try {
             connection = DBConnection.getConnection();
 
             String sql = "SELECT * FROM NhanVien "
-                    + "WHERE MaNV LIKE ? "
-                    + "   OR TenNV LIKE ? "
-                    + "   OR GioiTinh LIKE ? "
-                    + "   OR DiaChi LIKE ? "
-                    + "   OR Email LIKE ? "
-                    + "   OR SoDT LIKE ?";
+                    + "WHERE ";
+
+            if (type == 0) {
+                sql += " MaNV LIKE ? ";
+            } else if (type == 1) {
+                sql += " TenNV LIKE ? ";
+            } else if (type == 2) {
+                sql += " DiaChi LIKE ? ";
+            } else if (type == 3) {
+                sql += " GioiTinh LIKE ? ";
+            } else if (type == 4) {
+                sql += " Email LIKE ? ";
+            } else if (type == 5) {
+                sql += " SoDT LIKE ?";
+            };
 
             ps = connection.prepareStatement(sql);
             String searchKeyword = "%" + keyword + "%";
             ps.setString(1, searchKeyword);
-            ps.setString(2, searchKeyword);
-            ps.setString(3, searchKeyword);
-            ps.setString(4, searchKeyword);
-            ps.setString(5, searchKeyword);
-            ps.setString(6, searchKeyword);
 
             rs = ps.executeQuery();
 
