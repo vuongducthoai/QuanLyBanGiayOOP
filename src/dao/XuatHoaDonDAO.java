@@ -19,11 +19,12 @@ import SQLConnection.DBConnection;
 public class XuatHoaDonDAO {
 
     public void exportHoaDonToTxt(int maHD, Connection conn, String filePath) {
-        String query = "SELECT HD.MaHD, SP.TenSP, CTHD.SoLuong, SP.DonGiaBan, NV.TenNV "
+        String query = "SELECT HD.MaHD, HD.NgayMua, KH.TenKH, SP.TenSP, CTHD.SoLuong, SP.DonGiaBan, NV.TenNV, HD.TongTien "
                 + "FROM HoaDon HD "
                 + "JOIN ChiTietHoaDon CTHD ON HD.MaHD = CTHD.MaHD "
                 + "JOIN SanPham SP ON CTHD.MaSP = SP.MaSP "
                 + "JOIN NhanVien NV ON HD.MaNV = NV.MaNV "
+                + "JOIN KhachHang KH ON HD.MaKH = KH.MaKH "
                 + "WHERE HD.MaHD = ?";
 
         try (PreparedStatement stmt = conn.prepareStatement(query); BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
@@ -36,31 +37,42 @@ public class XuatHoaDonDAO {
                 return;
             }
 
+            rs.next(); // Di chuyển đến bản ghi đầu tiên
+
+            // Lấy thông tin chung từ bản ghi đầu tiên
+            String ngayMua = rs.getString("NgayMua");
+            String tenKH = rs.getString("TenKH");
+
+            // Viết thông tin hóa đơn
             writer.write("Hóa Đơn: " + maHD);
             writer.newLine();
-            writer.write(String.format("%-30s %-10s %-20s %-10s", "Tên Sản Phẩm", "Số Lượng", "Nhân Viên", "Đơn Giá Bán"));
+            writer.write("Ngày Mua: " + ngayMua);
             writer.newLine();
-            writer.write("------------------------------------------------------------------");
+            writer.write("Khách Hàng: " + tenKH);
+            writer.newLine();
+            writer.write(String.format("%-30s %-10s %-20s %-10s %-15s", "Tên Sản Phẩm", "Số Lượng", "Nhân Viên", "Đơn Giá Bán", "Thành Tiền"));
+            writer.newLine();
+            writer.write("--------------------------------------------------------------------------------------------------");
             writer.newLine();
 
-            double tongTien = 0; // Biến tính tổng tiền
+            double tongTien = 0;
 
-            while (rs.next()) {
+            do {
                 String tenSP = rs.getString("TenSP");
                 int soLuong = rs.getInt("SoLuong");
                 String tenNV = rs.getString("TenNV");
                 double donGiaBan = rs.getDouble("DonGiaBan");
-                double thanhTien = donGiaBan * soLuong; // Tính thành tiền cho từng sản phẩm
+                double thanhTien = donGiaBan * soLuong;
 
-                tongTien += thanhTien; // Cộng dồn vào tổng tiền
+                tongTien += thanhTien;
 
-                writer.write(String.format("%-30s %-10d %-20s %-10.2f", tenSP, soLuong, tenNV, donGiaBan));
+                writer.write(String.format("%-30s %-10d %-20s %-10.2f %-15.2f", tenSP, soLuong, tenNV, donGiaBan, thanhTien));
                 writer.newLine();
-            }
+            } while (rs.next());
 
-            writer.write("------------------------------------------------------------------");
+            writer.write("--------------------------------------------------------------------------------------------------");
             writer.newLine();
-            writer.write(String.format("Tổng Tiền: %.2f", tongTien)); // Xuất tổng tiền ở cuối hóa đơn
+            writer.write(String.format("Tổng Tiền: %.2f", tongTien));
             writer.newLine();
             writer.write("Cảm ơn quý khách!");
 
