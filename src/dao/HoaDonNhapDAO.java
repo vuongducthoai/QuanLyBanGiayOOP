@@ -13,6 +13,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import model.HoaDon;
 import model.HoaDonNhap;
 import model.NhaCungCap;
 import model.NhanVien;
@@ -49,9 +50,8 @@ public class HoaDonNhapDAO {
 
         return list;
     }
-    
-        
-     public static List<HoaDonNhap> thongKe(Connection conn) throws SQLException {
+
+    public static List<HoaDonNhap> thongKe(Connection conn) throws SQLException {
         List<HoaDonNhap> list = new ArrayList<>();
         String sql = "SELECT NgayNhap, TongTien FROM HoaDonNhap WHERE TrangThai LIKE N'ĐÃ THANH TOÁN' ORDER BY NgayNhap;";
         PreparedStatement pst = conn.prepareStatement(sql);
@@ -70,6 +70,68 @@ public class HoaDonNhapDAO {
 
         return list;
     }
+    
+        public static List<HoaDon> thongKeHD(Connection conn) throws SQLException {
+        List<HoaDon> list = new ArrayList<>();
+        String sql = "SELECT NgayMua, TongTien FROM HoaDon WHERE TrangThai LIKE N'ĐÃ THANH TOÁN' ORDER BY NgayMua;";
+        PreparedStatement pst = conn.prepareStatement(sql);
+        ResultSet rs = pst.executeQuery();
+        DecimalFormat df = new DecimalFormat("#,###");
+        while (rs.next()) {
+            Date ngayMua = rs.getDate("NgayMua");
+            double tongTien = rs.getDouble("TongTien");
+//            String formattedTongTien = df.format(tongTien);
+
+            HoaDon hoaDon = new HoaDon();
+            hoaDon.setNgayMua(ngayMua);
+            hoaDon.setTongTien(tongTien);
+            list.add(hoaDon);
+        }
+
+        return list;
+    }
+
+    public static List<HoaDonNhap> thongKeByMonthOrYear(Connection conn, int month, int year) throws SQLException {
+        List<HoaDonNhap> list = new ArrayList<>();
+        String sql = "SELECT NgayNhap, TongTien FROM HoaDonNhap WHERE TrangThai LIKE N'ĐÃ THANH TOÁN' AND MONTH(NgayNhap) = ? AND YEAR(NgayNhap) = ? ORDER BY NgayNhap;";
+        PreparedStatement pst = conn.prepareStatement(sql);
+        pst.setInt(1, month);
+        pst.setInt(2, year);
+        ResultSet rs = pst.executeQuery();
+        DecimalFormat df = new DecimalFormat("#,###");
+        while (rs.next()) {
+            Date ngayNhap = rs.getDate("NgayNhap");
+            double tongTien = rs.getDouble("TongTien");
+            String formattedTongTien = df.format(tongTien);
+
+            HoaDonNhap hoaDonNhap = new HoaDonNhap();
+            hoaDonNhap.setNgayNhap(ngayNhap);
+            hoaDonNhap.setFormatTongTien(formattedTongTien);
+            list.add(hoaDonNhap);
+        }
+
+        return list;
+    }
+    
+      public static List<HoaDon> thongKeHDByMonthOrYear(Connection conn, int month, int year) throws SQLException {
+        List<HoaDon> list = new ArrayList<>();
+        String sql = "SELECT NgayMua, TongTien FROM HoaDon WHERE TrangThai LIKE N'ĐÃ THANH TOÁN' AND MONTH(NgayMua) = ? AND YEAR(NgayMua) = ?  ORDER BY NgayMua;";
+        PreparedStatement pst = conn.prepareStatement(sql);
+        pst.setInt(1, month);
+        pst.setInt(2, year);
+        ResultSet rs = pst.executeQuery();
+        while (rs.next()) {
+            Date ngayMua = rs.getDate("NgayMua");
+            double tongTien = rs.getDouble("TongTien");
+            HoaDon hoaDon = new HoaDon();
+            hoaDon.setNgayMua(ngayMua);
+            hoaDon.setTongTien(tongTien);
+            list.add(hoaDon);
+        }
+        return list;
+    }
+    
+    
 
     public static NhaCungCap findNhaCungCapByMaNCC(Connection conn, int maNCC) throws SQLException {
         NhaCungCap nhaCungCap = null;
