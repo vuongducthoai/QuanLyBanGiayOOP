@@ -12,7 +12,7 @@ import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import javax.swing.JPanel;
-import model.HoaDonNhap;
+import model.HoaDon;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -25,14 +25,14 @@ import org.jfree.data.category.DefaultCategoryDataset;
  *
  * @author Asus
  */
-public class ChartCTHDN extends javax.swing.JFrame {
+public class ChartHoaDon extends javax.swing.JFrame {
 
     /**
      * Creates new form ChartCTHDN
      */
     private DBConnection conn;
 
-    public ChartCTHDN() {
+    public ChartHoaDon() {
         initComponents();
         for (int i = 1; i <= 12; i++) {
             cmbMonth.addItem(i); // Add integers for months
@@ -46,37 +46,25 @@ public class ChartCTHDN extends javax.swing.JFrame {
     public void setDataToChartHoaDonNhap(JPanel jpnItem) {
         try {
             // Gọi hàm thongKe để lấy dữ liệu từ cơ sở dữ liệu
-            List<HoaDonNhap> listItem = HoaDonNhapDAO.thongKe(conn.getConnection());
+            List<HoaDon> listItem = HoaDonNhapDAO.thongKeHD(conn.getConnection());
 
             // Tạo dataset cho biểu đồ
             DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 
             if (listItem != null) {
-                for (HoaDonNhap item : listItem) {
+                for (HoaDon item : listItem) {
                     // Sử dụng NgayNhap và TongTien để làm dữ liệu cho biểu đồ
                     // Format NgayNhap thành chuỗi ngày tháng cho trục X, TongTien cho trục Y
-                    String ngayNhapFormatted = new SimpleDateFormat("yyyy-MM-dd").format(item.getNgayNhap());
-//                    double tongTien = Double.parseDouble(item.getFormatTongTien().replace(",", ""));
-//                    dataset.addValue(tongTien, "Tổng Tiền", ngayNhapFormatted);
-                    String rawValue = item.getFormatTongTien();
-                    if (rawValue != null && !rawValue.isEmpty()) {
-                        try {
-                            // Thay dấu chấm (.) thành chuỗi rỗng trước khi chuyển đổi
-                            double tongTien = Double.parseDouble(rawValue.replace(".", "").replace(",", ""));
-                            dataset.addValue(tongTien, "Tổng Tiền", ngayNhapFormatted);
-                        } catch (NumberFormatException e) {
-                            System.err.println("Lỗi định dạng giá trị TongTien: " + rawValue);
-                        }
-                    } else {
-                        System.err.println("Giá trị TongTien null hoặc rỗng.");
-                    }
+                    String ngayMuaFormatted = new SimpleDateFormat("yyyy-MM-dd").format(item.getNgayMua());
+                    double tongTien = item.getTongTien();
+                    dataset.addValue(tongTien, "Tổng Tiền", ngayMuaFormatted);
                 }
             }
 
             // Tạo biểu đồ từ dataset
             JFreeChart barChart = ChartFactory.createBarChart(
-                    "Biểu đồ thống kê tổng tiền hóa đơn nhập", // Tiêu đề
-                    "Ngày Nhập", // Trục X
+                    "Biểu đồ thống kê  doanh thu", // Tiêu đề
+                    "Ngày Mua", // Trục X
                     "Tổng Tiền", // Trục Y
                     dataset, // Dataset
                     PlotOrientation.VERTICAL, // Định dạng biểu đồ (dọc)
@@ -111,25 +99,25 @@ public class ChartCTHDN extends javax.swing.JFrame {
             int year = (Integer) cmbYear.getSelectedItem();
 
             // Gọi hàm thongKe để lấy dữ liệu từ cơ sở dữ liệu
-            List<HoaDonNhap> listItem = HoaDonNhapDAO.thongKeByMonthOrYear(conn.getConnection(), month, year);
+            List<HoaDon> listItem = HoaDonNhapDAO.thongKeHDByMonthOrYear(conn.getConnection(), month, year);
 
             // Tạo dataset cho biểu đồ
             DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 
             if (listItem != null) {
-                for (HoaDonNhap item : listItem) {
+                for (HoaDon item : listItem) {
                     // Sử dụng NgayNhap và TongTien để làm dữ liệu cho biểu đồ
                     // Format NgayNhap thành chuỗi ngày tháng cho trục X, TongTien cho trục Y
-                    String ngayNhapFormatted = new SimpleDateFormat("yyyy-MM-dd").format(item.getNgayNhap());
-                    double tongTien = Double.parseDouble(item.getFormatTongTien().replace(",", ""));
+                    String ngayNhapFormatted = new SimpleDateFormat("yyyy-MM-dd").format(item.getNgayMua());
+                    double tongTien = item.getTongTien();
                     dataset.addValue(tongTien, "Tổng Tiền", ngayNhapFormatted);
                 }
             }
 
             // Tạo biểu đồ từ dataset
             JFreeChart barChart = ChartFactory.createBarChart(
-                    "Biểu đồ thống kê tổng tiền hóa đơn nhập", // Tiêu đề
-                    "Ngày Nhập", // Trục X
+                    "Biểu đồ thống kê doanh thu", // Tiêu đề
+                    "Ngày Mua", // Trục X
                     "Tổng Tiền", // Trục Y
                     dataset, // Dataset
                     PlotOrientation.VERTICAL, // Định dạng biểu đồ (dọc)
@@ -271,21 +259,23 @@ public class ChartCTHDN extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ChartCTHDN.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ChartHoaDon.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ChartCTHDN.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ChartHoaDon.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ChartCTHDN.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ChartHoaDon.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ChartCTHDN.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ChartHoaDon.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ChartCTHDN().setVisible(true);
+                new ChartHoaDon().setVisible(true);
             }
         });
     }
