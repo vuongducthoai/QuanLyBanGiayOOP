@@ -297,6 +297,10 @@ public class DSDanhMuc extends javax.swing.JPanel {
         danhMuc.setTenDM(tenDM);
 
         try {
+            if(DanhMucDAO.findDanhMucByTen(conn.getConnection(), tenDM) != null){
+                 JOptionPane.showMessageDialog(this, "Tên danh mục đã tồn tại.");
+                return;
+            }
             DanhMucDAO.insertDanhMuc(conn.getConnection(), danhMuc);
             loadDataToTableDanhMuc();
             JOptionPane.showMessageDialog(this, "Thêm danh mục thành công.");

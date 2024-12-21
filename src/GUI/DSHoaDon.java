@@ -303,7 +303,6 @@ public class DSHoaDon extends javax.swing.JPanel {
         jScrollPane3 = new javax.swing.JScrollPane();
         tblDscthd = new javax.swing.JTable();
         btnThemCTHD = new javax.swing.JButton();
-        btnXoaCTHD = new javax.swing.JButton();
         btnSuaCTHD = new javax.swing.JButton();
         btnReloadCTHD = new javax.swing.JButton();
         cbbMaSP = new javax.swing.JComboBox<>();
@@ -601,16 +600,6 @@ public class DSHoaDon extends javax.swing.JPanel {
             }
         });
 
-        btnXoaCTHD.setBackground(new java.awt.Color(255, 0, 0));
-        btnXoaCTHD.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnXoaCTHD.setForeground(new java.awt.Color(255, 255, 255));
-        btnXoaCTHD.setText("Xóa");
-        btnXoaCTHD.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnXoaCTHDActionPerformed(evt);
-            }
-        });
-
         btnSuaCTHD.setBackground(new java.awt.Color(0, 153, 51));
         btnSuaCTHD.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnSuaCTHD.setForeground(new java.awt.Color(255, 255, 255));
@@ -644,13 +633,11 @@ public class DSHoaDon extends javax.swing.JPanel {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(40, 40, 40)
                                 .addComponent(btnReloadCTHD)
-                                .addGap(29, 29, 29)
+                                .addGap(65, 65, 65)
                                 .addComponent(btnThemCTHD)
-                                .addGap(29, 29, 29)
-                                .addComponent(btnXoaCTHD)
-                                .addGap(26, 26, 26)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(btnSuaCTHD)
-                                .addGap(0, 0, Short.MAX_VALUE))
+                                .addGap(40, 40, 40))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -678,7 +665,7 @@ public class DSHoaDon extends javax.swing.JPanel {
                             .addComponent(txtTimkiemCTHD, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnTimkiemCTHD)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addGap(0, 58, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -709,8 +696,7 @@ public class DSHoaDon extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnThemCTHD, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSuaCTHD, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnReloadCTHD, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnXoaCTHD, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnReloadCTHD, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(15, 15, 15))
         );
 
@@ -823,35 +809,6 @@ public class DSHoaDon extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Có lỗi xảy ra khi thêm hóa đơn: " + e.getMessage());
         }
     }//GEN-LAST:event_btnThemHDActionPerformed
-
-    private void btnXoaCTHDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaCTHDActionPerformed
-        try {
-            // Lấy dữ liệu từ bảng chi tiết hóa đơn
-            int selectedRow = tblDscthd.getSelectedRow(); // Lấy chỉ số của hàng được chọn trong bảng chi tiết hóa đơn
-            if (selectedRow != -1) { // Kiểm tra nếu có hàng được chọn
-                int maCTHD = Integer.parseInt(tblDscthd.getValueAt(selectedRow, 0).toString()); // Lấy mã chi tiết hóa đơn
-
-                // Kết nối tới cơ sở dữ liệu và xóa chi tiết hóa đơn
-                Connection conn = DBConnection.getConnection();
-                int nextMaCTHD = ChiTietHoaDonDAO.getNextMaCTHD(conn);
-                int result = ChiTietHoaDonDAO.deleteChiTietHoaDon(conn, maCTHD);
-
-                if (result > 0) {
-                    JOptionPane.showMessageDialog(this, "Xóa chi tiết hóa đơn thành công!");
-                    LoadDSChiTietHoaDon(); // Cập nhật lại danh sách chi tiết hóa đơn sau khi xóa
-                    clearForm2(); // Xóa các trường nhập liệu trong form chi tiết hóa đơn
-                    // Lấy mã ct hóa đơn tiếp theo từ txtMaCTHD
-                    txtMaCTHD.setText(String.valueOf(nextMaCTHD + 1));
-                } else {
-                    JOptionPane.showMessageDialog(this, "Xóa chi tiết hóa đơn thất bại!");
-                }
-            } else {
-                JOptionPane.showMessageDialog(this, "Vui lòng chọn chi tiết hóa đơn để xóa.");
-            }
-        } catch (SQLException | ClassNotFoundException e) {
-            JOptionPane.showMessageDialog(this, "Có lỗi xảy ra khi xóa chi tiết hóa đơn: " + e.getMessage());
-        }
-    }//GEN-LAST:event_btnXoaCTHDActionPerformed
 
     private void btnThemCTHDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemCTHDActionPerformed
         try {
@@ -1216,7 +1173,6 @@ public class DSHoaDon extends javax.swing.JPanel {
     private javax.swing.JButton btnThemHD;
     private javax.swing.JButton btnTimkiemCTHD;
     private javax.swing.JButton btnTimkiemHD;
-    private javax.swing.JButton btnXoaCTHD;
     private javax.swing.JButton btnXuathoadon;
     private javax.swing.JComboBox<String> cbbMaKH;
     private javax.swing.JComboBox<String> cbbMaNV;

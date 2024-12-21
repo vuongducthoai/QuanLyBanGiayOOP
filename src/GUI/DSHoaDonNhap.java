@@ -62,7 +62,8 @@ public class DSHoaDonNhap extends javax.swing.JPanel {
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
-
+        txtTimKiem.setText("");
+        btnXoa.setVisible(false);
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
@@ -524,6 +525,12 @@ public class DSHoaDonNhap extends javax.swing.JPanel {
             hoaDonNhap.setTrangThai(trangThai);
             Date selectedDate = (Date) txtNgayNhap.getValue();
             hoaDonNhap.setNgayNhap(selectedDate);
+            int maNV = Session.getMaNV();
+            double tongTien = Double.parseDouble(txtTongTien.getText());
+            hoaDonNhap.setTongTien(tongTien);
+            NhanVien nhanVien = new NhanVien();
+            nhanVien.setMaNV(maNV);
+            hoaDonNhap.setNhanVien(nhanVien);
             HoaDonNhapDAO.updateHoaDonNhap(conn.getConnection(), hoaDonNhap);
             loadDataTableHDN();
             JOptionPane.showMessageDialog(this, "Sửa thông tin hóa đơn nhập thành công");

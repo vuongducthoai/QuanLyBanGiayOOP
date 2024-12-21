@@ -213,11 +213,11 @@ public class HoaDonNhapDAO {
         PreparedStatement pst = conn.prepareStatement(sql);
 
         pst.setInt(1, hoaDonNhap.getNhaCungCap().getMaNCC());
-        pst.setDate(2, (java.sql.Date) hoaDonNhap.getNgayNhap());
+        pst.setDate(2,  new java.sql.Date(hoaDonNhap.getNgayNhap().getTime()));
         pst.setDouble(3, hoaDonNhap.getTongTien());
         pst.setDouble(4, hoaDonNhap.getNhanVien().getMaNV());
         pst.setString(5, hoaDonNhap.getTrangThai());
-        pst.setInt(5, hoaDonNhap.getMaHDN());
+        pst.setInt(6, hoaDonNhap.getMaHDN());
 
         return pst.executeUpdate();
     }

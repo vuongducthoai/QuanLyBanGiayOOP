@@ -64,6 +64,19 @@ public class DanhMucDAO {
         return danhMuc;
     }
     
+    public static DanhMuc findDanhMucByTen(Connection connection, String tenDM) throws SQLException{
+        String sql = "SELECT * FROM DanhMuc WHERE TenDM = ?";
+        PreparedStatement prepareStatement = connection.prepareStatement(sql);
+        prepareStatement.setString(1, tenDM);
+        ResultSet rs = prepareStatement.executeQuery();
+        DanhMuc danhMuc = null;
+        if(rs.next()){
+            danhMuc = new DanhMuc();
+            danhMuc.setTenDM(tenDM);
+        }
+        return danhMuc;
+    }
+    
     public static void deleteDanhMuc(Connection connection, DanhMuc danhMuc) throws SQLException{
         String sql = "DELETE FROM DanhMuc WHERE MaDM = ?";
         PreparedStatement prepareStatement = connection.prepareStatement(sql);
