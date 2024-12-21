@@ -39,15 +39,38 @@ public class ChiTietHoaDonDAO {
     }
 
     public static int addChiTietHoaDon(Connection conn, ChiTietHoaDon cthd) throws SQLException {
-        String sql = "INSERT INTO ChiTietHoaDon (MaHD, MaSP, SoLuong, DonGiaBan) VALUES (?, ?, ?, ?)";
-        PreparedStatement pst = conn.prepareStatement(sql);
+        // Bước 1: Thêm chi tiết hóa đơn vào bảng ChiTietHoaDon
+        String sqlInsert = "INSERT INTO ChiTietHoaDon (MaHD, MaSP, SoLuong, DonGiaBan) VALUES (?, ?, ?, ?)";
+        PreparedStatement pstInsert = conn.prepareStatement(sqlInsert);
 
-        pst.setInt(1, cthd.getMaHD());
-        pst.setInt(2, cthd.getMaSP());
-        pst.setInt(3, cthd.getSoLuong());
-        pst.setDouble(4, cthd.getDonGiaBan());
+        pstInsert.setInt(1, cthd.getMaHD());
+        pstInsert.setInt(2, cthd.getMaSP());
+        pstInsert.setInt(3, cthd.getSoLuong());
+        pstInsert.setDouble(4, cthd.getDonGiaBan());
 
-        return pst.executeUpdate();
+        int rowsAffected = pstInsert.executeUpdate();
+
+        // Bước 2: Tính tổng giá trị (DonGiaBan * SoLuong)
+        double totalPrice = cthd.getDonGiaBan() * cthd.getSoLuong();
+
+        // Bước 3: Cập nhật giá trị cột TongTien trong bảng HoaDon
+        String sqlUpdate = """
+        UPDATE HoaDon
+        SET TongTien = CASE
+            WHEN TongTien IS NULL THEN ?
+            ELSE TongTien + ?
+        END
+        WHERE MaHD = ?
+        """;
+        PreparedStatement pstUpdate = conn.prepareStatement(sqlUpdate);
+
+        pstUpdate.setDouble(1, totalPrice);
+        pstUpdate.setDouble(2, totalPrice);
+        pstUpdate.setInt(3, cthd.getMaHD());
+
+        pstUpdate.executeUpdate();
+
+        return rowsAffected;
     }
 
     public static int deleteChiTietHoaDon(Connection conn, int maCTHD) throws SQLException {
