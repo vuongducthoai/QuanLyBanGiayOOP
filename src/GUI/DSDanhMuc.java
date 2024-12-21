@@ -137,7 +137,11 @@ public class DSDanhMuc extends javax.swing.JPanel {
             }
         });
 
-        txtTimKiem.setText("Tìm kiếm...");
+        txtTimKiem.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtTimKiemKeyPressed(evt);
+            }
+        });
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel10.setText("Tên Danh Mục");
@@ -154,7 +158,6 @@ public class DSDanhMuc extends javax.swing.JPanel {
                         .addGap(40, 40, 40)
                         .addComponent(btnXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(43, 43, 43)
-
                         .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(24, 24, 24)
@@ -197,7 +200,6 @@ public class DSDanhMuc extends javax.swing.JPanel {
                     .addComponent(btnXoa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnSua, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(24, 24, 24))
-
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -367,6 +369,30 @@ public class DSDanhMuc extends javax.swing.JPanel {
             txtTenDM.setText(tblDanhMuc.getValueAt(selectedRow, 1).toString());
         }
     }//GEN-LAST:event_tblDanhMucMouseClicked
+
+    private void txtTimKiemKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKiemKeyPressed
+        // TODO add your handling code here:
+        try {
+            String keyword = txtTimKiem.getText();
+                List<DanhMuc> searchResults = DanhMucDAO.searchDanhMuc(conn.getConnection(), keyword);
+
+            DefaultTableModel model = (DefaultTableModel) tblDanhMuc.getModel();
+            model.setRowCount(0);
+
+            for (DanhMuc dm : searchResults) {
+                model.addRow(new Object[]{
+                    dm.getMaDM(),
+                    dm.getTenDM(),
+                });
+            }
+
+            if (searchResults.isEmpty()) {
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Đã xảy ra lỗi khi tìm kiếm.");
+        }
+    }//GEN-LAST:event_txtTimKiemKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

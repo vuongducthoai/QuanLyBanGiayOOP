@@ -347,7 +347,11 @@ public class DSSanPham extends javax.swing.JPanel {
             }
         });
 
-        txtTimKiem.setText("Tìm kiếm...");
+        txtTimKiem.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtTimKiemKeyPressed(evt);
+            }
+        });
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel9.setText("Mã danh mục:");
@@ -717,6 +721,40 @@ public class DSSanPham extends javax.swing.JPanel {
     private void btnXuatfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXuatfileActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnXuatfileActionPerformed
+
+    private void txtTimKiemKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKiemKeyPressed
+        // TODO add your handling code here:
+        String keyword = txtTimKiem.getText().trim();
+
+        try {
+            // Kết nối cơ sở dữ liệu
+            Connection conn = DBConnection.getConnection();
+
+            // Gọi phương thức tìm kiếm từ DAO
+            List<SanPham> dsSanPham = QuanLySanPhamDAO.searchSanPham(conn, keyword);
+
+            // Hiển thị danh sách sản phẩm tìm được lên bảng
+            DefaultTableModel model = (DefaultTableModel) tblSanPham.getModel();
+            model.setRowCount(0); // Xóa dữ liệu cũ trên bảng
+
+            if (dsSanPham.isEmpty()) {
+                // Nếu không tìm thấy sản phẩm, load lại toàn bộ danh sách sản phẩm
+                dsSanPham = QuanLySanPhamDAO.ListSanPham(conn); // Phương thức lấy toàn bộ sản phẩm
+            }
+
+            for (SanPham sp : dsSanPham) {
+                model.addRow(new Object[]{
+                    sp.getMaSP(),
+                    sp.getTenSP(),
+                    sp.getDonGiaNhap(),
+                    sp.getDonGiaBan(),
+                    sp.getDanhMuc().getMaDM()
+                });
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            JOptionPane.showMessageDialog(this, "Có lỗi xảy ra khi tìm kiếm: " + e.getMessage());
+        }
+    }//GEN-LAST:event_txtTimKiemKeyPressed
 
     private void clearForm() {
         txtMaSP.setText("");

@@ -340,11 +340,15 @@ public class DSHoaDon extends javax.swing.JPanel {
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel7.setText("Mã hóa đơn:");
 
-        txtTimkiemHD.setText("Tìm kiếm...");
         txtTimkiemHD.setToolTipText("");
         txtTimkiemHD.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtTimkiemHDActionPerformed(evt);
+            }
+        });
+        txtTimkiemHD.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtTimkiemHDKeyPressed(evt);
             }
         });
 
@@ -545,11 +549,15 @@ public class DSHoaDon extends javax.swing.JPanel {
             }
         });
 
-        txtTimkiemCTHD.setText("Tìm kiếm...");
         txtTimkiemCTHD.setToolTipText("");
         txtTimkiemCTHD.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtTimkiemCTHDActionPerformed(evt);
+            }
+        });
+        txtTimkiemCTHD.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtTimkiemCTHDKeyPressed(evt);
             }
         });
 
@@ -732,7 +740,7 @@ public class DSHoaDon extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(270, Short.MAX_VALUE)
@@ -1117,6 +1125,77 @@ public class DSHoaDon extends javax.swing.JPanel {
     private void txtMaHDxuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMaHDxuatActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtMaHDxuatActionPerformed
+
+    private void txtTimkiemHDKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimkiemHDKeyPressed
+        // TODO add your handling code here:
+        String keyword = txtTimkiemHD.getText().trim();
+
+        try {
+            // Kết nối cơ sở dữ liệu
+            Connection conn = DBConnection.getConnection();
+
+            // Gọi phương thức tìm kiếm từ DAO
+            List<HoaDon> dsHoaDon = HoaDonDAO.searchHoaDon(conn, keyword);
+
+            // Hiển thị danh sách hóa đơn tìm được lên bảng
+            DefaultTableModel model = (DefaultTableModel) tblDshd.getModel();
+            model.setRowCount(0); // Xóa dữ liệu cũ trên bảng
+
+            if (dsHoaDon.isEmpty()) {
+                // Nếu không tìm thấy hóa đơn, load lại toàn bộ danh sách hóa đơn
+                dsHoaDon = HoaDonDAO.ListHoaDon(conn); // Phương thức lấy toàn bộ hóa đơn
+            }
+
+            // Thêm dữ liệu vào bảng
+            for (HoaDon hd : dsHoaDon) {
+                model.addRow(new Object[]{
+                    hd.getMaHD(),
+                    hd.getMaKH(),
+                    new SimpleDateFormat("dd-MM-yyyy").format(hd.getNgayMua()),
+                    hd.getpTTT(),
+                    hd.getTrangThai(),
+                    hd.getTongTien()
+                });
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            JOptionPane.showMessageDialog(this, "Có lỗi xảy ra khi tìm kiếm: " + e.getMessage());
+        }
+    }//GEN-LAST:event_txtTimkiemHDKeyPressed
+
+    private void txtTimkiemCTHDKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimkiemCTHDKeyPressed
+        // TODO add your handling code here:
+        String keyword = txtTimkiemCTHD.getText().trim();
+
+        try {
+            // Kết nối cơ sở dữ liệu
+            Connection conn = DBConnection.getConnection();
+
+            // Gọi phương thức tìm kiếm từ DAO
+            List<ChiTietHoaDon> dsChiTietHoaDon = ChiTietHoaDonDAO.searchChiTietHoaDon(conn, keyword);
+
+            // Hiển thị danh sách hóa đơn tìm được lên bảng
+            DefaultTableModel model1 = (DefaultTableModel) tblDscthd.getModel();
+            model1.setRowCount(0); // Xóa dữ liệu cũ trên bảng
+
+            if (dsChiTietHoaDon.isEmpty()) {
+                // Nếu không tìm thấy ct hóa đơn, load lại toàn bộ danh sách ct hóa đơn
+                dsChiTietHoaDon = ChiTietHoaDonDAO.ListChiTietHoaDon(conn); // Phương thức lấy toàn bộ ct hóa đơn
+            }
+
+            // Thêm dữ liệu vào bảng
+            for (ChiTietHoaDon cthd : dsChiTietHoaDon) {
+                model1.addRow(new Object[]{
+                    cthd.getMaCTHD(),
+                    cthd.getMaHD(),
+                    cthd.getMaSP(),
+                    cthd.getSoLuong(),
+                    cthd.getDonGiaBan()
+                });
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            JOptionPane.showMessageDialog(this, "Có lỗi xảy ra khi tìm kiếm: " + e.getMessage());
+        }
+    }//GEN-LAST:event_txtTimkiemCTHDKeyPressed
 
     private void clearForm1() {
         txtTongtien.setText("");

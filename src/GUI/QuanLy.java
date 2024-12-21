@@ -96,6 +96,7 @@ public class QuanLy extends javax.swing.JFrame {
         panelTab.setPreferredSize(new java.awt.Dimension(200, 600));
 
         btnNhanVien.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnNhanVien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/nv.png"))); // NOI18N
         btnNhanVien.setText("Nhân viên");
         btnNhanVien.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnNhanVien.addActionListener(new java.awt.event.ActionListener() {
@@ -105,6 +106,7 @@ public class QuanLy extends javax.swing.JFrame {
         });
 
         btnNCC.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnNCC.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/ncc.png"))); // NOI18N
         btnNCC.setText("Nhà cung cấp");
         btnNCC.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnNCC.addActionListener(new java.awt.event.ActionListener() {
@@ -114,6 +116,7 @@ public class QuanLy extends javax.swing.JFrame {
         });
 
         btnSanPham.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnSanPham.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/sp.png"))); // NOI18N
         btnSanPham.setText("Sản phẩm");
         btnSanPham.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnSanPham.addActionListener(new java.awt.event.ActionListener() {
@@ -123,6 +126,7 @@ public class QuanLy extends javax.swing.JFrame {
         });
 
         btnDanhMuc.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnDanhMuc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/dm.png"))); // NOI18N
         btnDanhMuc.setText("Danh mục");
         btnDanhMuc.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnDanhMuc.addActionListener(new java.awt.event.ActionListener() {
@@ -132,6 +136,7 @@ public class QuanLy extends javax.swing.JFrame {
         });
 
         btnNhapHang.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnNhapHang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/them.png"))); // NOI18N
         btnNhapHang.setText("Nhập hàng");
         btnNhapHang.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnNhapHang.addActionListener(new java.awt.event.ActionListener() {
@@ -141,6 +146,7 @@ public class QuanLy extends javax.swing.JFrame {
         });
 
         btnDangXuat.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnDangXuat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/logout.png"))); // NOI18N
         btnDangXuat.setText("Đăng xuất");
         btnDangXuat.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnDangXuat.addActionListener(new java.awt.event.ActionListener() {
@@ -150,6 +156,7 @@ public class QuanLy extends javax.swing.JFrame {
         });
 
         btnTTCN.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnTTCN.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/ttcn.png"))); // NOI18N
         btnTTCN.setText("Thông tin cá nhân");
         btnTTCN.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnTTCN.addActionListener(new java.awt.event.ActionListener() {
@@ -159,6 +166,7 @@ public class QuanLy extends javax.swing.JFrame {
         });
 
         btnHDN.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnHDN.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/tknh.png"))); // NOI18N
         btnHDN.setText("Thống kê nhập hàng");
         btnHDN.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnHDN.addActionListener(new java.awt.event.ActionListener() {
@@ -176,6 +184,7 @@ public class QuanLy extends javax.swing.JFrame {
         lblChucVu.setText("Chức vụ: ");
 
         btnHDN1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnHDN1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/thdt.png"))); // NOI18N
         btnHDN1.setText("Thống kê doanh thu");
         btnHDN1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnHDN1.addActionListener(new java.awt.event.ActionListener() {
@@ -197,22 +206,19 @@ public class QuanLy extends javax.swing.JFrame {
                             .addComponent(lblChucVu, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(panelTabLayout.createSequentialGroup()
                                 .addGap(6, 6, 6)
-                                .addGroup(panelTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnTTCN, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnDanhMuc, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnSanPham, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnNhapHang, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnHDN, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnHDN1, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnDangXuat, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnNCC, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 31, Short.MAX_VALUE)))
+                                .addGroup(panelTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(btnTTCN, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnNhanVien, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnNCC, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnDanhMuc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnSanPham, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnNhapHang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnHDN, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE)
+                                    .addComponent(btnHDN1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnDangXuat, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(0, 10, Short.MAX_VALUE)))
                 .addContainerGap())
         );
-
-        panelTabLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnDangXuat, btnDanhMuc, btnHDN, btnNCC, btnNhanVien, btnNhapHang, btnSanPham, btnTTCN, lblChucVu});
-
         panelTabLayout.setVerticalGroup(
             panelTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelTabLayout.createSequentialGroup()
@@ -234,9 +240,9 @@ public class QuanLy extends javax.swing.JFrame {
                 .addComponent(btnNhapHang, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(12, 12, 12)
                 .addComponent(btnHDN, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnHDN1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 167, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 161, Short.MAX_VALUE)
                 .addComponent(btnDangXuat, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(61, 61, 61))
         );

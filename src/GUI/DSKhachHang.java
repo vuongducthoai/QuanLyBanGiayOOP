@@ -177,11 +177,15 @@ public class DSKhachHang extends javax.swing.JPanel {
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel7.setText("Mã KH:");
 
-        txtTimkiem.setText("Tìm kiếm...");
         txtTimkiem.setToolTipText("");
         txtTimkiem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtTimkiemActionPerformed(evt);
+            }
+        });
+        txtTimkiem.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtTimkiemKeyPressed(evt);
             }
         });
 
@@ -432,7 +436,7 @@ public class DSKhachHang extends javax.swing.JPanel {
             kh.setEmail(email);
             kh.setSoDT(soDT);
             kh.setGioiTinh(gioiTinh);
-           
+
             // Tạo đối tượng Connection
             Connection conn = DBConnection.getConnection();
 
@@ -538,6 +542,42 @@ public class DSKhachHang extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Có lỗi xảy ra khi tìm kiếm: " + e.getMessage());
         }
     }//GEN-LAST:event_btnReloadKHActionPerformed
+
+    private void txtTimkiemKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimkiemKeyPressed
+        // TODO add your handling code here:
+        String keyword = txtTimkiem.getText().trim();
+
+        try {
+            // Kết nối cơ sở dữ liệu
+            Connection conn = DBConnection.getConnection();
+
+            // Gọi phương thức tìm kiếm từ DAO
+            List<KhachHang> dsKhachHang = KhachHangDAO.searchKhachHang(conn, keyword);
+
+            // Hiển thị danh sách khách hàng tìm được lên bảng
+            DefaultTableModel model = (DefaultTableModel) tblDskh.getModel();
+            model.setRowCount(0); // Xóa dữ liệu cũ trên bảng
+
+            if (dsKhachHang.isEmpty()) {
+                // Nếu không tìm thấy khách hàng, load lại toàn bộ danh sách khách hàng
+                dsKhachHang = KhachHangDAO.ListKhachHang(conn); // Phương thức lấy toàn bộ khách hàng
+            }
+
+            // Thêm dữ liệu vào bảng
+            for (KhachHang kh : dsKhachHang) {
+                model.addRow(new Object[]{
+                    kh.getMaKH(),
+                    kh.getTen(),
+                    kh.getGioiTinh(),
+                    kh.getDiaChi(),
+                    kh.getEmail(),
+                    kh.getSoDT()
+                });
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            JOptionPane.showMessageDialog(this, "Có lỗi xảy ra khi tìm kiếm: " + e.getMessage());
+        }
+    }//GEN-LAST:event_txtTimkiemKeyPressed
 
     private void clearForm() {
         txtHoten.setText("");

@@ -242,11 +242,11 @@
         </Component>
         <Component class="javax.swing.JTextField" name="txtTimkiem">
           <Properties>
-            <Property name="text" type="java.lang.String" value="T&#xec;m ki&#x1ebf;m..."/>
             <Property name="toolTipText" type="java.lang.String" value=""/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtTimkiemActionPerformed"/>
+            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtTimkiemKeyPressed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="txtDiachi">
