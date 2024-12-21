@@ -209,8 +209,9 @@ public class DSChiTietHoaDonNhap extends javax.swing.JFrame {
         txtTongTien.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtTongTien.setToolTipText("");
 
-        jButton1.setBackground(new java.awt.Color(51, 255, 0));
+        jButton1.setBackground(new java.awt.Color(51, 51, 255));
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Thêm");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -218,7 +219,7 @@ public class DSChiTietHoaDonNhap extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(51, 51, 255));
+        jButton2.setBackground(new java.awt.Color(0, 204, 102));
         jButton2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setText("Sửa");
@@ -245,7 +246,7 @@ public class DSChiTietHoaDonNhap extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel8.setText("Tên sản phẩm:");
 
-        jButton4.setBackground(new java.awt.Color(102, 255, 51));
+        jButton4.setBackground(new java.awt.Color(153, 255, 255));
         jButton4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jButton4.setText("Tìm kiếm");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -257,7 +258,7 @@ public class DSChiTietHoaDonNhap extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel5.setText("Tổng Tiền:");
 
-        jButton5.setBackground(new java.awt.Color(204, 0, 204));
+        jButton5.setBackground(new java.awt.Color(0, 153, 153));
         jButton5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jButton5.setForeground(new java.awt.Color(255, 255, 255));
         jButton5.setText("Export Excel");

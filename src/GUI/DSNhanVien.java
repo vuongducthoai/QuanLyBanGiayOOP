@@ -279,7 +279,6 @@ public class DSNhanVien extends javax.swing.JPanel {
 
         btnTimkiem.setBackground(new java.awt.Color(153, 255, 255));
         btnTimkiem.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnTimkiem.setForeground(new java.awt.Color(0, 0, 0));
         btnTimkiem.setText("Tìm");
         btnTimkiem.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnTimkiem.addActionListener(new java.awt.event.ActionListener() {
@@ -406,8 +405,8 @@ public class DSNhanVien extends javax.swing.JPanel {
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel7Layout.createSequentialGroup()
                         .addGap(56, 56, 56)
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel7Layout.createSequentialGroup()
@@ -452,21 +451,21 @@ public class DSNhanVien extends javax.swing.JPanel {
                                     .addComponent(txtMatKhau)
                                     .addComponent(txtNhapLaiMK))
                                 .addGap(0, 0, Short.MAX_VALUE))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addGap(0, 6, Short.MAX_VALUE)
+                        .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 889, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addGap(128, 128, 128)
                         .addComponent(btnThem)
-                        .addGap(18, 18, 18)
+                        .addGap(59, 59, 59)
                         .addComponent(btnSua)
-                        .addGap(18, 18, 18)
+                        .addGap(61, 61, 61)
                         .addComponent(btnXoa)
-                        .addGap(19, 19, 19)
+                        .addGap(59, 59, 59)
                         .addComponent(btnThucThi)
-                        .addGap(18, 18, 18)
+                        .addGap(58, 58, 58)
                         .addComponent(btnDatLai)
-                        .addGap(2, 2, 2))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 889, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
