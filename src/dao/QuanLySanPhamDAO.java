@@ -4,6 +4,10 @@
  */
 package dao;
 
+import SQLConnection.DBConnection;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -160,6 +164,88 @@ public class QuanLySanPhamDAO {
             return rs.getString("TenDM");
         }
         throw new SQLException("Không tìm thấy tên danh mục cho mã danh mục: " + maDM);
+    }
+
+    public List<SanPham> getSanPhamBySapXep(String sapXep) throws SQLException, ClassNotFoundException {
+        List<SanPham> list = new ArrayList<>();
+        String sql = "SELECT * FROM SanPham";
+
+        // Thay đổi câu lệnh SQL dựa vào tùy chọn sắp xếp
+        switch (sapXep) {
+            case "Giá bán từ thấp đến cao":
+                sql += " ORDER BY DonGiaBan ASC";
+                break;
+            case "Giá bán từ cao đến thấp":
+                sql += " ORDER BY DonGiaBan DESC";
+                break;
+            case "Mã sản phẩm giảm dần":
+                sql += " ORDER BY MaSP DESC";
+                break;
+            default: // Mặc định
+                break;
+        }
+
+        try (Connection conn = DBConnection.getConnection(); PreparedStatement pst = conn.prepareStatement(sql); ResultSet rs = pst.executeQuery()) {
+
+            while (rs.next()) {
+                SanPham sanPham = new SanPham();
+                sanPham.setMaSP(rs.getInt("MaSP"));
+                sanPham.setTenSP(rs.getString("TenSP"));
+                sanPham.setDonGiaNhap(rs.getDouble("DonGiaNhap"));
+                sanPham.setDonGiaBan(rs.getDouble("DonGiaBan"));
+
+                // Gọi phương thức để lấy đối tượng DanhMuc (giả sử có bảng DanhMuc)
+                DanhMuc danhMuc = getDanhMucById(conn, rs.getInt("MaDM"));
+                sanPham.setDanhMuc(danhMuc);
+
+                list.add(sanPham);
+            }
+        }
+        return list;
+    }
+
+// Phương thức bổ trợ để lấy thông tin DanhMuc
+    private DanhMuc getDanhMucById(Connection conn, int maDanhMuc) throws SQLException {
+        String sql = "SELECT * FROM DanhMuc WHERE MaDM = ?";
+        try (PreparedStatement pst = conn.prepareStatement(sql)) {
+            pst.setInt(1, maDanhMuc);
+            try (ResultSet rs = pst.executeQuery()) {
+                if (rs.next()) {
+                    DanhMuc danhMuc = new DanhMuc();
+                    danhMuc.setMaDM(rs.getInt("MaDM"));
+                    danhMuc.setTenDM(rs.getString("TenDM"));
+                    return danhMuc;
+                }
+            }
+        }
+        return null; // Nếu không tìm thấy
+    }
+
+    public void xuatFileSanPham(String filePath) throws SQLException, IOException, ClassNotFoundException {
+        String sql = "SELECT sp.MaSP, sp.TenSP, sp.DonGiaNhap, sp.DonGiaBan, dm.TenDM "
+                + "FROM SanPham sp "
+                + "JOIN DanhMuc dm ON sp.MaDM = dm.MaDM";
+
+        try (Connection conn = DBConnection.getConnection(); PreparedStatement pst = conn.prepareStatement(sql); ResultSet rs = pst.executeQuery(); BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+
+            // Ghi tiêu đề với căn chỉnh
+            writer.write(String.format("%-10s %-30s %-15s %-15s %-20s", "Mã SP", "Tên SP", "Đơn Giá Nhập", "Đơn Giá Bán", "Tên Danh Mục"));
+            writer.newLine();
+
+            // Ghi dữ liệu
+            while (rs.next()) {
+                int maSP = rs.getInt("MaSP");
+                String tenSP = rs.getString("TenSP");
+                double donGiaNhap = rs.getDouble("DonGiaNhap");
+                double donGiaBan = rs.getDouble("DonGiaBan");
+                String tenDM = rs.getString("TenDM");
+
+                writer.write(String.format("%-10d %-30s %-15.2f %-15.2f %-20s", maSP, tenSP, donGiaNhap, donGiaBan, tenDM));
+                writer.newLine();
+            }
+
+            writer.flush();
+        }
     }
 
 }
