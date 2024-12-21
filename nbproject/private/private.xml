@@ -3,15 +3,30 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/OOP/QuanLyBanGiayOOP/src/GUI/DSChiTietHoaDonNhap.java</file>
-            <file>file:/D:/OOP/QuanLyBanGiayOOP/src/GUI/DSHoaDonNhap.java</file>
-            <file>file:/D:/OOP/QuanLyBanGiayOOP/src/GUI/QuanLy.java</file>
-            <file>file:/D:/OOP/QuanLyBanGiayOOP/src/GUI/DSDanhMuc.java</file>
-            <file>file:/D:/OOP/QuanLyBanGiayOOP/src/GUI/DSNhaCungCap.java</file>
-            <file>file:/D:/OOP/QuanLyBanGiayOOP/src/GUI/ChartCTHDN.java</file>
-            <file>file:/D:/OOP/QuanLyBanGiayOOP/src/dao/HoaDonNhapDAO.java</file>
-            <file>file:/D:/OOP/QuanLyBanGiayOOP/src/dao/ChiTietHoaDonNhapDAO.java</file>
-            <file>file:/D:/OOP/QuanLyBanGiayOOP/src/dao/XuatHoaDonDAO.java</file>
+
+            <file>file:/D:/ky1_nam3/OOP/PROJECTCK/prj_main/QuanLyBanGiayOOP/src/GUI/DSHoaDonNhap.java</file>
+            <file>file:/D:/ky1_nam3/OOP/PROJECTCK/prj_main/QuanLyBanGiayOOP/src/GUI/DangNhap.java</file>
+            <file>file:/D:/ky1_nam3/OOP/PROJECTCK/prj_main/QuanLyBanGiayOOP/src/dao/HoaDonNhapDAO.java</file>
+            <file>file:/D:/ky1_nam3/OOP/PROJECTCK/prj_main/QuanLyBanGiayOOP/src/SQLConnection/SQLServerConnection.java</file>
+            <file>file:/D:/ky1_nam3/OOP/PROJECTCK/prj_main/QuanLyBanGiayOOP/src/dao/HoaDonDAO.java</file>
+            <file>file:/D:/ky1_nam3/OOP/PROJECTCK/prj_main/QuanLyBanGiayOOP/src/dao/ChiTietHoaDonDAO.java</file>
+            <file>file:/D:/ky1_nam3/OOP/PROJECTCK/prj_main/QuanLyBanGiayOOP/src/GUI/DSHoaDon.java</file>
+            <file>file:/D:/ky1_nam3/OOP/PROJECTCK/prj_main/QuanLyBanGiayOOP/src/GUI/DSSanPham.java</file>
+            <file>file:/D:/ky1_nam3/OOP/PROJECTCK/prj_main/QuanLyBanGiayOOP/src/dao/QuanLySanPhamDAO.java</file>
+            <file>file:/D:/ky1_nam3/OOP/PROJECTCK/prj_main/QuanLyBanGiayOOP/src/dao/XuatHoaDonDAO.java</file>
+            <file>file:/D:/ky1_nam3/OOP/PROJECTCK/prj_main/QuanLyBanGiayOOP/src/GUI/DSNhaCungCap.java</file>
+            <file>file:/D:/ky1_nam3/OOP/PROJECTCK/prj_main/QuanLyBanGiayOOP/src/model/SanPham.java</file>
+            <file>file:/D:/ky1_nam3/OOP/PROJECTCK/prj_main/QuanLyBanGiayOOP/src/GUI/ChartCTHDN.java</file>
+            <file>file:/D:/ky1_nam3/OOP/PROJECTCK/prj_main/QuanLyBanGiayOOP/src/GUI/DSDanhMuc.java</file>
+            <file>file:/D:/ky1_nam3/OOP/PROJECTCK/prj_main/QuanLyBanGiayOOP/src/GUI/DSKhachHang.java</file>
+            <file>file:/D:/ky1_nam3/OOP/PROJECTCK/prj_main/QuanLyBanGiayOOP/src/model/HoaDonNhap.java</file>
+            <file>file:/D:/ky1_nam3/OOP/PROJECTCK/prj_main/QuanLyBanGiayOOP/src/GUI/ThongTinCaNhan.java</file>
+            <file>file:/D:/ky1_nam3/OOP/PROJECTCK/prj_main/QuanLyBanGiayOOP/src/dao/TaiKhoanDAO.java</file>
+            <file>file:/D:/ky1_nam3/OOP/PROJECTCK/prj_main/QuanLyBanGiayOOP/src/GUI/DSChiTietHoaDonNhap.java</file>
+            <file>file:/D:/ky1_nam3/OOP/PROJECTCK/prj_main/QuanLyBanGiayOOP/src/GUI/NhanVien.java</file>
+            <file>file:/D:/ky1_nam3/OOP/PROJECTCK/prj_main/QuanLyBanGiayOOP/src/model/HoaDon.java</file>
+            <file>file:/D:/ky1_nam3/OOP/PROJECTCK/prj_main/QuanLyBanGiayOOP/src/GUI/QuanLy.java</file>
+            <file>file:/D:/ky1_nam3/OOP/PROJECTCK/prj_main/QuanLyBanGiayOOP/src/GUI/DSNhanVien.java</file>
         </group>
     </open-files>
 </project-private>
