@@ -15,6 +15,7 @@ public class SanPham {
     private double donGiaNhap;
     private double donGiaBan;
     private DanhMuc danhMuc;
+    private int soLuong;
 
     public SanPham() {
     }
@@ -26,6 +27,17 @@ public class SanPham {
         this.donGiaBan = donGiaBan;
         this.danhMuc = danhMuc;
     }
+
+    public SanPham(int maSP, String tenSP, double donGiaNhap, double donGiaBan, DanhMuc danhMuc, int soLuong) {
+        this.maSP = maSP;
+        this.tenSP = tenSP;
+        this.donGiaNhap = donGiaNhap;
+        this.donGiaBan = donGiaBan;
+        this.danhMuc = danhMuc;
+        this.soLuong = soLuong;
+    }
+    
+    
 
     public int getMaSP() {
         return maSP;
@@ -66,4 +78,14 @@ public class SanPham {
     public void setDanhMuc(DanhMuc danhMuc) {
         this.danhMuc = danhMuc;
     }
+
+    public int getSoLuong() {
+        return soLuong;
+    }
+
+    public void setSoLuong(int soLuong) {
+        this.soLuong = soLuong;
+    }
+    
+    
 }

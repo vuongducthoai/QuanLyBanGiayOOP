@@ -26,7 +26,7 @@ public class QuanLySanPhamDAO {
 
     public static List<SanPham> ListSanPham(Connection conn) throws SQLException {
         List<SanPham> list = new ArrayList<>();
-        String sql = "SELECT sp.MaSP, sp.TenSP, sp.DonGiaNhap, sp.DonGiaBan, sp.MaDM "
+        String sql = "SELECT sp.MaSP, sp.TenSP, sp.DonGiaNhap, sp.DonGiaBan, sp.MaDM, sp.SoLuong "
                 + "FROM SanPham sp";
 
         PreparedStatement pst = conn.prepareStatement(sql);
@@ -39,7 +39,8 @@ public class QuanLySanPhamDAO {
                     rs.getString("TenSP"),
                     rs.getDouble("DonGiaNhap"),
                     rs.getDouble("DonGiaBan"),
-                    new DanhMuc(rs.getInt("MaDM"), "")
+                    new DanhMuc(rs.getInt("MaDM"), ""),
+                    rs.getInt("SoLuong")
             );
             list.add(sp);
         }
@@ -72,6 +73,44 @@ public class QuanLySanPhamDAO {
         pstmt.setInt(1, maSP);
         return pstmt.executeUpdate();
     }
+    
+     public static SanPham findSanPhamByTen(Connection connection, String tenSP) throws SQLException{
+        String sql = "SELECT * FROM SanPham WHERE TenSP = ?";
+        PreparedStatement prepareStatement = connection.prepareStatement(sql);
+        prepareStatement.setString(1, tenSP);
+        ResultSet rs = prepareStatement.executeQuery();
+        SanPham sanPham = null;
+        if(rs.next()){
+            sanPham = new SanPham();
+            sanPham.setTenSP(tenSP);
+        }
+        return sanPham;
+    }
+     
+      public static SanPham findSanPhamByMaSP(Connection conn, int maSP) throws SQLException {
+        SanPham sanPham = null;
+        String sql = "SELECT * FROM SanPham WHERE MaSP = ?";
+        PreparedStatement pst = conn.prepareStatement(sql);
+        pst.setInt(1, maSP);
+        ResultSet rs = pst.executeQuery();
+        while (rs.next()) {
+            sanPham = new SanPham();
+            sanPham.setMaSP(maSP);
+            sanPham.setTenSP(rs.getString("TenSP"));
+            sanPham.setSoLuong(rs.getInt("SoLuong"));
+        }
+        return sanPham;
+    }
+     
+     public static int updateSoLuongSanPhamByTen(Connection conn, SanPham sp) throws SQLException {
+        // SQL Update
+        String sql = "UPDATE SanPham SET SoLuong = ? WHERE TenSP = ?";
+        PreparedStatement pstmt = conn.prepareStatement(sql);
+        pstmt.setInt(1, sp.getSoLuong());
+        pstmt.setString(2, sp.getTenSP());
+        return pstmt.executeUpdate();
+    }
+     
 
     public static int updateSanPham(Connection conn, SanPham sp) throws SQLException {
         // SQL Update

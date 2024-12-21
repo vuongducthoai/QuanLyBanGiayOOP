@@ -37,20 +37,6 @@ public class DSSanPham extends javax.swing.JPanel {
             LoadDSSanpham();
             initMaSP();
             loadTenDanhMucList(); // Tải danh sách tên danh mục
-            btnXuatfile.addActionListener(e -> {
-                String filePath = "D:\\danh_sach_san_pham.txt";
-                QuanLySanPhamDAO qlspDAO = new QuanLySanPhamDAO();
-
-                try {
-                    qlspDAO.xuatFileSanPham(filePath);
-                    JOptionPane.showMessageDialog(this, "Xuất file thành công: " + filePath);
-                } catch (SQLException | IOException ex) {
-                    JOptionPane.showMessageDialog(this, "Lỗi khi xuất file: " + ex.getMessage());
-                    ex.printStackTrace();
-                } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(DSSanPham.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            });
 
             cbbSapxep.addActionListener(e -> {
                 String selectedOption = cbbSapxep.getSelectedItem().toString();
@@ -212,7 +198,7 @@ public class DSSanPham extends javax.swing.JPanel {
     private ArrayList<SanPham> list = new ArrayList<>();
 
     public void LoadDSSanpham() throws SQLException, ClassNotFoundException {
-        String[] colsName = {"Mã sản phẩm", "Tên sản phẩm", "Giá nhập", "Giá bán", "Mã danh mục"};
+        String[] colsName = {"Mã sản phẩm", "Tên sản phẩm", "Giá nhập", "Giá bán", "Mã danh mục", "Số lượng"};
         DefaultTableModel tableModel = (DefaultTableModel) tblSanPham.getModel();
         tableModel.setRowCount(0); // Xóa dữ liệu cũ trước khi load mới
         tableModel.setColumnIdentifiers(colsName);
@@ -221,12 +207,13 @@ public class DSSanPham extends javax.swing.JPanel {
         List<SanPham> list = QuanLySanPhamDAO.ListSanPham(conn);
 
         for (SanPham sp : list) {
-            String rows[] = new String[5];
+            String rows[] = new String[6];
             rows[0] = Integer.toString(sp.getMaSP());          // Mã sản phẩm
             rows[1] = sp.getTenSP();                          // Tên sản phẩm
             rows[2] = Double.toString(sp.getDonGiaNhap());    // Giá nhập
             rows[3] = Double.toString(sp.getDonGiaBan());     // Giá bán
             rows[4] = Integer.toString(sp.getDanhMuc().getMaDM()); // Lấy mã danh mục thay vì tên danh mục
+            rows[5] = Integer.toString(sp.getSoLuong());
             tableModel.addRow(rows);
         }
     }
@@ -301,20 +288,20 @@ public class DSSanPham extends javax.swing.JPanel {
         tblSanPham.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         tblSanPham.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Mã sản phẩm", "Tên sản phẩm", "Giá nhập", "Giá bán", "Mã danh Mục"
+                "Mã sản phẩm", "Tên sản phẩm", "Giá nhập", "Giá bán", "Mã danh Mục", "Số lượng"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.Double.class, java.lang.Double.class, java.lang.Integer.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.Double.class, java.lang.Double.class, java.lang.Integer.class, java.lang.Integer.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -720,6 +707,18 @@ public class DSSanPham extends javax.swing.JPanel {
 
     private void btnXuatfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXuatfileActionPerformed
         // TODO add your handling code here:
+        String filePath = "D:\\danh_sach_san_pham.txt";
+        QuanLySanPhamDAO qlspDAO = new QuanLySanPhamDAO();
+
+        try {
+            qlspDAO.xuatFileSanPham(filePath);
+            JOptionPane.showMessageDialog(this, "Xuất file thành công: " + filePath);
+        } catch (SQLException | IOException ex) {
+            JOptionPane.showMessageDialog(this, "Lỗi khi xuất file: " + ex.getMessage());
+            ex.printStackTrace();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(DSSanPham.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnXuatfileActionPerformed
 
     private void txtTimKiemKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKiemKeyPressed

@@ -8,6 +8,7 @@ import DAO.ChiTietHoaDonNhapDAO;
 import DAO.HoaDonNhapDAO;
 import DAO.NhaCungCapDAO;
 import SQLConnection.DBConnection;
+import dao.QuanLySanPhamDAO;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -44,6 +45,7 @@ public class DSChiTietHoaDonNhap extends javax.swing.JFrame {
     private static int maHDN;
     private DBConnection conn;
     private double tongTien = 0;
+    private int soLuong1 = 0;
 
     public DSChiTietHoaDonNhap(int maHDN) {
         initComponents();
@@ -396,6 +398,14 @@ public class DSChiTietHoaDonNhap extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Thêm chi tiết hóa đơn nhập thành công.");
             getLastCTHDNId();
             loadTongTien();
+            int newSoLuong = soLuong + soLuong1;
+            SanPham sp1 = new SanPham();
+            
+            sp1.setTenSP(txtSanPham.getText());
+            sp1.setSoLuong(newSoLuong);
+            if(QuanLySanPhamDAO.findSanPhamByTen(conn.getConnection(), sp1.getTenSP()) != null){
+                QuanLySanPhamDAO.updateSoLuongSanPhamByTen(conn.getConnection(), sp1);
+            }
             ChiTietHoaDonNhapDAO.updateTongTien(conn.getConnection(), tongTien, maHDN);
         } catch (SQLException ex) {
             Logger.getLogger(DSNhaCungCap.class.getName()).log(Level.SEVERE, null, ex);
@@ -428,6 +438,14 @@ public class DSChiTietHoaDonNhap extends javax.swing.JFrame {
             ChiTietHoaDonNhapDAO.updateChiTietHoaDonNhap(conn.getConnection(), cthdn);
             loadDataTableCTHDN();
             JOptionPane.showMessageDialog(this, "Cap nhat chi tiết hóa đơn nhập thành công.");
+            int newSoLuong = soLuong + soLuong1;
+            SanPham sp = new SanPham();
+            
+            sp.setTenSP(txtSanPham.getText());
+            sp.setSoLuong(newSoLuong);
+            if(QuanLySanPhamDAO.findSanPhamByTen(conn.getConnection(), sp.getTenSP()) != null){
+                QuanLySanPhamDAO.updateSoLuongSanPhamByTen(conn.getConnection(), sp);
+            }
             clearInputFields();
             getLastCTHDNId();
             loadTongTien();
@@ -455,7 +473,7 @@ public class DSChiTietHoaDonNhap extends javax.swing.JFrame {
             try {
                 int soLuong = Integer.parseInt(tblCTHDN.getValueAt(selectedRow, 2).toString());
                 txtSoLuong.setValue(soLuong);
-
+                 soLuong1 = soLuong;
                 double donGiaNhap = Double.parseDouble(tblCTHDN.getValueAt(selectedRow, 3).toString());
                 txtDonGiaNhap.setValue(donGiaNhap);
             } catch (NumberFormatException e) {

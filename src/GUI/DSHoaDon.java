@@ -8,6 +8,7 @@ import SQLConnection.DBConnection;
 import dao.HoaDonDAO;
 import dao.XuatHoaDonDAO;
 import dao.ChiTietHoaDonDAO;
+import dao.QuanLySanPhamDAO;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -22,6 +23,7 @@ import javax.swing.JSpinner;
 import javax.swing.table.DefaultTableModel;
 import model.HoaDon;
 import model.ChiTietHoaDon;
+import model.SanPham;
 
 /**
  *
@@ -34,6 +36,7 @@ public class DSHoaDon extends javax.swing.JPanel {
      */
     private DefaultTableModel tableModel1 = new DefaultTableModel();
     private DefaultTableModel tableModel2 = new DefaultTableModel();
+    private int masp1;
 
     public DSHoaDon() {
         try {
@@ -106,6 +109,7 @@ public class DSHoaDon extends javax.swing.JPanel {
                         String maCTHD = tblDscthd.getValueAt(selectedRow, 0).toString();
                         String maHD = tblDscthd.getValueAt(selectedRow, 1).toString();
                         String maSP = tblDscthd.getValueAt(selectedRow, 2).toString();
+                        masp1 = Integer.parseInt(maSP);
                         String soLuong = tblDscthd.getValueAt(selectedRow, 3).toString();
                         String donGiaBan = tblDscthd.getValueAt(selectedRow, 4).toString();
 
@@ -817,7 +821,16 @@ public class DSHoaDon extends javax.swing.JPanel {
             int maSP = Integer.parseInt(cbbMaSP.getSelectedItem().toString()); // Mã sản phẩm từ ô nhập liệu
             int soLuong = Integer.parseInt(txtSoluong.getText()); // Số lượng từ ô nhập liệu
             double donGiaBan = Double.parseDouble(txtGiaban.getText()); // Giá bán từ ô nhập liệu
-
+            Connection conn = DBConnection.getConnection();
+            SanPham sp = QuanLySanPhamDAO.findSanPhamByMaSP(conn, maSP);
+            if (soLuong > sp.getSoLuong()) {
+                JOptionPane.showMessageDialog(this, "Số lượng lớn hơn trong kho vui lòng nhập lại!");
+                return;
+            } else {
+                int soLuongNew = sp.getSoLuong() - soLuong;
+                sp.setSoLuong(soLuongNew);
+                int x = QuanLySanPhamDAO.updateSoLuongSanPhamByTen(conn, sp);
+            }
             // Tạo đối tượng ChiTietHoaDon
             ChiTietHoaDon cthd = new ChiTietHoaDon();
             cthd.setMaHD(maHD);
@@ -826,7 +839,6 @@ public class DSHoaDon extends javax.swing.JPanel {
             cthd.setDonGiaBan(donGiaBan);
 
             // Kết nối tới cơ sở dữ liệu và thêm chi tiết hóa đơn
-            Connection conn = DBConnection.getConnection();
             int nextMaCTHD = ChiTietHoaDonDAO.getNextMaCTHD(conn);
             int result = ChiTietHoaDonDAO.addChiTietHoaDon(conn, cthd);
 

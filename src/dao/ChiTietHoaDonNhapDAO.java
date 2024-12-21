@@ -23,7 +23,7 @@ import model.SanPham;
 public class ChiTietHoaDonNhapDAO {
 
     public static List<ChiTietHoaDonNhap> getChiTietHoaDonNhapList(Connection conn, int maHDN) throws SQLException {
-        String sql = "SELECT MaCTHDN, TenSP, SoLuong, c.DonGiaNhap "
+        String sql = "SELECT MaCTHDN, TenSP, c.SoLuong, c.DonGiaNhap "
                 + "FROM ChiTietHoaDonNhap as c INNER JOIN SanPham as s "
                 + "ON c.MaSP = s.MaSP "
                 + "WHERE C.MaHDN = ?";
