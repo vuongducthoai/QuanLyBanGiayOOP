@@ -177,7 +177,6 @@ public class QuanLy extends javax.swing.JFrame {
 
         btnHDN1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnHDN1.setText("Thống kê doanh thu");
-        btnHDN1.setActionCommand("Thống kê doanh thu");
         btnHDN1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnHDN1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

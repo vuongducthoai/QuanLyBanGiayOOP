@@ -74,7 +74,7 @@ public class XuatHoaDonDAO {
             writer.newLine();
             writer.write(String.format("Tổng Tiền: %.2f", tongTien));
             writer.newLine();
-            writer.write("Cảm ơn quý khách!");
+            writer.write("Dinno shop cảm ơn quý khách!");
 
             System.out.println("File hóa đơn đã được xuất tại: " + filePath);
         } catch (IOException e) {
