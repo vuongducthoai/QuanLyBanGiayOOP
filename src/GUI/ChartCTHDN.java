@@ -53,8 +53,20 @@ public class ChartCTHDN extends javax.swing.JFrame {
                     // Sử dụng NgayNhap và TongTien để làm dữ liệu cho biểu đồ
                     // Format NgayNhap thành chuỗi ngày tháng cho trục X, TongTien cho trục Y
                     String ngayNhapFormatted = new SimpleDateFormat("yyyy-MM-dd").format(item.getNgayNhap());
-                    double tongTien = Double.parseDouble(item.getFormatTongTien().replace(",", ""));
-                    dataset.addValue(tongTien, "Tổng Tiền", ngayNhapFormatted);
+//                    double tongTien = Double.parseDouble(item.getFormatTongTien().replace(",", ""));
+//                    dataset.addValue(tongTien, "Tổng Tiền", ngayNhapFormatted);
+                    String rawValue = item.getFormatTongTien();
+                    if (rawValue != null && !rawValue.isEmpty()) {
+                        try {
+                            // Thay dấu chấm (.) thành chuỗi rỗng trước khi chuyển đổi
+                            double tongTien = Double.parseDouble(rawValue.replace(".", "").replace(",", ""));
+                            dataset.addValue(tongTien, "Tổng Tiền", ngayNhapFormatted);
+                        } catch (NumberFormatException e) {
+                            System.err.println("Lỗi định dạng giá trị TongTien: " + rawValue);
+                        }
+                    } else {
+                        System.err.println("Giá trị TongTien null hoặc rỗng.");
+                    }
                 }
             }
 
