@@ -190,17 +190,16 @@ public class DangNhap extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Mật khẩu không chính xác !", "Sai mật khẩu", JOptionPane.ERROR_MESSAGE);
             } else {
                 JOptionPane.showMessageDialog(this, "Đăng nhập thành công", "Thành công", JOptionPane.INFORMATION_MESSAGE);
-                
-                
+
                 TaiKhoan taiKhoan = dao.getThongTinTaiKhoan(tk);
-               Session.setMaNV(taiKhoan.getMaNV());
+                Session.setMaNV(taiKhoan.getMaNV());
                 this.dispose();
-                
+
                 JFrame frame = null;
-                
+
                 if (taiKhoan.getChucVu().equals(ChucVu.quanLy)) {
                     frame = new QuanLy(taiKhoan);
-                } else {                  
+                } else {
 
                     if (taiKhoan.getChucVu().equals(ChucVu.quanLy)) {
                         frame = new QuanLy(taiKhoan);
@@ -212,10 +211,10 @@ public class DangNhap extends javax.swing.JFrame {
                     frame.setVisible(true);
 
                 }
-                
+
                 frame.setLocationRelativeTo(null);
                 frame.setVisible(true);
-                
+
             }
         }
     }

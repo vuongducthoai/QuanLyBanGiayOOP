@@ -32,7 +32,7 @@ public class DanhMucDAO {
     }
      
      public static void insertDanhMuc(Connection connection, DanhMuc danhMuc) throws SQLException{
-        String sql = "INSERT INTO DanhMuc(?)";
+        String sql = "INSERT INTO DanhMuc VALUES (?)";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setString(1, danhMuc.getTenDM());
         preparedStatement.execute();
